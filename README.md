@@ -4,8 +4,6 @@
 
 > _A API se trata de um projeto submetido à metodologia de ensino em implantação na Fatec São José dos Campos, do qual os alunos formam equipes baseadas na metodologia ágil SCRUM, tendo um aluno como Scrum Master, um sendo o Product Owner e o restante dos integrantes como Dev Team._
 
-### ⏳ Status do projeto: 0/3 Sprint
-
 ## Visão Geral
   Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log.  
   A solução permitirá a visualização de informações, notificações e relatórios de forma integrada, garantindo maior eficiência, controle
@@ -45,7 +43,7 @@
 |  14  |  🟡 Baixa  |    2   |                                            Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH                                           |      ?     |                                                                  Integração de dados de fretes concluídos com o setor de RH                                                                 |
 |  15  |  🟡 Baixa  |    3   |                                                             Eu como cliente, quero acompanhar a localização de cada funcionário                                                             |      ?     |                                                               Registro de localização de funcionários com histórico atualizado                                                              |
 
----
+### ⏳ Status do projeto: 0/3 Sprint
 
 ## 🟢 Sprint 1 - Comercial
 
@@ -53,14 +51,14 @@
 | :--: | :--------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   1  |   🔴 Alta  |                                               Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para inclui-los no sistema                                              |      ?     |    1   | Sistema de cadastro de clientes com campos completos                                                                                                                                        |
 |   2  |   🔴 Alta  |                                    Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes                                   |      ?     |    1   | Registro e consulta de histórico detalhado de interações com clientes                                                                                                                       |
-|   3  |  🟠 Média  |               Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação e Follow Up, para visualizar insights sobre o ciclo de vendas do cliente               |      ?     |    1   | Funil de vendas com etapas definidas e classificações de clientes ---> *Aqui que acho que ficaria bom colocar tambem um quadro parecido com o do jura, para mostrar onde cada cliente esta* |
+|   3  |  🟠 Média  |               Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação e Follow Up, para visualizar insights sobre o ciclo de vendas do cliente               |      ?     |    1   | Funil de vendas com etapas definidas e classificações de clientes |
 |   4  |  🟠 Média  | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores |      ?     |    1   | Relatórios e dashboards com filtros e agrupamentos customizáveis                                                                                                                            |
 |   5  |  🟡 Baixa  |                                            Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes                                            |      ?     |    1   | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes                                                                                                            |
 |   6  |  🟡 Baixa  |                                         Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores                                        |      ?     |    1   | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento                                                                                                      |
 |   7  |  🟡 Baixa  |                                        Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria                                        |      ?     |    1   | Visualização do histórico completo de interações com o cliente                                                                                                       |
 
 
-## 🟠 Sprint 2 - Operacional ---> *Coloquei na 2 sprint poe causa do item 2*
+## 🟠 Sprint 2 - Operacional 
 
 | Rank | Prioridade |                                                               User Story                                                               | Estimativa | Sprint | Requisitos do Parceiro                                                                                              |
 | :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
@@ -100,3 +98,4 @@
 | <img src="https://avatars.githubusercontent.com/u/144951743?v=4" width="75px"> | Dev Team      | Miguel Tomio Toledo Nonaka |  [Linkedin](https://www.linkedin.com/in/miguel-nonaka)  | [GitHub](https://github.com/miguelnonaka)    |
 | <img src="https://avatars.githubusercontent.com/u/102493225?v=4" width="75px"> | Dev Team      | Paula Emy Tamay |  [Linkedin](https://www.linkedin.com/in/paula-tamay-7a168228a/)  | [GitHub](https://github.com/PaulaEmy)    |
 | <img src="https://avatars.githubusercontent.com/u/163305926?v=4" width="75px"> | Dev Team      | Vinícius da Silva Leite |  [Linkedin](https://www.linkedin.com/in/vinícius-leite-4792b02ba/)  | [GitHub](https://github.com/vinislvleite)    |
+| <img src="https://avatars.githubusercontent.com/u/180225838?v=4" width="75px"> | Dev Team      | Vinícius Kinoshi |  [Linkedin]([https://www.linkedin.com/in/vinícius-leite-4792b02ba/](https://www.linkedin.com/in/vinícius-gregório-406640232)  | [GitHub](https://github.com/Vinicius-Konishi)    |
