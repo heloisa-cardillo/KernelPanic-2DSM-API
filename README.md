@@ -5,14 +5,9 @@
 > _A API se trata de um projeto submetido à metodologia de ensino em implantação na Fatec São José dos Campos, do qual os alunos formam equipes baseadas na metodologia ágil SCRUM, tendo um aluno como Scrum Master, um sendo o Product Owner e o restante dos integrantes como Dev Team._
 
 ## Visão Geral
-  Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log.  
-  A solução permitirá a visualização de informações, notificações e relatórios de forma integrada, garantindo maior eficiência, controle
+  Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log, garantindo maior eficiência e controle para a empresa. A solução permitirá a visualização de informações, notificações e relatórios de forma integrada.
 
-
-Visão Geral
-Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log, garantindo maior eficiência e controle para a empresa. A solução permitirá a visualização de informações, notificações e relatórios de forma integrada.
-
-A dor do cliente é a falta de uma plataforma centralizada, já que a empresa atualmente utiliza diversas ferramentas separadas para gerenciar checklists e cadastros, como o Microsoft Lists, Google Forms e Microsoft Forms. Isso leva à descentralização de dados e processos, o que pode causar retrabalho, erros, falta de controle e relatórios imprecisos. O projeto busca resolver essa dor, oferecendo uma solução integrada que simplifique o acesso e padronize as informações para todos os envolvidos.
+  Atualmente, a Newe Log utiliza diversas ferramentas separadas para gerenciar checklists e cadastros, como o Microsoft Lists, Google Forms e Microsoft Forms. Essa fragmentação de processos e dados causa descentralização e falta de padronização, o que pode levar a retrabalho, erros e relatórios imprecisos. O projeto busca solucionar esse desafio, oferecendo uma solução integrada que simplifique o acesso e padronize as informações.
 
 ## Objetivo do produto
   O sistema tem como objetivo principal centralizar todos os processos e dados da empresa em uma única plataforma, oferecendo uma visão integrada da parte administrativa, comercial e operacional. Entre os principais recursos, destacam-se:
