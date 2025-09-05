@@ -193,3 +193,8 @@
 | <img src="https://avatars.githubusercontent.com/u/102493225?v=4" width="75px"> | Dev Team      | Paula Emy Tamay |  [Linkedin](https://www.linkedin.com/in/paula-tamay-7a168228a/)  | [GitHub](https://github.com/PaulaEmy)    |
 | <img src="https://avatars.githubusercontent.com/u/163305926?v=4" width="75px"> | Dev Team      | Vinícius da Silva Leite |  [Linkedin](https://www.linkedin.com/in/vinícius-leite-4792b02ba/)  | [GitHub](https://github.com/vinislvleite)    |
 | <img src="https://avatars.githubusercontent.com/u/180225838?v=4" width="75px"> | Dev Team      | Vinícius Kinoshi |  [Linkedin](https://www.linkedin.com/in/vinícius-gregório-406640232/)  | [GitHub](https://github.com/Vinicius-Konishi)    |
+
+
+# Tabela de Requisitos do Projeto
+
+Para ver a tabela completa com as colunas de estimativa e sprint, [clique aqui](https://[seu-usuario].github.io/[seu-repositorio]).
