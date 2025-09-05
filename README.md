@@ -8,6 +8,12 @@
   Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log.  
   A solução permitirá a visualização de informações, notificações e relatórios de forma integrada, garantindo maior eficiência, controle
 
+
+Visão Geral
+Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log, garantindo maior eficiência e controle para a empresa. A solução permitirá a visualização de informações, notificações e relatórios de forma integrada.
+
+A dor do cliente é a falta de uma plataforma centralizada, já que a empresa atualmente utiliza diversas ferramentas separadas para gerenciar checklists e cadastros, como o Microsoft Lists, Google Forms e Microsoft Forms. Isso leva à descentralização de dados e processos, o que pode causar retrabalho, erros, falta de controle e relatórios imprecisos. O projeto busca resolver essa dor, oferecendo uma solução integrada que simplifique o acesso e padronize as informações para todos os envolvidos.
+
 ## Objetivo do produto
   O sistema tem como objetivo principal centralizar todos os processos e dados da empresa em uma única plataforma, oferecendo uma visão integrada da parte administrativa, comercial e operacional. Entre os principais recursos, destacam-se:
 - Centralização de dados e processos em um único ambiente.
