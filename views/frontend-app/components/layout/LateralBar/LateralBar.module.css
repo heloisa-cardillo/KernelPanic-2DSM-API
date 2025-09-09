@@ -24,7 +24,7 @@
   gap: 15px;
   padding: 10px 15px;
   cursor: pointer;
-  width: 100%;
+  width: calc(100% - 20px);
   background-color: transparent;
   border-radius: 6px;
   border-color: transparent;
@@ -37,10 +37,6 @@
   transition: background-color 0.2s, color 0.2s;
 }
 
-.menuItem:hover {
-  background-color: #e6f0ff;
-  color: #1f4af4;
-}
 
 .menuItemAtivo {
   background-color: #1f4af4;
@@ -50,8 +46,20 @@
   width: calc(100% - 20px);
 }
 
+
 .menuItemAtivo h3 {
   color: #fff;
+}
+
+
+
+.menuItem:hover h3  {
+  color: #1f4af4;
+}
+
+.menuItem:hover {
+  background-color: #e6f0ff;
+  color: #1f4af4;
 }
 
 .boxglobal {
@@ -65,3 +73,5 @@
   grid-area: content;
   background-color: #f4f4f4;
 }
+
+

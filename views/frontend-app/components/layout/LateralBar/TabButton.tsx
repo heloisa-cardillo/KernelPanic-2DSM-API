@@ -1,8 +1,14 @@
 "use client";
-import React from "react";
+import React, { ReactNode } from "react";
 import styles from "./LateralBar.module.css";
 
-function TabButton({ children, selectTab, active }) {
+interface TabButtonProps {
+  children: ReactNode;
+  selectTab: () => void;
+  active: boolean;
+}
+
+function TabButton({ children, selectTab, active }: TabButtonProps) {
   return (
     <button
       onClick={selectTab}

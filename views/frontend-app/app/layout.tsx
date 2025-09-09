@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LateralBar from "@/components/layout/LateralBar";
+import LateralBar from "@/components/layout/LateralBar/LateralBar";
 
 
 const geistSans = Geist({
@@ -25,12 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LateralBar></LateralBar>
-        {children}
+        <div className="layout">
+          <LateralBar />
+          <main className="conteudo">{children}</main>
+        </div>
       </body>
     </html>
   );
