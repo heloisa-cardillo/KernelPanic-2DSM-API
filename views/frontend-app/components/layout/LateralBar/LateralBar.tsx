@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
 import styles from "./LateralBar.module.css";
+import { useRouter } from "next/navigation";
+
 
 interface TabItem {
   title: string;
   id: string;
+  route: string,
   content: (active: boolean) => React.ReactNode;
 }
 
@@ -14,6 +17,7 @@ const tab_data: TabItem[] = [
   {
     title: "interações",
     id: "interações",
+    route: "/interacoes",
     content: (active: boolean) => (
       <>
         <Image
@@ -34,6 +38,7 @@ const tab_data: TabItem[] = [
   {
     title: "vendas",
     id: "vendas",
+    route: "/vendas",
     content: (active: boolean) => (
       <>
         <Image
@@ -54,6 +59,7 @@ const tab_data: TabItem[] = [
   {
     title: "cliente",
     id: "cliente",
+    route: "/cliente",
     content: (active: boolean) => (
       <>
         <Image
@@ -74,6 +80,7 @@ const tab_data: TabItem[] = [
   {
     title: "funil",
     id: "funil",
+    route: "/funil-vendas",
     content: (active: boolean) => (
       <>
         <Image
@@ -94,6 +101,7 @@ const tab_data: TabItem[] = [
   {
     title: "agendamento",
     id: "agendamento",
+    route: "/agendamento",
     content: (active: boolean) => (
       <>
         <Image
@@ -114,6 +122,7 @@ const tab_data: TabItem[] = [
   {
     title: "grafico",
     id: "grafico",
+    route: "/grafico",
     content: (active: boolean) => (
       <>
         <Image
@@ -135,9 +144,10 @@ const tab_data: TabItem[] = [
 
 function LateralBar() {
   const [tab, setTab] = useState("interações");
-
-  const handleTabChange = (id: string) => {
+  const router = useRouter();
+  const handleTabChange = (id: string, route: string) => {
     setTab(id);
+    router.push(route);
   };
 
   return (
@@ -153,7 +163,7 @@ function LateralBar() {
           {tab_data.map((t) => (
             <TabButton
               key={t.id}
-              selectTab={() => handleTabChange(t.id)}
+              selectTab={() => handleTabChange(t.id, t.route)}
               active={tab === t.id}
             >
               {t.content(tab === t.id)}
