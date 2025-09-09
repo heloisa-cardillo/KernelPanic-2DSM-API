@@ -1,0 +1,67 @@
+
+.barralateral {
+  grid-area: aside;
+  background-color: #ffffff;
+  color: #9197B3;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.tabButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 6px;
+  border-color: transparent;
+  color: #9197B3;
+  margin-left: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.menuItem:hover {
+  background-color: #e6f0ff;
+  color: #1f4af4;
+}
+
+.menuItemAtivo {
+  background-color: #1f4af4;
+  color: #fff;
+  border-radius: 6px;
+  margin-left: 10px;
+  width: calc(100% - 20px);
+}
+
+.menuItemAtivo h3 {
+  color: #fff;
+}
+
+.boxglobal {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "aside content";
+  height: 100vh;
+}
+
+.conteudo {
+  grid-area: content;
+  background-color: #f4f4f4;
+}

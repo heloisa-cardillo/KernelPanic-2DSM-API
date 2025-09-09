@@ -1,16 +1,16 @@
+"use client";
 import React from "react";
+import styles from "./LateralBar.module.css";
 
-const TabButton = ({active,selectTab,children}) => {
-  const buttonClasses = active
-  ? "menu-item menu-item-ativo"
-  : "menu-item";
-
+function TabButton({ children, selectTab, active }) {
   return (
-    <button onClick={selectTab} className={buttonClasses}>
+    <button
+      onClick={selectTab}
+      className={`${styles.menuItem} ${active ? styles.menuItemAtivo : ""}`}
+    >
       {children}
     </button>
-
   );
-};
+}
 
 export default TabButton;

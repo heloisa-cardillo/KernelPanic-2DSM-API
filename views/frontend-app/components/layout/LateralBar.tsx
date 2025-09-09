@@ -1,17 +1,22 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from 'next/link';
-import TabButton from './TabButton';
+import Link from "next/link";
+import TabButton from "./TabButton";
+import styles from "./LateralBar.module.css";
 
 const tab_data = [
   {
-    title: 'interações',
-    id: 'interações',
+    title: "interações",
+    id: "interações",
     content: (active) => (
       <>
         <Image
-          src={active ? "/images/iconinteracoesbranco.png" : "/images/iconinteracoes.png"}
+          src={
+            active
+              ? "/images/iconinteracoesbranco.png"
+              : "/images/iconinteracoes.png"
+          }
           width={24}
           height={25}
           alt="Ícone de Interações"
@@ -21,12 +26,16 @@ const tab_data = [
     ),
   },
   {
-    title: 'vendas',
-    id: 'vendas',
+    title: "vendas",
+    id: "vendas",
     content: (active) => (
       <>
         <Image
-          src={active ? "/images/iconvendasbranco.png" : "/images/iconvendas.png"}
+          src={
+            active
+              ? "/images/iconvendasbranco.png"
+              : "/images/iconvendas.png"
+          }
           width={24}
           height={25}
           alt="Ícone de Vendas"
@@ -36,12 +45,16 @@ const tab_data = [
     ),
   },
   {
-    title: 'cliente',
-    id: 'cliente',
+    title: "cliente",
+    id: "cliente",
     content: (active) => (
       <>
         <Image
-          src={active ? "/images/iconclientebranco.png" : "/images/iconcliente.png"}
+          src={
+            active
+              ? "/images/iconclientebranco.png"
+              : "/images/iconcliente.png"
+          }
           width={24}
           height={25}
           alt="Ícone de Cliente"
@@ -51,12 +64,16 @@ const tab_data = [
     ),
   },
   {
-    title: 'funil',
-    id: 'funil',
+    title: "funil",
+    id: "funil",
     content: (active) => (
       <>
         <Image
-          src={active ? "/images/iconfunilbranco.png" : "/images/iconfunil.png"}
+          src={
+            active
+              ? "/images/iconfunilbranco.png"
+              : "/images/iconfunil.png"
+          }
           width={24}
           height={25}
           alt="Ícone de Funil de Vendas"
@@ -66,12 +83,16 @@ const tab_data = [
     ),
   },
   {
-    title: 'agendamento',
-    id: 'agendamento',
+    title: "agendamento",
+    id: "agendamento",
     content: (active) => (
       <>
         <Image
-          src={active ? "/images/iconagendamentobranco.png" : "/images/iconagendamento.png"}
+          src={
+            active
+              ? "/images/iconagendamentobranco.png"
+              : "/images/iconagendamento.png"
+          }
           width={24}
           height={25}
           alt="Ícone de Agendamento"
@@ -81,12 +102,16 @@ const tab_data = [
     ),
   },
   {
-    title: 'grafico',
-    id: 'grafico',
+    title: "grafico",
+    id: "grafico",
     content: (active) => (
       <>
         <Image
-          src={active ? "/images/icongraficobranco.png" : "/images/icongrafico.png"}
+          src={
+            active
+              ? "/images/icongraficobranco.png"
+              : "/images/icongrafico.png"
+          }
           width={24}
           height={25}
           alt="Ícone de Gráfico"
@@ -97,22 +122,23 @@ const tab_data = [
   },
 ];
 
-const header = () => {
-  const [tab, setTab] = useState('interações');
+function LateralBar() {
+  const [tab, setTab] = useState("interações");
+
   const handleTabChange = (id) => {
     setTab(id);
   };
 
   return (
-    <div className='boxglobal'>
-      <div className='barralateral'>
+    <div className={styles.boxglobal}>
+      <div className={styles.barralateral}>
         <Image
-          src={"/logoneweglobal.jpg"}
+          src={"/images/logoneweglobal.jpg"}
           width={300}
           height={150}
           alt="Logo da Newe"
         />
-        <div className="tab-buttons">
+        <div className={styles.tabButtons}>
           {tab_data.map((t) => (
             <TabButton
               key={t.id}
@@ -126,6 +152,6 @@ const header = () => {
       </div>
     </div>
   );
-};
+}
 
-export default header;
+export default LateralBar;
