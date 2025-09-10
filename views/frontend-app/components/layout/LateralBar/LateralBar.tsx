@@ -5,7 +5,6 @@ import TabButton from "./TabButton";
 import styles from "./LateralBar.module.css";
 import { useRouter } from "next/navigation";
 
-
 interface TabItem {
   title: string;
   id: string;
@@ -23,8 +22,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/iconinteracoesbranco.png"
-              : "/images/iconinteracoes.png"
+              ? "/images/iconinteracoesbranco.svg"
+              : "/images/iconinteracoes.svg"
           }
           width={24}
           height={25}
@@ -44,8 +43,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/iconvendasbranco.png"
-              : "/images/iconvendas.png"
+              ? "/images/iconvendasbranco.svg"
+              : "/images/iconvendas.svg"
           }
           width={24}
           height={25}
@@ -65,8 +64,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/iconclientebranco.png"
-              : "/images/iconcliente.png"
+              ? "/images/iconclientebranco.svg"
+              : "/images/iconcliente.svg"
           }
           width={24}
           height={25}
@@ -86,8 +85,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/icongestaobranco.png"
-              : "/images/icongestao.png"
+              ? "/images/icongestaobranco.svg"
+              : "/images/icongestao.svg"
           }
           width={24}
           height={25}
@@ -107,8 +106,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/iconfunilbranco.png"
-              : "/images/iconfunil.png"
+              ? "/images/iconfunilbranco.svg"
+              : "/images/iconfunil.svg"
           }
           width={24}
           height={25}
@@ -128,8 +127,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/iconagendamentobranco.png"
-              : "/images/iconagendamento.png"
+              ? "/images/iconagendamentobranco.svg"
+              : "/images/iconagendamento.svg"
           }
           width={24}
           height={25}
@@ -149,8 +148,8 @@ const tab_data: TabItem[] = [
         <Image
           src={
             active
-              ? "/images/icongraficobranco.png"
-              : "/images/icongrafico.png"
+              ? "/images/icongraficobranco.svg"
+              : "/images/icongrafico.svg"
           }
           width={24}
           height={25}
