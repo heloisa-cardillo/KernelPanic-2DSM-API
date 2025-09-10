@@ -78,6 +78,27 @@ const tab_data: TabItem[] = [
     ),
   },
   {
+    title: "gestao",
+    id: "gestao",
+    route: "/gestao",
+    content: (active: boolean) => (
+      <>
+        <Image
+          src={
+            active
+              ? "/images/icongestaobranco.png"
+              : "/images/icongestao.png"
+          }
+          width={24}
+          height={25}
+          alt="Ícone de Gestão"
+          className={styles.icone}
+        />
+        <h3>Gestão</h3>
+      </>
+    ),
+  },
+  {
     title: "funil",
     id: "funil",
     route: "/funil-vendas",
