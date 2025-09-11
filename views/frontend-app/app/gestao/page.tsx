@@ -12,6 +12,11 @@ function App() {
     { id: 3, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-03' },
     { id: 4, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-04' },
     { id: 5, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-02' },
+    { id: 6, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-05' },
+    { id: 7, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-01' },
+    { id: 8, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-03' },
+    { id: 9, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-04' },
+    { id: 10, name: 'Emra', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-02' },
   ];
 
 
@@ -33,8 +38,8 @@ function App() {
   });
 
   return (
-    <div className='conteudo'>
-    <div className="container">
+    <div className='conteudo-gestao'>
+    <div className="container-gestao">
       <div className="table-container">
         <h1 className="titulo">Gestão de Clientes</h1>
        
