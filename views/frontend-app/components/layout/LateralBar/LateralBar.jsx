@@ -5,19 +5,12 @@ import TabButton from "./TabButton";
 import styles from "./LateralBar.module.css";
 import { useRouter } from "next/navigation";
 
-interface TabItem {
-  title: string;
-  id: string;
-  route: string,
-  content: (active: boolean) => React.ReactNode;
-}
-
-const tab_data: TabItem[] = [
+const tab_data = [
   {
     title: "interações",
     id: "interações",
     route: "/interacoes",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
@@ -38,13 +31,11 @@ const tab_data: TabItem[] = [
     title: "vendas",
     id: "vendas",
     route: "/vendas",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
-            active
-              ? "/images/iconvendasbranco.svg"
-              : "/images/iconvendas.svg"
+            active ? "/images/iconvendasbranco.svg" : "/images/iconvendas.svg"
           }
           width={24}
           height={25}
@@ -59,7 +50,7 @@ const tab_data: TabItem[] = [
     title: "cliente",
     id: "cliente",
     route: "/cliente",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
@@ -80,13 +71,11 @@ const tab_data: TabItem[] = [
     title: "gestao",
     id: "gestao",
     route: "/gestao",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
-            active
-              ? "/images/icongestaobranco.svg"
-              : "/images/icongestao.svg"
+            active ? "/images/icongestaobranco.svg" : "/images/icongestao.svg"
           }
           width={24}
           height={25}
@@ -101,13 +90,11 @@ const tab_data: TabItem[] = [
     title: "funil",
     id: "funil",
     route: "/funil-vendas",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
-            active
-              ? "/images/iconfunilbranco.svg"
-              : "/images/iconfunil.svg"
+            active ? "/images/iconfunilbranco.svg" : "/images/iconfunil.svg"
           }
           width={24}
           height={25}
@@ -122,7 +109,7 @@ const tab_data: TabItem[] = [
     title: "agendamento",
     id: "agendamento",
     route: "/agendamento",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
@@ -143,7 +130,7 @@ const tab_data: TabItem[] = [
     title: "grafico",
     id: "grafico",
     route: "/grafico",
-    content: (active: boolean) => (
+    content: (active) => (
       <>
         <Image
           src={
@@ -165,7 +152,8 @@ const tab_data: TabItem[] = [
 function LateralBar() {
   const [tab, setTab] = useState("interações");
   const router = useRouter();
-  const handleTabChange = (id: string, route: string) => {
+
+  const handleTabChange = (id, route) => {
     setTab(id);
     router.push(route);
   };
