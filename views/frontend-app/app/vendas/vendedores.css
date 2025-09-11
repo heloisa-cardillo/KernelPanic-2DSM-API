@@ -1,7 +1,6 @@
 body {
   margin: 0;
-  height: 100vh;
-  display: block;
+  min-height: 100vh;
   font-family: 'Poppins', 'Inter', sans-serif;
   background-color: #F0F2F5;
 }
@@ -12,18 +11,22 @@ th {
 }
 
 .desempenho-vendedores {
-  max-width: 1000px;
+  width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background-color: #FFFFFF;
-  min-height: 100vh;
+  min-height: 90vh;
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .tabela-desempenho{
     font-size: 16px;
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
 }
 
 .tabela-desempenho th,
