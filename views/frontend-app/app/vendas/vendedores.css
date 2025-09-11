@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: block;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  background-color: #F0F2F5;
+}
+
+th {
+    text-align: center;
+    padding: 10px 10px;
+}
+
+.desempenho-vendedores {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  border-radius: 6px;
+}
+
+.tabela-desempenho{
+    font-size: 16px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tabela-desempenho th,
+.tabela-desempenho td {
+    text-align: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    text-align: center;
+    padding: 10px 10px;
+}
