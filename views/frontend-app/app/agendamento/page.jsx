@@ -1,6 +1,5 @@
 import React from 'react'
-import CalendarComponent from '../components/layout/Calendar/Calendar'
-
+import CalendarComponent from "../../components/layout/Calendar/Calendar"
 export default function page() {
   return (
     <div>

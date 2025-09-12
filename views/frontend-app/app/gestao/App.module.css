@@ -1,16 +1,8 @@
-body {
-  margin: 0;
-  height: 100vh;
-  display: block;
-  font-family: 'Poppins', 'Inter', sans-serif;
-  background-color: #F0F2F5;
-}
-
-.conteudo{
+.conteudo {
   display: flex;
-  justify-content: center;  
-  align-items: center;      
-  height: 100%; 
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .container {
@@ -33,14 +25,15 @@ body {
   font-weight: 600;
 }
 
-.search-container{
+.searchContainer {
   display: flex;
   justify-content: flex-end;
   color: #333;
- 
+  margin-bottom: 20px;
 }
 
-.pesquisa, .sort-dropdown{
+.pesquisa,
+.sortDropdown {
   background-color: #F9FBFF;
   border-color: white;
   border-radius: 15px;
@@ -49,7 +42,7 @@ body {
   border: 1px solid #ccc;
 }
 
-.pesquisa{
+.pesquisa {
   background: url('/images/lupa.png') no-repeat 10px center;
   background-size: 20px 20px;
   padding-left: 40px;
@@ -59,22 +52,20 @@ body {
   outline: none;
 }
 
-.sort-dropdown {
+.sortDropdown {
   border: 1px solid #ccc;
   padding: 10px;
   color: #333;
-  appearance: none; 
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
-  padding-right: 30px; 
+  padding-right: 30px;
   background-image: url('/images/seta.png');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
 }
-
-
 
 .tabela {
   font-size: 14px;
@@ -82,7 +73,6 @@ body {
   border-collapse: collapse;
   border-color: white;
 }
-
 
 .tabela thead th {
   padding: 15px;
@@ -92,7 +82,6 @@ body {
   border-bottom: 1px solid #c1c1c1;
 }
 
-
 .tabela tbody td {
   padding: 15px 40px;
   text-align: left;
@@ -101,15 +90,11 @@ body {
   border-bottom: 1px solid #c1c1c1;
 }
 
-
 .tabela tbody tr:last-child td {
   border-bottom: none;
 }
 
-
-
-
-button {
+.botao {
   margin: 0 4px;
   padding: 6px 12px;
   border: none;
@@ -119,14 +104,10 @@ button {
   font-size: 14px;
   color: white;
   transition: background-color 0.3s ease;
-}
-
-
-button.detalhes, button.atualizar, button.deletar {
   background-color: #1f4af4;
   box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
 }
 
-button:hover{
-    background-color: #6684ff;
+.botao:hover {
+  background-color: #6684ff;
 }
