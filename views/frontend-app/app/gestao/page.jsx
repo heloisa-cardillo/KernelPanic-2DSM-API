@@ -27,8 +27,8 @@ function App() {
   });
 
   return (
-    <div className={styles.conteudo}>
-      <div className={styles.container}>
+    <div className={styles['conteudo']}>
+      <div className={styles['container-gestao']}>
         <div className={styles.tableContainer}>
           <h1 className={styles.titulo}>Gestão de Clientes</h1>
 
@@ -53,33 +53,34 @@ function App() {
             </div>
           </div>
 
-          <table className={styles.tabela}>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Cliente</th>
-                <th>Estado da venda</th>
-                <th>Última Interação</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedClients.map(client => (
-                <tr key={client.id}>
-                  <td>{client.name}</td>
-                  <td>{client.company}</td>
-                  <td>{client.status}</td>
-                  <td>{client.lastInteraction}</td>
-                  <td>
-                    <button className={styles.botao}>Detalhes</button>
-                    <button className={styles.botao}>Atualizar</button>
-                    <button className={styles.botao}>Deletar</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
+          <div className={styles['tabela-container']}>
+              <table className={styles.tabela}>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Cliente</th>
+                    <th>Estado da venda</th>
+                    <th>Última Interação</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedClients.map(client => (
+                    <tr key={client.id}>
+                      <td>{client.name}</td>
+                      <td>{client.company}</td>
+                      <td>{client.status}</td>
+                      <td>{client.lastInteraction}</td>
+                      <td>
+                        <button className={styles.botao}>Detalhes</button>
+                        <button className={styles.botao}>Atualizar</button>
+                        <button className={styles.botao}>Deletar</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
         </div>
       </div>
     </div>
