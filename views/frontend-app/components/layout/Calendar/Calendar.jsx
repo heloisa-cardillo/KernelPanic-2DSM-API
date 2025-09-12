@@ -4,9 +4,9 @@ import React, { useEffect, useRef } from 'react';
 import { createCalendar, destroyCalendar, TimeGrid, List} from '@event-calendar/core';
 import '@event-calendar/core/index.css';
 
-const CalendarComponent: React.FC = () => {
-  const calendarRef = useRef<HTMLDivElement | null>(null);
-  const calendarInstance = useRef<any | null>(null); 
+const CalendarComponent = () => {
+  const calendarRef = useRef(null);
+  const calendarInstance = useRef(null); 
 
   useEffect(() => {
     if (calendarRef.current) {
