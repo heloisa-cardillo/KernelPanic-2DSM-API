@@ -1,42 +1,44 @@
-// {
-//   "compilerOptions": {
-//     "rootDir": "./src",
-//     "outDir": "./dist",
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./out",
 
-//     "module": "nodenext",
-//     "moduleResolution": "nodenext",
-//     "target": "ES2020",
-//     "lib": ["ES2020"],
-//     "types": ["node"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,    
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "types": ["node"],
 
-//     "experimentalDecorators": true,
-//     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
 
-//     "sourceMap": true,
-//     "declaration": true,
-//     "declarationMap": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
 
-//     "strict": true,
-//     "noImplicitReturns": true,
-//     "noUnusedLocals": true,
-//     "noUnusedParameters": true,
-//     "noFallthroughCasesInSwitch": true,
-//     "noUncheckedIndexedAccess": true,
-//     "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
 
-//     "forceConsistentCasingInFileNames": true,
-//     "skipLibCheck": true,
 
-//     "jsx": "react-jsx",
-//     "isolatedModules": true
-//   },
-//   "include": [
-//     "src/DAL/**/*.ts",
-//     "src/main.ts"
-//   ],
-//   "exclude": [
-//     "node_modules",
-//     "dist",
-//     "src/View"
-//   ]
-// }
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "jsx": "react-jsx",
+    "isolatedModules": true
+  },
+  "include": [
+    "src/DAL/**/*.ts",
+    "src/main.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/View"
+  ]
+}
