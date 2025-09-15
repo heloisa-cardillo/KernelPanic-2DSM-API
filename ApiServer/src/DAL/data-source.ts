@@ -1,19 +1,23 @@
 import { DataSource } from "typeorm";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import * as dotenv from "dotenv";
+import path from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+dotenv.config();
+
+const host = process.env.DB_HOST || "localhost"
+const password = process.env.DB_PASSWORD || ""
+const username = process.env.DB_USERNAME || "root"
+const database = process.env.DB_DB || "newe_database"
 
 export const AppDataSource = new DataSource({
   type: "mysql",
-  host: "localhost",
+  host: host,
   port: 3306,
-  username: "root",
-  password: "-Templa123",
-  database: "newe_database",
-  entities: [join(__dirname, "../Domain/Models/*.js")], // <--- glob das entidades
-  migrations: [join(__dirname, "./migrations/*.ts")],
+  username: username,
+  password: password,
+  database: database,
+  entities: [path.join(__dirname, "../Domain/Models/*.js")], // <--- glob das entidades
+  migrations: [path.join(__dirname, "./migrations/*.ts")],
   synchronize: false,
   logging: true
 });

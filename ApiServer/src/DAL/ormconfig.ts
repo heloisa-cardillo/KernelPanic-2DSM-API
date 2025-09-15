@@ -1,37 +1,45 @@
 import { DataSource } from "typeorm";
+import * as dotenv from "dotenv";
 
-import { Employee } from "./Models/Employee.js";
-import { Customer } from "./Models/Customer.js";
+import { Funcionario } from "./Models/Funcionario";
+import { Cliente } from "./Models/Cliente";
 import { CustomerStage } from "./Models/CustomerStage.js";
-import { CustomerContact } from "./Models/CustomerContact.js";
-import { CustomerInteraction } from "./Models/CustomerInteraction.js";
-import { Sale } from "./Models/Sale.js";
-import { AggregatedDelivery } from "./Models/AggregatedDelivery.js";
+import { ContatoCliente } from "./Models/ContatoCliente";
+import { InteracaoCliente } from "./Models/InteracaoCliente";
+import { Vendas } from "./Models/Vendas";
+import { AggregatedDelivery } from "./Models/AggregatedDelivery";
 import { Vehicle } from "./Models/Vehicle.js";
-import { EventTraining } from "./Models/EventTraining.js";
+import { EventoTreinamento } from "./Models/EventoTreinamento";
 import { Attendance } from "./Models/Attendance.js";
-import { Notification } from "./Models/Notification.js";
+import { Notificacao } from "./Models/Notificacao";
 import { FacilityManagement } from "./Models/FacilityManagement.js";
+
+const host = process.env.DB_HOST || "localhost"
+const password = process.env.DB_PASSWORD || ""
+const username = process.env.DB_USERNAME || "root"
+const database = process.env.DB_DB || "newe_database"
+
 
 export const AppDataSource = new DataSource({
   type: "mysql",
-  host: "localhost",
+  host: host,
   port: 3306,
-  username: "root",
-  password: "-Templa123",
-  database: "newe_database",
+  username: username,
+  password: password,
+  database: database,
   entities: [
-    Employee,
-    Customer,
+    ,
+    Funcionario,
+    Cliente,
     CustomerStage,
-    CustomerContact,
-    CustomerInteraction,
-    Sale,
+    ContatoCliente,
+    InteracaoCliente,
+    Vendas,
     AggregatedDelivery,
     Vehicle,
-    EventTraining,
+    EventoTreinamento,
     Attendance,
-    Notification,
+    Notificacao,
     FacilityManagement
   ],
   migrations: ["src/DAL/migrations/*.ts"], // <---- adicionado
