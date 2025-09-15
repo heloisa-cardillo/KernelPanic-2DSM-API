@@ -2,6 +2,8 @@ import "reflect-metadata"; // necessário para TypeORM
 import express from "express"
 import cors from "cors"
 
+const calendarioRoute = require("./API/Routes/calendarioRoutes")
+
 const app = express();
 
 app.use(cors())
@@ -17,6 +19,8 @@ app.use(express.json())
 //   .catch((err:Error) => {
 //     console.error("❌ Erro ao conectar ao MySQL:", err);
 //   });
+
+app.use("/calendario", calendarioRoute)
 
 app.get("/", (req, res) => {
     res.send("API funcionando")
