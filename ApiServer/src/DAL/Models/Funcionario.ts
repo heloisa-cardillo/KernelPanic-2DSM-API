@@ -3,7 +3,7 @@ import {
 } from "typeorm";
 import { Cliente } from "./Cliente";
 import { EventoTreinamento } from "./EventoTreinamento";
-import { AgendamentoInteracao } from "./AgendamentoInteracao.ts";
+import { AgendamentoInteracao } from "./AgendamentoInteracao";
 import { InteracaoCliente } from "./InteracaoCliente";
 import { Vendas } from "./Vendas";
 import { FuncionariosConvidados } from "./FuncionariosConvidados";

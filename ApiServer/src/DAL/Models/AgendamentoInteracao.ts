@@ -23,7 +23,7 @@ export class AgendamentoInteracao {
   @ManyToOne(() => Cliente, c => c.agendamentos)
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario: any, f => f.agendamentos)
+  @ManyToOne(() => Funcionario, f => f.agendamentos)
   funcionario!: Funcionario;
 
   @OneToMany(() => InteracaoCliente, i => i.agendamento)

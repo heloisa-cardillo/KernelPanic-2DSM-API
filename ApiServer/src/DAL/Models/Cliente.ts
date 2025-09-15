@@ -3,7 +3,7 @@ import { Funcionario } from "./Funcionario";
 import { FunilVendas } from "./FunilVendas";
 import { ContatoCliente } from "./ContatoCliente";
 import { HistoricoFunil } from "./HistoricoFunil";
-import { AgendamentoInteracao } from "./AgendamentoInteracao.ts";
+import { AgendamentoInteracao } from "./AgendamentoInteracao";
 import { InteracaoCliente } from "./InteracaoCliente";
 import { Vendas } from "./Vendas";
 
