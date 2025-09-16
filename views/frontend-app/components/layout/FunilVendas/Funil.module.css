@@ -1,0 +1,13 @@
+.funnel-bar {
+  height: 2rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  transition: width 0.5s;
+  white-space: nowrap;
+}
+
