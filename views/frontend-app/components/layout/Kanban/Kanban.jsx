@@ -5,7 +5,6 @@ import styles from "./Kanban.module.css";
 import Funil from "../FunilVendas/FunilVendas";
 
 export default function CicloDeVendas() {
-  // estado: cada coluna tem 2 cards, cada card tem lista de clientes
   const [cards, setCards] = useState({
     colunaUm: { prospeccao: [], negociacao: [] },
     colunaDois: { inicial: [], followUp: [] },
@@ -15,26 +14,7 @@ export default function CicloDeVendas() {
 
   const [draggingCliente, setDraggingCliente] = useState(null);
 
-  // adicionar cliente de teste
-  const adicionarCliente = (coluna, cardKey) => {
-    const novoCliente = {
-      nome: "Cliente " + (Math.floor(Math.random() * 1000)),
-      empresa: "Empresa X",
-      telefone: "(12) 1234-5678",
-      email: "cliente@email.com",
-      status: "Ativo",
-    };
-
-    setCards((prev) => ({
-      ...prev,
-      [coluna]: {
-        ...prev[coluna],
-        [cardKey]: [...prev[coluna][cardKey], novoCliente],
-      },
-    }));
-  };
-
-  // arrastar
+  // mover card
   const handleDragStart = (cliente, origemColuna, origemCard) => {
     setDraggingCliente({ cliente, origemColuna, origemCard });
   };
@@ -45,11 +25,11 @@ export default function CicloDeVendas() {
     const { cliente, origemColuna, origemCard } = draggingCliente;
 
     setCards((prev) => {
-      // remove do card de origem
+
       const origemLista = prev[origemColuna][origemCard].filter(
         (c) => c !== cliente
       );
-      // adiciona no card de destino
+
       const destinoLista = [...prev[destinoColuna][destinoCard], cliente];
 
       return {
@@ -68,7 +48,7 @@ export default function CicloDeVendas() {
     setDraggingCliente(null);
   };
 
-  // render cliente-card
+  //renderização
   const renderCliente = (cliente, coluna, cardKey, index) => (
     <div
       key={index}
@@ -84,7 +64,6 @@ export default function CicloDeVendas() {
     </div>
   );
 
-  // render card (coluna)
   const renderCard = (titulo, coluna, cardKey) => (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -127,7 +106,6 @@ export default function CicloDeVendas() {
         <button>Gerar Gráfico</button>
       </div>
 
-      {/* Kanban */}
       <div className={styles.kanban}>
         <div className={styles.column}>
           {renderCard("Prospecção", "colunaUm", "prospeccao")}

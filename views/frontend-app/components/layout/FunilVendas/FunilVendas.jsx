@@ -1,3 +1,5 @@
+ //funil atualiza automaticamente com a mudança dos cards de coluna
+
 export default function FunilVendas({ cards }) {
   const coresFunil = [
     "#2A49EB",
