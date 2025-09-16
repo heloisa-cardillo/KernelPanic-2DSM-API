@@ -1,36 +1,34 @@
-import { DataSource } from "typeorm";
-// import * as dotenv from "dotenv";
+const { DataSource } = require("typeorm");
+const dotenv = require("dotenv");
 
-import { AgendamentoInteracao } from "./Models/AgendamentoInteracao";
-import { Cliente } from "./Models/Cliente";
-import { ContatoCliente } from "./Models/ContatoCliente";
-import { EventoTreinamento} from "./Models/EventoTreinamento";
-import { Funcionario } from "./Models/Funcionario";
-import { FuncionariosConvidados } from "./Models/FuncionariosConvidados";
-import { FunilVendas } from "./Models/FunilVendas";
-import { HistoricoFunil } from "./Models/HistoricoFunil";
-import { InteracaoCliente } from "./Models/InteracaoCliente";
-import { Notificacao } from "./Models/Notificacao";
-import { NotificacaoConvidados } from "./Models/NotificacaoConvidados";
-import { Presenca } from "./Models/Presenca";
-import { Vendas } from "./Models/Vendas";
+const { AgendamentoInteracao } = require("./Models/AgendamentoInteracao");
+const { Cliente } = require("./Models/Cliente");
+const { ContatoCliente } = require("./Models/ContatoCliente");
+const { EventoTreinamento } = require("./Models/EventoTreinamento");
+const { Funcionario } = require("./Models/Funcionario");
+const { FuncionariosConvidados } = require("./Models/FuncionariosConvidados");
+const { FunilVendas } = require("./Models/FunilVendas");
+const { HistoricoFunil } = require("./Models/HistoricoFunil");
+const { InteracaoCliente } = require("./Models/InteracaoCliente");
+const { Notificacao } = require("./Models/Notificacao");
+const { NotificacaoConvidados } = require("./Models/NotificacaoConvidados");
+const { Presenca } = require("./Models/Presenca");
+const { Vendas } = require("./Models/Vendas");
 
+dotenv.config();
 
+const host = process.env.DB_HOST || "localhost";
+const password = process.env.DB_PASSWORD || "fatec";
+const username = process.env.DB_USERNAME || "root";
+const database = process.env.DB_DB || "newe_database";
 
-
-const host = process.env.DB_HOST || "localhost"
-const password = process.env.DB_PASSWORD || ""
-const username = process.env.DB_USERNAME || "root"
-const database = process.env.DB_DB || "newe_database"
-
-
-export const AppDataSource = new DataSource({
+const AppDataSource = new DataSource({
   type: "mysql",
-  host: host,
+  host,
   port: 3306,
-  username: username,
-  password: password,
-  database: database,
+  username,
+  password,
+  database,
   entities: [
     AgendamentoInteracao,
     Cliente,
@@ -46,7 +44,9 @@ export const AppDataSource = new DataSource({
     Presenca,
     Vendas
   ],
-  migrations: ["src/DAL/migrations/*.ts"], // <---- adicionado
-  synchronize: false, // <---- desliga para usar migrations
+  migrations: ["src/DAL/migrations/*.ts"],
+  synchronize: false,
   logging: true
 });
+
+module.exports = { AppDataSource };
