@@ -1,0 +1,30 @@
+import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
+import { Notificacao } from "./Notificacao";
+import { FuncionariosConvidados } from "./FuncionariosConvidados";
+
+@Entity()
+export class NotificacaoConvidados {
+  @PrimaryColumn()
+  funcionario_ID!: number;
+
+  @PrimaryColumn()
+  evento_ID!: number;
+
+  @PrimaryColumn()
+  notificacao_ID!: number;
+
+  @Column()
+  status_leitura!: boolean;
+
+  @Column({ nullable: true })
+  data_leitura?: Date;
+
+  @Column({ length: 20 })
+  prioridade!: string;
+
+  @ManyToOne(() => Notificacao, n => n.convidados)
+  notificacao!: Notificacao;
+
+  @ManyToOne(() => FuncionariosConvidados, fc => fc.notificacoes)
+  funcionarioConvidado!: FuncionariosConvidados;
+}
