@@ -1,18 +1,22 @@
 import { DataSource } from "typeorm";
-import * as dotenv from "dotenv";
+// import * as dotenv from "dotenv";
 
-import { Funcionario } from "./Models/Funcionario";
+import { AgendamentoInteracao } from "./Models/AgendamentoInteracao";
 import { Cliente } from "./Models/Cliente";
-import { CustomerStage } from "./Models/CustomerStage.js";
 import { ContatoCliente } from "./Models/ContatoCliente";
+import { EventoTreinamento} from "./Models/EventoTreinamento";
+import { Funcionario } from "./Models/Funcionario";
+import { FuncionariosConvidados } from "./Models/FuncionariosConvidados";
+import { FunilVendas } from "./Models/FunilVendas";
+import { HistoricoFunil } from "./Models/HistoricoFunil";
 import { InteracaoCliente } from "./Models/InteracaoCliente";
-import { Vendas } from "./Models/Vendas";
-import { AggregatedDelivery } from "./Models/AggregatedDelivery";
-import { Vehicle } from "./Models/Vehicle.js";
-import { EventoTreinamento } from "./Models/EventoTreinamento";
-import { Attendance } from "./Models/Attendance.js";
 import { Notificacao } from "./Models/Notificacao";
-import { FacilityManagement } from "./Models/FacilityManagement.js";
+import { NotificacaoConvidados } from "./Models/NotificacaoConvidados";
+import { Presenca } from "./Models/Presenca";
+import { Vendas } from "./Models/Vendas";
+
+
+
 
 const host = process.env.DB_HOST || "localhost"
 const password = process.env.DB_PASSWORD || ""
@@ -28,19 +32,19 @@ export const AppDataSource = new DataSource({
   password: password,
   database: database,
   entities: [
-    ,
-    Funcionario,
+    AgendamentoInteracao,
     Cliente,
-    CustomerStage,
     ContatoCliente,
-    InteracaoCliente,
-    Vendas,
-    AggregatedDelivery,
-    Vehicle,
     EventoTreinamento,
-    Attendance,
+    Funcionario,
+    FuncionariosConvidados,
+    FunilVendas,
+    HistoricoFunil,
+    InteracaoCliente,
     Notificacao,
-    FacilityManagement
+    NotificacaoConvidados,
+    Presenca,
+    Vendas
   ],
   migrations: ["src/DAL/migrations/*.ts"], // <---- adicionado
   synchronize: false, // <---- desliga para usar migrations
