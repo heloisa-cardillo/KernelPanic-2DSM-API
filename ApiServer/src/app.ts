@@ -10,15 +10,15 @@ app.use(cors())
 app.use(express.json())
 
 //Conexão com o banco de dados
-// import { AppDataSource } from " ./DAL/ormconfig.js";
+import { AppDataSource } from "./DAL/ormconfig";
 
-// AppDataSource.initialize()
-//   .then(() => {
-//     console.log("✅ Conectado ao MySQL com sucesso!");
-//   })
-//   .catch((err:Error) => {
-//     console.error("❌ Erro ao conectar ao MySQL:", err);
-//   });
+AppDataSource.initialize()
+  .then(() => {
+    console.log("✅ Conectado ao MySQL com sucesso!");
+  })
+  .catch((err:Error) => {
+    console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
+  });
 
 app.use("/calendario", calendarioRoute)
 
