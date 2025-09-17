@@ -22,7 +22,7 @@ const password = process.env.DB_PASSWORD || "fatec";
 const username = process.env.DB_USERNAME || "root";
 const database = process.env.DB_DB || "newe_database";
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: "mysql",
   host,
   port: 3306,
@@ -49,4 +49,3 @@ const AppDataSource = new DataSource({
   logging: true
 });
 
-module.exports = { AppDataSource };
