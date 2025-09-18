@@ -12,6 +12,22 @@
 
 ---
 
+# Mockup
+
+<details>
+<summary><b>Versão Mobile</b></summary>
+
+![Mockup Mobile](docs/Mockup/mobile%20API.png)
+
+</details>
+
+<details>
+<summary><b>Versão Desktop</b></summary>
+
+![Mockup Desktop](docs/Mockup/desktop%20API.png)
+
+</details>
+
 # Cenários de Teste
 
 ### User Story: US01 – Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para incluí-los no sistema.
