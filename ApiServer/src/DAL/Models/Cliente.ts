@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 import { Funcionario } from "./Funcionario";
 import { FunilVendas } from "./FunilVendas";
 import { ContatoCliente } from "./ContatoCliente";
@@ -19,9 +19,11 @@ export class Cliente {
   endereco!: string;
 
   @ManyToOne(() => Funcionario, f => f.clientes)
+  @JoinColumn({ name: "funcionario_ID" })
   funcionario!: Funcionario;
 
   @ManyToOne(() => FunilVendas, f => f.clientes)
+  @JoinColumn({ name: "funil_ID" })
   funil!: FunilVendas;
 
   @OneToMany(() => ContatoCliente, c => c.cliente)

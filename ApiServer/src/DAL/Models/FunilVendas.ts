@@ -1,10 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
 import { Cliente } from "./Cliente";
 import { HistoricoFunil } from "./HistoricoFunil";
 
-@Entity()
+@Entity("funilvendas")
 export class FunilVendas {
   @PrimaryGeneratedColumn()
+  @JoinColumn({ name: "funil_ID" })
   funil_ID!: number;
 
   @Column({ length: 20 })

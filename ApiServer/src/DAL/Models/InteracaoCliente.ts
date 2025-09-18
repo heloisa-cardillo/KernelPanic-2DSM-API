@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Funcionario } from "./Funcionario";
 import { Cliente } from "./Cliente";
 import { AgendamentoInteracao } from "./AgendamentoInteracao";
 
-@Entity()
+@Entity("InteracaoCliente")
 export class InteracaoCliente {
   @PrimaryGeneratedColumn()
   interacao_ID!: number;
@@ -17,12 +17,15 @@ export class InteracaoCliente {
   @Column({ length: 255 })
   relatorio_interacao!: string;
 
-  @ManyToOne(() => Funcionario, f => f.interacoes)
+  @ManyToOne(() => Funcionario, funcionario => funcionario.interacoes)
+  @JoinColumn({ name: "funcionario_ID" }) 
   funcionario!: Funcionario;
 
-  @ManyToOne(() => Cliente, c => c.interacoes)
+  @ManyToOne(() => Cliente, cliente => cliente.interacoes)
+  @JoinColumn({ name: "cliente_ID" }) 
   cliente!: Cliente;
 
-  @ManyToOne(() => AgendamentoInteracao, a => a.interacoes, { nullable: true })
-  agendamento?: AgendamentoInteracao;
+  @ManyToOne(() => AgendamentoInteracao, agendamento => agendamento.interacoes)
+  @JoinColumn({ name: "agendamento_interacao_ID" }) 
+  agendamento!: AgendamentoInteracao;
 }

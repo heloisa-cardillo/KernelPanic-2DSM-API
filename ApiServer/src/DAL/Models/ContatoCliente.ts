@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Cliente } from "./Cliente";
 
-@Entity()
+@Entity("contatocliente")
 export class ContatoCliente {
   @PrimaryGeneratedColumn()
   Contato_cliente_ID!: number;
@@ -12,6 +12,7 @@ export class ContatoCliente {
   @Column({ length: 255 })
   valor_contato!: string;
 
-  @ManyToOne(() => Cliente, c => c.contatos)
+  @ManyToOne(() => Cliente, c => c.contatos )
+  @JoinColumn({ name: "cliente_ID" }) 
   cliente!: Cliente;
 }
