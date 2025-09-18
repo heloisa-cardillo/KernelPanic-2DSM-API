@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Cliente } from "./Cliente";
-import { Funcionario } from "./Funcionario";
-import { InteracaoCliente } from "./InteracaoCliente";
+import { Cliente } from "./Cliente.js";
+import { Funcionario } from "./Funcionario.js";
+import { InteracaoCliente } from "./InteracaoCliente.js";
 
 @Entity()
 export class AgendamentoInteracao {
@@ -20,12 +20,12 @@ export class AgendamentoInteracao {
   @Column({ length: 255, nullable: true })
   notas?: string;
 
-  @ManyToOne(() => Cliente, c => c.agendamentos)
+  @ManyToOne(() => Cliente, cliente => cliente.agendamentos)
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario, f => f.agendamentos)
+  @ManyToOne(() => Funcionario, funcionario => funcionario.agendamentos)
   funcionario!: Funcionario;
 
-  @OneToMany(() => InteracaoCliente, i => i.agendamento)
+  @OneToMany(() => InteracaoCliente, interacaoCliente => interacaoCliente.agendamento)
   interacoes?: InteracaoCliente[];
 }

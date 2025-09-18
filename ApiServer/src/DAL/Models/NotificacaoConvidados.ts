@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
-import { Notificacao } from "./Notificacao";
-import { FuncionariosConvidados } from "./FuncionariosConvidados";
+import { Notificacao } from "./Notificacao.js";
+import { FuncionariosConvidados } from "./FuncionariosConvidados.js";
 
 @Entity()
 export class NotificacaoConvidados {
@@ -13,10 +13,10 @@ export class NotificacaoConvidados {
   @PrimaryColumn()
   notificacao_ID!: number;
 
-  @Column()
+  @Column({ type: "boolean" })
   status_leitura!: boolean;
 
-  @Column({ nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   data_leitura?: Date;
 
   @Column({ length: 20 })

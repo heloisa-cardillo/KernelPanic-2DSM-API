@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { FuncionariosConvidados } from "./FuncionariosConvidados";
-import { Notificacao } from "./Notificacao";
+import { Funcionario } from "./Funcionario.js";
+import { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+import { Notificacao } from "./Notificacao.js";
 
 @Entity()
 export class EventoTreinamento {
@@ -32,6 +32,7 @@ export class EventoTreinamento {
   @OneToMany(() => FuncionariosConvidados, fc => fc.evento)
   convidados?: FuncionariosConvidados[];
 
-  @OneToMany(() => Notificacao, n => n.evento)
+  @OneToMany(() => Notificacao, (notificacao) => notificacao.evento)
   notificacoes?: Notificacao[];
+
 }

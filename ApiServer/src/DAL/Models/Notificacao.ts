@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { EventoTreinamento } from "./EventoTreinamento";
-import { NotificacaoConvidados } from "./NotificacaoConvidados";
+import { EventoTreinamento } from "./EventoTreinamento.js";
+import { NotificacaoConvidados } from "./NotificacaoConvidados.js";
 
 @Entity()
 export class Notificacao {
@@ -13,7 +13,7 @@ export class Notificacao {
   @Column({ type: "longtext", nullable: true })
   corpo_notificacao?: string;
 
-  @ManyToOne(() => EventoTreinamento, e => e.notificacoes)
+  @ManyToOne(() => EventoTreinamento, (evento) => evento.notificacoes)
   evento!: EventoTreinamento;
 
   @OneToMany(() => NotificacaoConvidados, nc => nc.notificacao)

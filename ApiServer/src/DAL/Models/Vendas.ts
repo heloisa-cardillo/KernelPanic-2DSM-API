@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Cliente } from "./Cliente";
-import { Funcionario } from "./Funcionario";
+import { Cliente } from "./Cliente.js";
+import { Funcionario } from "./Funcionario.js";
 
 @Entity()
 export class Vendas {
   @PrimaryGeneratedColumn()
   venda_ID!: number;
 
-  @Column({ type: "date" })
+  @Column({ type: "timestamp" })  // ou "datetime"
   data_venda!: Date;
 
   @Column({ type: "decimal", precision: 10, scale: 2 })

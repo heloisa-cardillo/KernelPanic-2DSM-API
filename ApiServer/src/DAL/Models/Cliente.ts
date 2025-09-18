@@ -1,11 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { FunilVendas } from "./FunilVendas";
-import { ContatoCliente } from "./ContatoCliente";
-import { HistoricoFunil } from "./HistoricoFunil";
-import { AgendamentoInteracao } from "./AgendamentoInteracao";
-import { InteracaoCliente } from "./InteracaoCliente";
-import { Vendas } from "./Vendas";
+import { Funcionario } from "./Funcionario.js";
+import { FunilVendas } from "./FunilVendas.js";
+import { ContatoCliente } from "./ContatoCliente.js";
+import { HistoricoFunil } from "./HistoricoFunil.js";
+import { AgendamentoInteracao } from "./AgendamentoInteracao.js";
+import { InteracaoCliente } from "./InteracaoCliente.js";
+import { Vendas } from "./Vendas.js";
 
 @Entity()
 export class Cliente {
@@ -18,24 +18,24 @@ export class Cliente {
   @Column({ length: 255 })
   endereco!: string;
 
-  @ManyToOne(() => Funcionario, f => f.clientes)
+  @ManyToOne(() => Funcionario, funcionario => funcionario.clientes)
   funcionario!: Funcionario;
 
-  @ManyToOne(() => FunilVendas, f => f.clientes)
+  @ManyToOne(() => FunilVendas, funil => funil.clientes)
   funil!: FunilVendas;
 
-  @OneToMany(() => ContatoCliente, c => c.cliente)
+  @OneToMany(() => ContatoCliente, contato => contato.cliente)
   contatos?: ContatoCliente[];
 
-  @OneToMany(() => HistoricoFunil, h => h.cliente)
+  @OneToMany(() => HistoricoFunil, historico => historico.cliente)
   historico?: HistoricoFunil[];
 
-  @OneToMany(() => AgendamentoInteracao, a => a.cliente)
+  @OneToMany(() => AgendamentoInteracao, agendamento => agendamento.cliente)
   agendamentos?: AgendamentoInteracao[];
 
-  @OneToMany(() => InteracaoCliente, i => i.cliente)
+  @OneToMany(() => InteracaoCliente, interacao => interacao.cliente)
   interacoes?: InteracaoCliente[];
 
-  @OneToMany(() => Vendas, v => v.cliente)
+  @OneToMany(() => Vendas, venda => venda.cliente)
   vendas?: Vendas[];
 }

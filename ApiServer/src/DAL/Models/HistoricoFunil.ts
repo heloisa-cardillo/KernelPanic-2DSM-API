@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Cliente } from "./Cliente";
-import { FunilVendas } from "./FunilVendas";
+import { Cliente } from "./Cliente.js";
+import { FunilVendas } from "./FunilVendas.js";
 
 @Entity()
 export class HistoricoFunil {

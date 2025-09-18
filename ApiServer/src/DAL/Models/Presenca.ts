@@ -1,18 +1,18 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { FuncionariosConvidados } from "./FuncionariosConvidados";
+import { FuncionariosConvidados } from "./FuncionariosConvidados.js";
 
 @Entity()
 export class Presenca {
   @PrimaryGeneratedColumn()
   presenca_ID!: number;
 
-  @Column()
+  @Column({ type: "boolean" })
   presente!: boolean;
 
   @Column({ type: "longtext", nullable: true })
   razao_recusa?: string;
 
-  @Column({ nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   data_termino?: Date;
 
   @Column({ type: "longtext", nullable: true })
