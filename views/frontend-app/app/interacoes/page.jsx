@@ -1,19 +1,29 @@
 'use client';
 import { useState } from 'react';
+import Select from 'react-select';
 import styles from './App.module.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortKey, setSortKey] = useState('name');
+  const [sortKey, setSortKey] = useState('newest');
+  const [clienteSelecionado, setclienteSelecionado] = useState(null);
+
+  const sortOptions = [
+    { value: 'newest', label: 'Mais recentes' },
+    { value: 'oldest', label: 'Mais antigas' },
+  ];
 
   const clients = [
-    { id: 1, name: 'Emra', department: 'Gestão', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-05' },
-    { id: 2, name: 'Emra', department: 'Gestão', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-01' },
-    { id: 3, name: 'Emra', department: 'Gestão', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-03' },
-    { id: 4, name: 'Emra', department: 'Gestão', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-04' },
-    { id: 5, name: 'Emra', department: 'Gestão', company: 'WCM', status: 'Pendente', lastInteraction: '2025-09-02' },
-    
+    { id: 1, name: 'Ana Silva', department: 'Vendas', company: 'Tech Solutions', status: 'Ativo', lastInteraction: '2025-09-05', report: 'Discussão sobre a renovação do contrato. Cliente demonstrou interesse em novos produtos.' },
+    { id: 2, name: 'Bruno Costa', department: 'Comercial', company: 'Inova Corp', status: 'Pendente', lastInteraction: '2025-09-01', report: 'Apresentação da nova campanha de marketing. Feedback positivo recebido.' },
+    { id: 3, name: 'Carla Dias', department: 'Adminstrativo', company: 'BuildMax', status: 'Finalizado', lastInteraction: '2025-09-03', report: 'Projeto concluído e entregue. Cliente satisfeito com o resultado final.' },
+    { id: 4, name: 'Daniel Alves', department: 'Vendas', company: 'Future Systems', status: 'Ativo', lastInteraction: '2025-09-04', report: 'Reunião de alinhamento sobre as próximas etapas do projeto. Tudo ocorrendo conforme o planejado.' },
+    { id: 5, name: 'Eduarda Lima', department: 'Comercial', company: 'Connect Net', status: 'Pendente', lastInteraction: '2025-09-02', report: 'Cliente reportou um problema técnico. Equipe de suporte já está investigando a solução.' },
   ];
+
+  const DetalhesClick = (client) => {
+    setclienteSelecionado(client);
+  };
 
   const filteredClients = clients.filter(client =>
     client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -41,54 +51,65 @@ function App() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div style={{ marginLeft: '10px' }}>
-              <select
-                id="sort-by"
-                className={styles.sortDropdown}
+            <div className ='opções' style={{ marginLeft: '10px' }}>
+              <Select
+                instanceid="sort-by"
+                options = {sortOptions}
                 value={sortKey}
-                onChange={(e) => setSortKey(e.target.value)}
+                placeholder = 'Data'
+                onChange={(selectedOption) => setSortKey(selectedOption.value)}
+                styles={{
+                  indicatorSeparator: () => ({ display: 'none' })
+                }}
               >
-                <option value="newest">Mais recentes</option>
-                <option value="oldest">Mais antigas</option>
-              </select>
+              </Select>
             </div>
           </div>
 
-         <div className={styles['conteudo-tabela']}>
-          <div className={styles['tabela-container']}>
-            <table className={styles.tabela}>
-              <thead>
-                <tr>
-                  <th>Funcionário</th>
-                  <th>Departamento</th>
-                  <th>Cliente</th>
-                  <th>Estado da venda</th>
-                  <th>Última Interação</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedClients.map(client => (
-                  <tr key={client.id}>
-                    <td>{client.name}</td>
-                    <td>{client.department}</td>
-                    <td>{client.company}</td>
-                    <td>{client.status}</td>
-                    <td>{client.lastInteraction}</td>
-                    <td>
-                      <button className={styles.botao}>Detalhes</button>
-                    </td>
+          <div className={styles['conteudo-tabela']}>
+            <div className={styles['tabela-container']}>
+              <table className={styles.tabela}>
+                <thead>
+                  <tr>
+                    <th>Funcionário</th>
+                    <th>Departamento</th>
+                    <th>Cliente</th>
+                    <th>Estado da venda</th>
+                    <th>Última Interação</th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {sortedClients.map(client => (
+                    <tr key={client.id}>
+                      <td>{client.name}</td>
+                      <td>{client.department}</td>
+                      <td>{client.company}</td>
+                      <td>{client.status}</td>
+                      <td>{client.lastInteraction}</td>
+                      <td>
+                        <button className={styles.botao} onClick={() => DetalhesClick(client)}>Detalhes</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-          <div className={styles['detalhes-container']}>
-            <p>Informações do relatório</p>
+            <div className={styles['detalhes-container']}>
+              {clienteSelecionado ? (
+                <div>
+                  <h3>Detalhes de {clienteSelecionado.company}</h3>
+                  <p><strong>Funcionário:</strong> {clienteSelecionado.name}</p>
+                  <p><strong>Estado:</strong> {clienteSelecionado.status}</p>
+                  <p><strong>Última Interação:</strong> {clienteSelecionado.lastInteraction}</p>
+                  <p><strong>Relatório:</strong> {clienteSelecionado.report}</p>
+                </div>
+              ) : (
+                <p>Selecione um cliente na tabela para ver os detalhes.</p>
+              )}
+            </div>
           </div>
-        </div>
-
         </div>
       </div>
     </div>

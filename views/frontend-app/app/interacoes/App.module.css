@@ -18,7 +18,7 @@
 }
 
 .titulo {
-  color: #333;
+  color: #1f4af4;
   margin-bottom: 25px;
   text-align: left;
   font-size: 50px;
@@ -129,4 +129,18 @@
 
 .botao:hover {
   background-color: #6684ff;
+}
+
+.opcões select:focus{
+  outline: none;
+  border-color: #1f4af4;
+}
+
+.opcões label {
+  font-size: 14px;
+  color: #333;
+}
+
+.select__indicator-separator {
+  display: none;
 }
