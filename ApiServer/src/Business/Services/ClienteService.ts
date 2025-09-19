@@ -16,7 +16,7 @@ export class ClinteService{
             relations: ['funcionario', 'funil', 'contatos', 'historico', 'agendamentos', 'interacoes', 'vendas']
         })
     }
-   
+
     async buscarPorID(id: number): Promise<Cliente | null>{
         return this.clienteRepo.findOne({
             where:{cliente_ID: id},

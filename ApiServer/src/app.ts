@@ -1,8 +1,9 @@
 import "reflect-metadata"; // necessário para TypeORM
 import express from "express"
 import cors from "cors"
+import gestaoRoute from "./API/Routes/gestaoRoutes";
 
-const calendarioRoute = require("./API/Routes/calendarioRoutes")
+/*const calendarioRoute = require("./API/Routes/calendarioRoutes")*/
 
 const app = express();
 
@@ -20,7 +21,9 @@ AppDataSource.initialize()
     console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
   });
 
-app.use("/calendario", calendarioRoute)
+/*app.use("/calendario", calendarioRoute)*/
+
+app.use("/vendas",gestaoRoute)
 
 app.get("/", (req, res) => {
     res.send("API funcionando")
