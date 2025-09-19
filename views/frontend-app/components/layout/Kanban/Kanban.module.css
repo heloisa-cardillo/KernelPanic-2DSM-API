@@ -1,9 +1,7 @@
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-  background: #f3f4f6;
-  padding: 20px;
+  background-color: white;
+  padding: 3rem;
+  border-radius: 10px;
 }
 
 .header {
@@ -11,13 +9,12 @@
   margin-bottom: 20px;
 }
 
-.header h1 {
-  background: #1F4AF4;
-  color: white;
-  padding: 15px 40px;
-  border-radius: 25px;
-  display: inline-block;
-  font-size: 24px;
+.tittle{
+  color: #1f4af4;
+  margin-bottom: 25px;
+  text-align: left;
+  font-size: 50px;
+  font-weight: 600;
 }
 
 .filters {
@@ -77,15 +74,13 @@
 }
 
 .card {
-  flex: 1;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
   background: white;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  max-height: 400px;
 }
 
 .cardHeader {
@@ -119,10 +114,39 @@
 }
 
 .clienteCard {
+  cursor: pointer;
   background-color: #f9f9f9;
   border: 1px solid #575756;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 8px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clienteCard strong {
+  font-size: 16px;
+  color: #1f4af4;
+}
+
+.clienteCard em {
+  font-style: italic;
+  color: #999;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.clienteCard div {
+  font-size: 14px;
+  color: #555;
+}
+
+.clienteCard:hover {
+  background-color: #e2eaff;
+  border-color: #1f4af4;
+  box-shadow: 0 0 8px #1f4af4aa;
+  transition: 0.3s;
 }

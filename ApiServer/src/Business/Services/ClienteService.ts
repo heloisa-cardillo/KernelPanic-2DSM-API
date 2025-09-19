@@ -86,7 +86,7 @@
             if (!funil)
                 throw new Error(`Funil com ID ${novo_funil_id} não encontrado`);
 
-            cliente.funil_ID = novo_funil_id;
+            cliente.funil = funil;
 
             await clienteRepo.save(cliente);
             return cliente;

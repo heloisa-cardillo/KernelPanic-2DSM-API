@@ -33,3 +33,21 @@ export const getClientes = async (req:Request, res:Response) => {
         return res.send({message: "Erroo"})
     }
 }
+
+export const postMoverCliente = async(req: Request, res: Response) =>{
+    const clienteRepo = new ClienteService()
+    const body = req.body
+    console.log(body)
+    try {
+        const cliente = await clienteRepo.editarFunilCliente(body.cliente_id, body.novo_estagio);
+
+        if (!cliente) {
+            return res.status(404).send({ message: "Cliente não encontrado ou não atualizado." });
+        }
+
+        return res.status(200).send({ message: "Cliente atualizado com sucesso", cliente });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: "Erro ao atualizar cliente", error: err instanceof Error ? err.message : err });
+    }
+}
