@@ -1,5 +1,6 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, Unique
+  Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, Unique,
+  JoinColumn
 } from "typeorm";
 import { Cliente } from "./Cliente";
 import { EventoTreinamento } from "./EventoTreinamento";
@@ -42,6 +43,7 @@ export class Funcionario {
   localizacao_funcionario!: string;
 
   @ManyToOne(() => Funcionario, gerente => gerente.subordinados, { nullable: true })
+  @JoinColumn({ name: "gerente_ID" })
   gerente?: Funcionario;
 
   @OneToMany(() => Funcionario, f => f.gerente)
