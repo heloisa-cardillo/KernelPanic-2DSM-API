@@ -18,36 +18,36 @@ import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.j
 
 @Entity()
 export class AgendamentoInteracao {
-  @PrimaryGeneratedColumn()
-  agendamento_interacao_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  agendamento_interacao_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
 
-  @Column()
-  data_marcada!: Date;
+  @Column({ type: "datetime" })
+  data_marcada!: Date; // Tipo explícito: Date
 
-  @Column({ length: 20 })
-  tipo_interacao!: string;
+  @Column({ type: "varchar", length: 20 })
+  tipo_interacao!: string; // Tipo explícito: string
 
-  @Column({ length: 20 })
-  status!: string;
+  @Column({ type: "varchar", length: 20 })
+  status!: string; // Tipo explícito: string
 
-  @Column({ length: 255, nullable: true })
-  notas?: string;
+  @Column({ type: "varchar", length: 255, nullable: true })
+  notas?: string; // Tipo explícito: string | undefined (nullable)
 
   @ManyToOne(
     () => ClienteEntity,
-    cliente => cliente.agendamentos
+    (cliente: Cliente) => cliente.agendamentos
   )
-  cliente!: Cliente;
+  cliente!: Cliente; // Tipo explícito: Cliente
 
   @ManyToOne(
     () => FuncionarioEntity,
-    funcionario => funcionario.agendamentos
+    (funcionario: Funcionario) => funcionario.agendamentos
   )
-  funcionario!: Funcionario;
+  funcionario!: Funcionario; // Tipo explícito: Funcionario
 
   @OneToMany(
     () => InteracaoClienteEntity,
-    interacao => interacao.agendamento
+    (interacao: InteracaoCliente) => interacao.agendamento
   )
-  interacoes?: InteracaoCliente[];
+  interacoes?: InteracaoCliente[]; // Tipo explícito: InteracaoCliente[] | undefined (nullable)
 }

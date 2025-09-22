@@ -15,7 +15,7 @@ import { FunilVendas as FunilVendasEntity } from "./FunilVendas.js";
 
 @Entity()
 export class HistoricoFunil {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: "int" })
   historico_ID!: number;
 
   @Column({ type: "timestamp" })

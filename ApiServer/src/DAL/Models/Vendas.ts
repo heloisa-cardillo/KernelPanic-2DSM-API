@@ -10,7 +10,7 @@ import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 
 @Entity()
 export class Vendas {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: "int" })
   venda_ID!: number;
 
   @Column({ type: "timestamp" })  // ou "datetime"
@@ -19,7 +19,7 @@ export class Vendas {
   @Column({ type: "decimal", precision: 10, scale: 2 })
   valor_total!: number;
 
-  @Column({ length: 20 })
+  @Column({ type: "varchar", length: 20 })
   status!: string;
 
   @ManyToOne(() => ClienteEntity, (c: Cliente) => c.vendas)

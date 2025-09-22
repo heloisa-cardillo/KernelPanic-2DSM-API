@@ -26,54 +26,54 @@ import { Vendas as VendasEntity } from "./Vendas.js";
 
 @Entity()
 export class Cliente {
-  @PrimaryGeneratedColumn()
-  cliente_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  cliente_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
 
-  @Column({ length: 100 })
-  nome!: string;
+  @Column({ type: "varchar", length: 100 })
+  nome!: string; // Tipo explícito: string
 
-  @Column({ length: 255 })
-  endereco!: string;
+  @Column({ type: "varchar", length: 255 })
+  endereco!: string; // Tipo explícito: string
 
   @ManyToOne(
     () => FuncionarioEntity,
-    funcionario => funcionario.clientes
+    (funcionario: Funcionario) => funcionario.clientes
   )
-  funcionario!: Funcionario;
+  funcionario!: Funcionario; // Tipo explícito: Funcionario
 
   @ManyToOne(
     () => FunilVendasEntity,
-    funil => funil.clientes
+    (funil: FunilVendas) => funil.clientes
   )
-  funil!: FunilVendas;
+  funil!: FunilVendas; // Tipo explícito: FunilVendas
 
   @OneToMany(
     () => ContatoClienteEntity,
-    contato => contato.cliente
+    (contato: ContatoCliente) => contato.cliente
   )
-  contatos?: ContatoCliente[];
+  contatos?: ContatoCliente[]; // Tipo explícito: ContatoCliente[] | undefined (nullable)
 
   @OneToMany(
     () => HistoricoFunilEntity,
-    historico => historico.cliente
+    (historico: HistoricoFunil) => historico.cliente
   )
-  historico?: HistoricoFunil[];
+  historico?: HistoricoFunil[]; // Tipo explícito: HistoricoFunil[] | undefined (nullable)
 
   @OneToMany(
     () => AgendamentoInteracaoEntity,
-    agendamento => agendamento.cliente
+    (agendamento: AgendamentoInteracao) => agendamento.cliente
   )
-  agendamentos?: AgendamentoInteracao[];
+  agendamentos?: AgendamentoInteracao[]; // Tipo explícito: AgendamentoInteracao[] | undefined (nullable)
 
   @OneToMany(
     () => InteracaoClienteEntity,
-    interacao => interacao.cliente
+    (interacao: InteracaoCliente) => interacao.cliente
   )
-  interacoes?: InteracaoCliente[];
+  interacoes?: InteracaoCliente[]; // Tipo explícito: InteracaoCliente[] | undefined (nullable)
 
   @OneToMany(
     () => VendasEntity,
-    venda => venda.cliente
+    (venda: Vendas) => venda.cliente
   )
-  vendas?: Vendas[];
+  vendas?: Vendas[]; // Tipo explícito: Vendas[] | undefined (nullable)
 }

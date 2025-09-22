@@ -8,7 +8,7 @@ import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./Funcio
 
 @Entity()
 export class Presenca {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: "int" })
   presenca_ID!: number;
 
   @Column({ type: "boolean" })

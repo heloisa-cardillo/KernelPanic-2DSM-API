@@ -10,23 +10,23 @@ import { HistoricoFunil as HistoricoFunilEntity } from "./HistoricoFunil.js";
 
 @Entity()
 export class FunilVendas {
-  @PrimaryGeneratedColumn()
-  funil_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  funil_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
 
-  @Column({ length: 20 })
-  estagio_nome!: string;
+  @Column({ type: "varchar", length: 20 })
+  estagio_nome!: string; // Tipo explícito: string
 
   // Relacionamento 1:N com Cliente
   @OneToMany(
     () => ClienteEntity,
     (cliente: Cliente) => cliente.funil
   )
-  clientes?: Cliente[];
+  clientes?: Cliente[]; // Tipo explícito: Cliente[] | undefined (nullable)
 
   // Relacionamento 1:N com HistoricoFunil
   @OneToMany(
     () => HistoricoFunilEntity,
     (historico: HistoricoFunil) => historico.funil
   )
-  historico?: HistoricoFunil[];
+  historico?: HistoricoFunil[]; // Tipo explícito: HistoricoFunil[] | undefined (nullable)
 }

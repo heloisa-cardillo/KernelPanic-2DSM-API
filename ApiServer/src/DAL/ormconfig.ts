@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
-dotenv.config();
+// dotenv.config();
 
 const host = process.env.DB_HOST || "localhost";
 const password = process.env.DB_PASSWORD || "fatec";

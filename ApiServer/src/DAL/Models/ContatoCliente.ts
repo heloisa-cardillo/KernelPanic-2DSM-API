@@ -13,18 +13,18 @@ import { Cliente as ClienteEntity } from "./Cliente.js";
 
 @Entity()
 export class ContatoCliente {
-  @PrimaryGeneratedColumn()
-  contato_cliente_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  contato_cliente_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
 
-  @Column({ length: 20 })
-  tipo_contato!: string;
+  @Column({ type: "varchar", length: 20 })
+  tipo_contato!: string; // Tipo explícito: string
 
-  @Column({ length: 255 })
-  valor_contato!: string;
+  @Column({ type: "varchar", length: 255 })
+  valor_contato!: string; // Tipo explícito: string
 
   @ManyToOne(
     () => ClienteEntity,
-    cliente => cliente.contatos
+    (cliente: Cliente) => cliente.contatos
   )
-  cliente!: Cliente;
+  cliente!: Cliente; // Tipo explícito: Cliente
 }

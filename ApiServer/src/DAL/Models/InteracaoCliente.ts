@@ -16,34 +16,34 @@ import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteraca
 
 @Entity()
 export class InteracaoCliente {
-  @PrimaryGeneratedColumn()
-  interacao_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  interacao_ID!: number; // Tipo explícito: number
 
   @Column({ type: "date" })
-  data_interacao!: Date;
+  data_interacao!: Date; // Tipo explícito: Date
 
-  @Column({ length: 20 })
-  tipo_interacao!: string;
+  @Column({ type: "varchar", length: 20 })
+  tipo_interacao!: string; // Tipo explícito: string
 
-  @Column({ length: 255 })
-  relatorio_interacao!: string;
+  @Column({ type: "varchar", length: 255 })
+  relatorio_interacao!: string; // Tipo explícito: string
 
   @ManyToOne(
     () => FuncionarioEntity,
-    funcionario => funcionario.interacoes
+    (funcionario: Funcionario) => funcionario.interacoes
   )
-  funcionario!: Funcionario;
+  funcionario!: Funcionario; // Tipo explícito: Funcionario
 
   @ManyToOne(
     () => ClienteEntity,
-    cliente => cliente.interacoes
+    (cliente: Cliente) => cliente.interacoes
   )
-  cliente!: Cliente;
+  cliente!: Cliente; // Tipo explícito: Cliente
 
   @ManyToOne(
     () => AgendamentoEntity,
-    agendamento => agendamento.interacoes,
+    (agendamento: AgendamentoInteracao) => agendamento.interacoes,
     { nullable: true }
   )
-  agendamento?: AgendamentoInteracao;
+  agendamento?: AgendamentoInteracao; // Tipo explícito: AgendamentoInteracao | undefined (nullable)
 }

@@ -10,24 +10,24 @@ import { NotificacaoConvidados as NotificacaoConvidadosEntity } from "./Notifica
 
 @Entity()
 export class Notificacao {
-  @PrimaryGeneratedColumn()
-  notificacao_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  notificacao_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
 
-  @Column({ length: 100 })
-  titulo_notificacao!: string;
+  @Column({ type: "varchar", length: 100 })
+  titulo_notificacao!: string; // Tipo explícito: string
 
   @Column({ type: "longtext", nullable: true })
-  corpo_notificacao?: string;
+  corpo_notificacao?: string | null; // Tipo explícito: string | null (nullable)
 
   @ManyToOne(
     () => EventoTreinamentoEntity,
     (evento: EventoTreinamento) => evento.notificacoes
   )
-  evento!: EventoTreinamento;
+  evento!: EventoTreinamento; // Tipo explícito: EventoTreinamento
 
   @OneToMany(
     () => NotificacaoConvidadosEntity,
     (nc: NotificacaoConvidados) => nc.notificacao
   )
-  convidados?: NotificacaoConvidados[];
+  convidados?: NotificacaoConvidados[]; // Tipo explícito: NotificacaoConvidados[] | undefined (nullable)
 }

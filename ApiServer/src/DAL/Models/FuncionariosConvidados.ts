@@ -20,11 +20,11 @@ import { Presenca as PresencaEntity } from "./Presenca.js";
 
 @Entity()
 export class FuncionariosConvidados {
-  @PrimaryColumn()
-  funcionario_ID!: number;
+  @PrimaryColumn({ type: "int" })
+  funcionario_ID!: number; // Tipo explícito: number (ID de tipo numérico)
 
-  @PrimaryColumn()
-  evento_ID!: number;
+  @PrimaryColumn({ type: "int" })
+  evento_ID!: number; // Tipo explícito: number (ID de tipo numérico)
 
   @ManyToOne(
     () => EventoEntity,
@@ -32,7 +32,7 @@ export class FuncionariosConvidados {
     { onDelete: "CASCADE" }
   )
   @JoinColumn({ name: "evento_ID" })
-  evento!: EventoTreinamento;
+  evento!: EventoTreinamento; // Tipo explícito: EventoTreinamento
 
   @ManyToOne(
     () => FuncionarioEntity,
@@ -40,17 +40,17 @@ export class FuncionariosConvidados {
     { onDelete: "CASCADE" }
   )
   @JoinColumn({ name: "funcionario_ID" })
-  funcionario!: Funcionario;
+  funcionario!: Funcionario; // Tipo explícito: Funcionario
 
   @OneToMany(
     () => NotificacaoEntity,
     (notificacaoConvidados: NotificacaoConvidados) => notificacaoConvidados.funcionarioConvidado
   )
-  notificacoes?: NotificacaoConvidados[];
+  notificacoes?: NotificacaoConvidados[]; // Tipo explícito: NotificacaoConvidados[] | undefined (nullable)
 
   @OneToMany(
     () => PresencaEntity,
     (presenca: Presenca) => presenca.funcionarioConvidado
   )
-  presencas?: Presenca[];
+  presencas?: Presenca[]; // Tipo explícito: Presenca[] | undefined (nullable)
 }

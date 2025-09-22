@@ -14,7 +14,7 @@ import type { InteracaoCliente } from "./InteracaoCliente.js";
 import type { Vendas } from "./Vendas.js";
 import type { EventoTreinamento } from "./EventoTreinamento.js";
 import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
-import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // pra recursivo
+import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // para recursivo
 
 // Importação real usada nos decorators (TypeORM)
 import { Cliente as ClienteEntity } from "./Cliente.js";
@@ -28,82 +28,82 @@ import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 @Entity()
 @Unique(["email"])
 export class Funcionario {
-  @PrimaryGeneratedColumn()
-  funcionario_ID!: number;
+  @PrimaryGeneratedColumn({ type: "int" })
+  funcionario_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
 
-  @Column({ length: 100 })
-  nome!: string;
+  @Column({ type: "varchar", length: 100 })
+  nome!: string; // Tipo explícito: string
 
-  @Column({ length: 10 })
-  genero!: string;
+  @Column({ type: "varchar", length: 10 })
+  genero!: string; // Tipo explícito: string
 
-  @Column({ length: 255 })
-  endereco!: string;
+  @Column({ type: "varchar", length: 255 })
+  endereco!: string; // Tipo explícito: string
 
-  @Column({ length: 20 })
-  numero_telefone!: string;
+  @Column({ type: "varchar", length: 20 })
+  numero_telefone!: string; // Tipo explícito: string
 
-  @Column({ length: 50 })
-  cargo!: string;
+  @Column({ type: "varchar", length: 50 })
+  cargo!: string; // Tipo explícito: string
 
-  @Column({ length: 50 })
-  email!: string;
+  @Column({ type: "varchar", length: 50 })
+  email!: string; // Tipo explícito: string
 
-  @Column({ length: 255 })
-  senha_hash!: string;
+  @Column({ type: "varchar", length: 255 })
+  senha_hash!: string; // Tipo explícito: string
 
-  @Column({ length: 255 })
-  nivel_acesso!: string;
+  @Column({ type: "varchar", length: 255 })
+  nivel_acesso!: string; // Tipo explícito: string
 
-  @Column({ length: 100 })
-  localizacao_funcionario!: string;
+  @Column({ type: "varchar", length: 100 })
+  localizacao_funcionario!: string; // Tipo explícito: string
 
   @ManyToOne(
     () => FuncionarioEntity,
-    gerente => gerente.subordinados,
+    (gerente: FuncionarioType) => gerente.subordinados,
     { nullable: true }
   )
-  gerente?: FuncionarioType;
+  gerente?: FuncionarioType; // Tipo explícito: FuncionarioType | undefined (nullable)
 
   @OneToMany(
     () => FuncionarioEntity,
-    funcionario => funcionario.gerente
+    (funcionario: FuncionarioType) => funcionario.gerente
   )
-  subordinados?: FuncionarioType[];
+  subordinados?: FuncionarioType[]; // Tipo explícito: FuncionarioType[] | undefined (nullable)
 
   @OneToMany(
     () => ClienteEntity,
-    cliente => cliente.funcionario
+    (cliente: Cliente) => cliente.funcionario
   )
-  clientes?: Cliente[];
+  clientes?: Cliente[]; // Tipo explícito: Cliente[] | undefined (nullable)
 
   @OneToMany(
     () => AgendamentoEntity,
-    agendamento => agendamento.funcionario
+    (agendamento: AgendamentoInteracao) => agendamento.funcionario
   )
-  agendamentos?: AgendamentoInteracao[];
+  agendamentos?: AgendamentoInteracao[]; // Tipo explícito: AgendamentoInteracao[] | undefined (nullable)
 
   @OneToMany(
     () => InteracaoEntity,
-    interacao => interacao.funcionario
+    (interacao: InteracaoCliente) => interacao.funcionario
   )
-  interacoes?: InteracaoCliente[];
+  interacoes?: InteracaoCliente[]; // Tipo explícito: InteracaoCliente[] | undefined (nullable)
 
   @OneToMany(
     () => VendasEntity,
-    venda => venda.funcionario
+    (venda: Vendas) => venda.funcionario
   )
-  vendas?: Vendas[];
+  vendas?: Vendas[]; // Tipo explícito: Vendas[] | undefined (nullable)
 
   @OneToMany(
     () => EventoEntity,
-    evento => evento.organizador
+    (evento: EventoTreinamento) => evento.organizador
   )
-  eventosOrganizados?: EventoTreinamento[];
+  eventosOrganizados?: EventoTreinamento[]; // Tipo explícito: EventoTreinamento[] | undefined (nullable)
 
   @OneToMany(
     () => ConvidadosEntity,
-    convite => convite.funcionario
+    (convite: FuncionariosConvidados) => convite.funcionario
   )
-  convites?: FuncionariosConvidados[];
+  convites?: FuncionariosConvidados[]; // Tipo explícito: FuncionariosConvidados[] | undefined (nullable)
 }
