@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+/*import { Repository } from "typeorm";
 import { AppDataSource } from "../../DAL/ormconfig";
 import { Vendas } from "../../DAL/Models/Vendas"
 import { Cliente } from "../../DAL/Models/Cliente";
@@ -15,7 +15,7 @@ export class GestaoService{
 
     async listarInformacoes(): Promise<Vendas[]>{
         return this.vendasRepo.find({
-            relations: ['cliente','cliente.contatos' ,'funcionario']
+            relations: ['cliente', 'funcionario', 'contatocliente', 'historico']
         })
     }
 
@@ -23,7 +23,7 @@ export class GestaoService{
     async listarPorID(id: number): Promise<Vendas | null>{
         return this.vendasRepo.findOne({
             where: {venda_ID: id},
-            relations: ['cliente','cliente.contatos' ,'funcionario']
+            relations: ['cliente', 'funcionario']
         })
 
     }
@@ -33,7 +33,7 @@ export class GestaoService{
 
         return this.vendasRepo.findOne({
             where: {venda_ID: id},
-            relations: ['cliente','cliente.contatos' ,'funcionario']
+            relations: ['cliente', 'funcionario']
         })
 
     }
@@ -48,10 +48,11 @@ export class GestaoService{
             return false; 
         }
 
+        await this.vendasRepo.delete(id);
         if (venda.cliente) {
             await this.clienteRepo.delete(venda.cliente.cliente_ID);
         }
 
         return true;
     }
-}
+}*/

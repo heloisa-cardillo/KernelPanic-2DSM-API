@@ -33,3 +33,14 @@ export const getVendaById = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Erro ao buscar venda" });
     }
 };
+
+export const UptadeVenda = async (req:Request, res:Response) =>{
+    try{
+        const id = Number(req.params.id)
+        const venda = await Service.listarPorID(id)
+        return res.json(venda)
+    }catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Erro ao buscar venda" });
+    }
+};

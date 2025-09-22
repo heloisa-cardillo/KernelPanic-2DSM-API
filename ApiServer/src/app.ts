@@ -23,7 +23,7 @@ AppDataSource.initialize()
 
 /*app.use("/calendario", calendarioRoute)*/
 
-app.use("/vendas",gestaoRoute)
+app.use("/gestao",gestaoRoute)
 
 app.get("/", (req, res) => {
     res.send("API funcionando")
