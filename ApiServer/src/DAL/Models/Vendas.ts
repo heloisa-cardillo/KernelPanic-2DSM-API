@@ -1,6 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Cliente } from "./Cliente.js";
-import { Funcionario } from "./Funcionario.js";
+
+// Importação de tipo para evitar ciclo
+import type { Cliente } from "./Cliente.js";
+import type { Funcionario } from "./Funcionario.js";
+
+// Importação real para os decorators
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 
 @Entity()
 export class Vendas {
@@ -16,9 +22,9 @@ export class Vendas {
   @Column({ length: 20 })
   status!: string;
 
-  @ManyToOne(() => Cliente, c => c.vendas)
+  @ManyToOne(() => ClienteEntity, (c: Cliente) => c.vendas)
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario, f => f.vendas)
+  @ManyToOne(() => FuncionarioEntity, (f: Funcionario) => f.vendas)
   funcionario!: Funcionario;
 }

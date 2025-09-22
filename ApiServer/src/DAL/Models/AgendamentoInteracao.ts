@@ -1,7 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Cliente } from "./Cliente.js";
-import { Funcionario } from "./Funcionario.js";
-import { InteracaoCliente } from "./InteracaoCliente.js";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
+
+// Importações apenas de tipo
+import type { Cliente } from "./Cliente.js";
+import type { Funcionario } from "./Funcionario.js";
+import type { InteracaoCliente } from "./InteracaoCliente.js";
+
+// Importações reais para os decorators
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
 
 @Entity()
 export class AgendamentoInteracao {
@@ -20,12 +33,21 @@ export class AgendamentoInteracao {
   @Column({ length: 255, nullable: true })
   notas?: string;
 
-  @ManyToOne(() => Cliente, cliente => cliente.agendamentos)
+  @ManyToOne(
+    () => ClienteEntity,
+    cliente => cliente.agendamentos
+  )
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario, funcionario => funcionario.agendamentos)
+  @ManyToOne(
+    () => FuncionarioEntity,
+    funcionario => funcionario.agendamentos
+  )
   funcionario!: Funcionario;
 
-  @OneToMany(() => InteracaoCliente, interacaoCliente => interacaoCliente.agendamento)
+  @OneToMany(
+    () => InteracaoClienteEntity,
+    interacao => interacao.agendamento
+  )
   interacoes?: InteracaoCliente[];
 }

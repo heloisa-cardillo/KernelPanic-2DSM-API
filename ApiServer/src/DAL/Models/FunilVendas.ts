@@ -1,6 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Cliente } from "./Cliente.js";
-import { HistoricoFunil } from "./HistoricoFunil.js";
+
+// Importação apenas para tipos (não gera código JS)
+import type { Cliente } from "./Cliente.js";
+import type { HistoricoFunil } from "./HistoricoFunil.js";
+
+// Importação real para decorators
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { HistoricoFunil as HistoricoFunilEntity } from "./HistoricoFunil.js";
 
 @Entity()
 export class FunilVendas {
@@ -11,10 +17,16 @@ export class FunilVendas {
   estagio_nome!: string;
 
   // Relacionamento 1:N com Cliente
-  @OneToMany(() => Cliente, c => c.funil)
+  @OneToMany(
+    () => ClienteEntity,
+    (cliente: Cliente) => cliente.funil
+  )
   clientes?: Cliente[];
 
   // Relacionamento 1:N com HistoricoFunil
-  @OneToMany(() => HistoricoFunil, h => h.funil)
+  @OneToMany(
+    () => HistoricoFunilEntity,
+    (historico: HistoricoFunil) => historico.funil
+  )
   historico?: HistoricoFunil[];
 }

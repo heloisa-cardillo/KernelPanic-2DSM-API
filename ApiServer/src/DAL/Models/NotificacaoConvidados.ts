@@ -1,6 +1,12 @@
 import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
-import { Notificacao } from "./Notificacao.js";
-import { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+
+// Importação apenas para tipos
+import type { Notificacao } from "./Notificacao.js";
+import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+
+// Importação real para decorators
+import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
+import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
 
 @Entity()
 export class NotificacaoConvidados {
@@ -22,9 +28,15 @@ export class NotificacaoConvidados {
   @Column({ length: 20 })
   prioridade!: string;
 
-  @ManyToOne(() => Notificacao, n => n.convidados)
+  @ManyToOne(
+    () => NotificacaoEntity,
+    (notificacao: Notificacao) => notificacao.convidados
+  )
   notificacao!: Notificacao;
 
-  @ManyToOne(() => FuncionariosConvidados, fc => fc.notificacoes)
+  @ManyToOne(
+    () => FuncionariosConvidadosEntity,
+    (fc: FuncionariosConvidados) => fc.notificacoes
+  )
   funcionarioConvidado!: FuncionariosConvidados;
 }

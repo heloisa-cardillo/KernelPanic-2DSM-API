@@ -7,12 +7,23 @@ import {
   Unique,
 } from "typeorm";
 
-import { Cliente } from "./Cliente.js";
-import { EventoTreinamento } from "./EventoTreinamento.js";
-import { AgendamentoInteracao } from "./AgendamentoInteracao.js";
-import { InteracaoCliente } from "./InteracaoCliente.js";
-import { Vendas } from "./Vendas.js";
-import { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+// Importação só para tipagem (TypeScript)
+import type { Cliente } from "./Cliente.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
+import type { InteracaoCliente } from "./InteracaoCliente.js";
+import type { Vendas } from "./Vendas.js";
+import type { EventoTreinamento } from "./EventoTreinamento.js";
+import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // pra recursivo
+
+// Importação real usada nos decorators (TypeORM)
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteracao.js";
+import { InteracaoCliente as InteracaoEntity } from "./InteracaoCliente.js";
+import { Vendas as VendasEntity } from "./Vendas.js";
+import { EventoTreinamento as EventoEntity } from "./EventoTreinamento.js";
+import { FuncionariosConvidados as ConvidadosEntity } from "./FuncionariosConvidados.js";
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 
 @Entity()
 @Unique(["email"])
@@ -47,27 +58,52 @@ export class Funcionario {
   @Column({ length: 100 })
   localizacao_funcionario!: string;
 
-  @ManyToOne(() => Funcionario, (gerente) => gerente.subordinados, { nullable: true })
-  gerente?: Funcionario;
+  @ManyToOne(
+    () => FuncionarioEntity,
+    gerente => gerente.subordinados,
+    { nullable: true }
+  )
+  gerente?: FuncionarioType;
 
-  @OneToMany(() => Funcionario, (f) => f.gerente)
-  subordinados?: Funcionario[];
+  @OneToMany(
+    () => FuncionarioEntity,
+    funcionario => funcionario.gerente
+  )
+  subordinados?: FuncionarioType[];
 
-  @OneToMany(() => Cliente, (c) => c.funcionario)
+  @OneToMany(
+    () => ClienteEntity,
+    cliente => cliente.funcionario
+  )
   clientes?: Cliente[];
 
-  @OneToMany(() => AgendamentoInteracao, (a) => a.funcionario)
+  @OneToMany(
+    () => AgendamentoEntity,
+    agendamento => agendamento.funcionario
+  )
   agendamentos?: AgendamentoInteracao[];
 
-  @OneToMany(() => InteracaoCliente, (i) => i.funcionario)
+  @OneToMany(
+    () => InteracaoEntity,
+    interacao => interacao.funcionario
+  )
   interacoes?: InteracaoCliente[];
 
-  @OneToMany(() => Vendas, (v) => v.funcionario)
+  @OneToMany(
+    () => VendasEntity,
+    venda => venda.funcionario
+  )
   vendas?: Vendas[];
 
-  @OneToMany(() => EventoTreinamento, (e) => e.organizador)
+  @OneToMany(
+    () => EventoEntity,
+    evento => evento.organizador
+  )
   eventosOrganizados?: EventoTreinamento[];
 
-  @OneToMany(() => FuncionariosConvidados, (fc) => fc.funcionario)
+  @OneToMany(
+    () => ConvidadosEntity,
+    convite => convite.funcionario
+  )
   convites?: FuncionariosConvidados[];
 }

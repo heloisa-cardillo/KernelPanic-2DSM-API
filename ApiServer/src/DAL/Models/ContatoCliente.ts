@@ -1,5 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Cliente } from "./Cliente.js";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+} from "typeorm";
+
+// Importação de tipo (não gera código JS)
+import type { Cliente } from "./Cliente.js";
+
+// Importação real (para uso no decorator)
+import { Cliente as ClienteEntity } from "./Cliente.js";
 
 @Entity()
 export class ContatoCliente {
@@ -12,6 +22,9 @@ export class ContatoCliente {
   @Column({ length: 255 })
   valor_contato!: string;
 
-  @ManyToOne(() => Cliente, c => c.contatos)
+  @ManyToOne(
+    () => ClienteEntity,
+    cliente => cliente.contatos
+  )
   cliente!: Cliente;
 }

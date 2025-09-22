@@ -1,5 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+
+// Importação apenas para tipos
+import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+
+// Importação real para uso no decorator
+import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
 
 @Entity()
 export class Presenca {
@@ -18,6 +23,9 @@ export class Presenca {
   @Column({ type: "longtext", nullable: true })
   link_feedback?: string;
 
-  @ManyToOne(() => FuncionariosConvidados, fc => fc.presencas)
+  @ManyToOne(
+    () => FuncionariosConvidadosEntity,
+    (fc: FuncionariosConvidados) => fc.presencas
+  )
   funcionarioConvidado!: FuncionariosConvidados;
 }
