@@ -1,11 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { FunilVendas } from "./FunilVendas";
-import { ContatoCliente } from "./ContatoCliente";
-import { HistoricoFunil } from "./HistoricoFunil";
-import { AgendamentoInteracao } from "./AgendamentoInteracao";
-import { InteracaoCliente } from "./InteracaoCliente";
-import { Vendas } from "./Vendas";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
+
+// Importações apenas de tipo (evita código circular no JS)
+import type { Funcionario } from "./Funcionario.js";
+import type { FunilVendas } from "./FunilVendas.js";
+import type { ContatoCliente } from "./ContatoCliente.js";
+import type { HistoricoFunil } from "./HistoricoFunil.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
+import type { InteracaoCliente } from "./InteracaoCliente.js";
+import type { Vendas } from "./Vendas.js";
+
+// Importações reais (apenas para os decorators)
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { FunilVendas as FunilVendasEntity } from "./FunilVendas.js";
+import { ContatoCliente as ContatoClienteEntity } from "./ContatoCliente.js";
+import { HistoricoFunil as HistoricoFunilEntity } from "./HistoricoFunil.js";
+import { AgendamentoInteracao as AgendamentoInteracaoEntity } from "./AgendamentoInteracao.js";
+import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
+import { Vendas as VendasEntity } from "./Vendas.js";
 
 @Entity()
 export class Cliente {
@@ -18,26 +35,45 @@ export class Cliente {
   @Column({ length: 255 })
   endereco!: string;
 
-  @ManyToOne(() => Funcionario, f => f.clientes)
-  @JoinColumn({ name: "funcionario_ID" })
+  @ManyToOne(
+    () => FuncionarioEntity,
+    funcionario => funcionario.clientes
+  )
   funcionario!: Funcionario;
 
-  @ManyToOne(() => FunilVendas, f => f.clientes)
-  @JoinColumn({ name: "funil_ID" })
+  @ManyToOne(
+    () => FunilVendasEntity,
+    funil => funil.clientes
+  )
   funil!: FunilVendas;
 
-  @OneToMany(() => ContatoCliente, c => c.cliente)
+  @OneToMany(
+    () => ContatoClienteEntity,
+    contato => contato.cliente
+  )
   contatos?: ContatoCliente[];
 
-  @OneToMany(() => HistoricoFunil, h => h.cliente)
+  @OneToMany(
+    () => HistoricoFunilEntity,
+    historico => historico.cliente
+  )
   historico?: HistoricoFunil[];
 
-  @OneToMany(() => AgendamentoInteracao, a => a.cliente)
+  @OneToMany(
+    () => AgendamentoInteracaoEntity,
+    agendamento => agendamento.cliente
+  )
   agendamentos?: AgendamentoInteracao[];
 
-  @OneToMany(() => InteracaoCliente, i => i.cliente)
+  @OneToMany(
+    () => InteracaoClienteEntity,
+    interacao => interacao.cliente
+  )
   interacoes?: InteracaoCliente[];
 
-  @OneToMany(() => Vendas, v => v.cliente)
+  @OneToMany(
+    () => VendasEntity,
+    venda => venda.cliente
+  )
   vendas?: Vendas[];
 }

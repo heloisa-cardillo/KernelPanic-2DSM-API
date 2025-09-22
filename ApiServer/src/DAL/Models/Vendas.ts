@@ -1,13 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { Cliente } from "./Cliente";
-import { Funcionario } from "./Funcionario";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+
+// Importação de tipo para evitar ciclo
+import type { Cliente } from "./Cliente.js";
+import type { Funcionario } from "./Funcionario.js";
+
+// Importação real para os decorators
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 
 @Entity()
 export class Vendas {
   @PrimaryGeneratedColumn()
   venda_ID!: number;
 
-  @Column({ type: "date" })
+  @Column({ type: "timestamp" })  // ou "datetime"
   data_venda!: Date;
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
@@ -16,11 +22,9 @@ export class Vendas {
   @Column({ length: 20 })
   status!: string;
 
-  @ManyToOne(() => Cliente, c => c.vendas)
-  @JoinColumn({ name: "cliente_ID" })  
+  @ManyToOne(() => ClienteEntity, (c: Cliente) => c.vendas)
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario, f => f.vendas)
-  @JoinColumn({ name: "funcionario_ID" }) 
+  @ManyToOne(() => FuncionarioEntity, (f: Funcionario) => f.vendas)
   funcionario!: Funcionario;
 }

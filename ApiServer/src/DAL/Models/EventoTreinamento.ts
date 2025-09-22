@@ -1,7 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { FuncionariosConvidados } from "./FuncionariosConvidados";
-import { Notificacao } from "./Notificacao";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
+
+// Importações de tipo (só para o TypeScript, não vira código JS)
+import type { Funcionario } from "./Funcionario.js";
+import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+import type { Notificacao } from "./Notificacao.js";
+
+// Importações reais (usadas nos decorators)
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
+import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
 
 @Entity()
 export class EventoTreinamento {
@@ -26,12 +39,21 @@ export class EventoTreinamento {
   @Column({ length: 20 })
   status!: string;
 
-  @ManyToOne(() => Funcionario, f => f.eventosOrganizados)
+  @ManyToOne(
+    () => FuncionarioEntity,
+    f => f.eventosOrganizados
+  )
   organizador!: Funcionario;
 
-  @OneToMany(() => FuncionariosConvidados, fc => fc.evento)
+  @OneToMany(
+    () => FuncionariosConvidadosEntity,
+    fc => fc.evento
+  )
   convidados?: FuncionariosConvidados[];
 
-  @OneToMany(() => Notificacao, n => n.evento)
+  @OneToMany(
+    () => NotificacaoEntity,
+    notificacao => notificacao.evento
+  )
   notificacoes?: Notificacao[];
 }

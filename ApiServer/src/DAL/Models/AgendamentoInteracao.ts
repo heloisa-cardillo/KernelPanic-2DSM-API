@@ -1,9 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
-import { Cliente } from "./Cliente";
-import { Funcionario } from "./Funcionario";
-import { InteracaoCliente } from "./InteracaoCliente";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 
-@Entity("AgendamentoInteracao")
+// Importações apenas de tipo
+import type { Cliente } from "./Cliente.js";
+import type { Funcionario } from "./Funcionario.js";
+import type { InteracaoCliente } from "./InteracaoCliente.js";
+
+// Importações reais para os decorators
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
+
+@Entity()
 export class AgendamentoInteracao {
   @PrimaryGeneratedColumn()
   agendamento_interacao_ID!: number;
@@ -20,14 +33,21 @@ export class AgendamentoInteracao {
   @Column({ length: 255, nullable: true })
   notas?: string;
 
-  @ManyToOne(() => Cliente, cliente => cliente.agendamentos)
-  @JoinColumn({ name: "cliente_ID" }) 
+  @ManyToOne(
+    () => ClienteEntity,
+    cliente => cliente.agendamentos
+  )
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario, funcionario => funcionario.agendamentos)
-  @JoinColumn({ name: "funcionario_ID" }) 
+  @ManyToOne(
+    () => FuncionarioEntity,
+    funcionario => funcionario.agendamentos
+  )
   funcionario!: Funcionario;
 
-  @OneToMany(() => InteracaoCliente, i => i.agendamento )
+  @OneToMany(
+    () => InteracaoClienteEntity,
+    interacao => interacao.agendamento
+  )
   interacoes?: InteracaoCliente[];
 }

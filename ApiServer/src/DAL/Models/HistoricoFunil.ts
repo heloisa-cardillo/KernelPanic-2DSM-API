@@ -1,8 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { Cliente } from "./Cliente";
-import { FunilVendas } from "./FunilVendas";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+} from "typeorm";
 
-@Entity("historicofunil")
+// Importações apenas de tipo (não geram código JS)
+import type { Cliente } from "./Cliente.js";
+import type { FunilVendas } from "./FunilVendas.js";
+
+// Importações reais (para uso no decorator)
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { FunilVendas as FunilVendasEntity } from "./FunilVendas.js";
+
+@Entity()
 export class HistoricoFunil {
   @PrimaryGeneratedColumn()
   historico_ID!: number;
@@ -10,11 +21,15 @@ export class HistoricoFunil {
   @Column({ type: "timestamp" })
   data_movimentacao!: Date;
 
-  @ManyToOne(() => Cliente, c => c.historico)
-  @JoinColumn({ name: "cliente_ID" })
+  @ManyToOne(
+    () => ClienteEntity,
+    cliente => cliente.historico
+  )
   cliente!: Cliente;
 
-  @ManyToOne(() => FunilVendas, f => f.historico)
-  @JoinColumn({ name: "funil_venda_ID" }) 
+  @ManyToOne(
+    () => FunilVendasEntity,
+    funil => funil.historico
+  )
   funil!: FunilVendas;
 }

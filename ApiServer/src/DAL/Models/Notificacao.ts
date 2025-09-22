@@ -1,6 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { EventoTreinamento } from "./EventoTreinamento";
-import { NotificacaoConvidados } from "./NotificacaoConvidados";
+
+// Importação apenas para tipos (não gera código JS)
+import type { EventoTreinamento } from "./EventoTreinamento.js";
+import type { NotificacaoConvidados } from "./NotificacaoConvidados.js";
+
+// Importação real para decorators
+import { EventoTreinamento as EventoTreinamentoEntity } from "./EventoTreinamento.js";
+import { NotificacaoConvidados as NotificacaoConvidadosEntity } from "./NotificacaoConvidados.js";
 
 @Entity()
 export class Notificacao {
@@ -13,9 +19,15 @@ export class Notificacao {
   @Column({ type: "longtext", nullable: true })
   corpo_notificacao?: string;
 
-  @ManyToOne(() => EventoTreinamento, e => e.notificacoes)
+  @ManyToOne(
+    () => EventoTreinamentoEntity,
+    (evento: EventoTreinamento) => evento.notificacoes
+  )
   evento!: EventoTreinamento;
 
-  @OneToMany(() => NotificacaoConvidados, nc => nc.notificacao)
+  @OneToMany(
+    () => NotificacaoConvidadosEntity,
+    (nc: NotificacaoConvidados) => nc.notificacao
+  )
   convidados?: NotificacaoConvidados[];
 }
