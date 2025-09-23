@@ -2,6 +2,7 @@
   "name": "meu-projeto-backend",
   "version": "1.0.0",
   "scripts": {
+  "build:db": "npm run build && node dist/DAL/Scripts/build-database.js && npx typeorm migration:run -d dist/DAL/ormconfig.js",
   "dev": "nodemon -r tsconfig-paths/register --watch src/**/*.ts --exec tsx src/main.ts",
   "build": "tsc",
   "start": "node dist/main.js"
