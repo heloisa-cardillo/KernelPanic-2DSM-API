@@ -12,7 +12,8 @@
       "emitDecoratorMetadata": true,
 
       "sourceMap": true,
-
+      "esModuleInterop": true,
+      "noImplicitAny": false,
       "strict": true,
       "noImplicitReturns": true,
       "noUnusedLocals": true,

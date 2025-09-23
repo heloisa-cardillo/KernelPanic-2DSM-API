@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  JoinColumn, // Importe o JoinColumn para definir o nome das chaves estrangeiras
 } from "typeorm";
 
 // Importações apenas de tipo
@@ -16,38 +17,40 @@ import { Cliente as ClienteEntity } from "./Cliente.js";
 import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
 
-@Entity()
+@Entity("Agendamento_interacao") // Nome da tabela definido explicitamente
 export class AgendamentoInteracao {
-  @PrimaryGeneratedColumn({ type: "int" })
-  agendamento_interacao_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
+  @PrimaryGeneratedColumn({ name: "agendamento_interacao_ID" }) // Nome da coluna de ID
+  agendamento_interacao_ID!: number;
 
-  @Column({ type: "datetime" })
-  data_marcada!: Date; // Tipo explícito: Date
+  @Column({ name: "data_marcada", type: "datetime" }) // Nome da coluna
+  data_marcada!: Date;
 
-  @Column({ type: "varchar", length: 20 })
-  tipo_interacao!: string; // Tipo explícito: string
+  @Column({ name: "tipo_interacao", type: "varchar", length: 20 }) // Nome da coluna
+  tipo_interacao!: string;
 
-  @Column({ type: "varchar", length: 20 })
-  status!: string; // Tipo explícito: string
+  @Column({ name: "status", type: "varchar", length: 20 }) // Nome da coluna
+  status!: string;
 
-  @Column({ type: "varchar", length: 255, nullable: true })
-  notas?: string; // Tipo explícito: string | undefined (nullable)
+  @Column({ name: "notas", type: "varchar", length: 255, nullable: true }) // Nome da coluna
+  notas?: string;
 
   @ManyToOne(
     () => ClienteEntity,
     (cliente: Cliente) => cliente.agendamentos
   )
-  cliente!: Cliente; // Tipo explícito: Cliente
+  @JoinColumn({ name: "cliente_ID" }) // Nome da coluna de chave estrangeira
+  cliente!: Cliente;
 
   @ManyToOne(
     () => FuncionarioEntity,
     (funcionario: Funcionario) => funcionario.agendamentos
   )
-  funcionario!: Funcionario; // Tipo explícito: Funcionario
+  @JoinColumn({ name: "funcionario_ID" }) // Nome da coluna de chave estrangeira
+  funcionario!: Funcionario;
 
   @OneToMany(
     () => InteracaoClienteEntity,
     (interacao: InteracaoCliente) => interacao.agendamento
   )
-  interacoes?: InteracaoCliente[]; // Tipo explícito: InteracaoCliente[] | undefined (nullable)
+  interacoes?: InteracaoCliente[];
 }

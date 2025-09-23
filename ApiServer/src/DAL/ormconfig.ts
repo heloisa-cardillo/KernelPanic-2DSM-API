@@ -1,4 +1,17 @@
 import { DataSource } from "typeorm";
+import { Funcionario } from "./Models/Funcionario";
+import { Cliente } from "./Models/Cliente";
+import { AgendamentoInteracao } from "./Models/AgendamentoInteracao";
+import { ContatoCliente } from "./Models/ContatoCliente";
+import { EventoTreinamento } from "./Models/EventoTreinamento";
+import { FuncionariosConvidados } from "./Models/FuncionariosConvidados";
+import { FunilVendas } from "./Models/FunilVendas";
+import { HistoricoFunil } from "./Models/HistoricoFunil";
+import { InteracaoCliente } from "./Models/InteracaoCliente";
+import { Notificacao } from "./Models/Notificacao";
+import { NotificacaoConvidados } from "./Models/NotificacaoConvidados";
+import { Presenca } from "./Models/Presenca";
+import { Vendas } from "./Models/Vendas";
 // import dotenv from "dotenv";
 
 // dotenv.config();
@@ -16,8 +29,13 @@ export const AppDataSource = new DataSource({
   password,
   database,
   // Use os arquivos compilados JS para evitar problemas de importação circular
-  entities: ["dist/DAL/Models/*.js"],
-  migrations: ["dist/DAL/Migrations/*.js"],
+  entities: [
+    AgendamentoInteracao, Cliente, ContatoCliente, 
+    EventoTreinamento, Funcionario, FuncionariosConvidados, 
+    FunilVendas, HistoricoFunil, InteracaoCliente,
+    Notificacao, NotificacaoConvidados, Presenca,
+    Vendas],
+  migrations: ["dist/DAL/Migrations/*.ts"],
   synchronize: false,
   logging: true,
 });

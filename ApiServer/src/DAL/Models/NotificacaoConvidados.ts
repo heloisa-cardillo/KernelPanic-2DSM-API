@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 // Importações apenas para tipos
 import type { Notificacao } from "./Notificacao.js";
@@ -8,29 +8,28 @@ import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
 import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
 import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
 
-@Entity()
+@Entity("Notificacao_convidados") // Nome da tabela
 export class NotificacaoConvidados {
-  
-  // Chave primária composta
-  @PrimaryColumn({ type: "int" })
+  // Chave primária composta com nomes explícitos
+  @PrimaryColumn({ name: "funcionario_ID", type: "int" })
   funcionario_ID!: number;
 
-  @PrimaryColumn({ type: "int" })
+  @PrimaryColumn({ name: "evento_ID", type: "int" })
   evento_ID!: number;
 
-  @PrimaryColumn({ type: "int" })
+  @PrimaryColumn({ name: "notificacao_ID", type: "int" })
   notificacao_ID!: number;
 
   // Definindo a coluna de status com tipo boolean
-  @Column({ type: "boolean" })
+  @Column({ name: "status_leitura", type: "boolean" })
   status_leitura!: boolean;
 
   // Data de leitura, permitindo null
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ name: "data_leitura", type: "timestamp", nullable: true })
   data_leitura?: Date | null;
 
   // A prioridade é uma string, mas com comprimento limitado
-  @Column({ type: "varchar", length: 20 })
+  @Column({ name: "prioridade", type: "varchar", length: 20 })
   prioridade!: string;
 
   // Relacionamento com a entidade Notificacao
@@ -38,6 +37,7 @@ export class NotificacaoConvidados {
     () => NotificacaoEntity,
     (notificacao: Notificacao) => notificacao.convidados
   )
+  @JoinColumn({ name: "notificacao_ID" })
   notificacao!: Notificacao;
 
   // Relacionamento com a entidade FuncionariosConvidados
@@ -45,5 +45,9 @@ export class NotificacaoConvidados {
     () => FuncionariosConvidadosEntity,
     (fc: FuncionariosConvidados) => fc.notificacoes
   )
+  @JoinColumn([
+    { name: "funcionario_ID", referencedColumnName: "funcionario_ID" },
+    { name: "evento_ID", referencedColumnName: "evento_ID" },
+  ])
   funcionarioConvidado!: FuncionariosConvidados;
 }

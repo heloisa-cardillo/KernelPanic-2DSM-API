@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  JoinColumn, // Importe o JoinColumn
 } from "typeorm";
 
 // Importação de tipo (não gera código JS)
@@ -11,20 +12,21 @@ import type { Cliente } from "./Cliente.js";
 // Importação real (para uso no decorator)
 import { Cliente as ClienteEntity } from "./Cliente.js";
 
-@Entity()
+@Entity("Contato_cliente") // Nome da tabela
 export class ContatoCliente {
-  @PrimaryGeneratedColumn({ type: "int" })
-  contato_cliente_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
+  @PrimaryGeneratedColumn({ name: "contato_cliente_ID" }) // Nome da coluna de ID
+  contato_cliente_ID!: number;
 
-  @Column({ type: "varchar", length: 20 })
-  tipo_contato!: string; // Tipo explícito: string
+  @Column({ name: "tipo_contato", type: "varchar", length: 20 }) // Nome da coluna
+  tipo_contato!: string;
 
-  @Column({ type: "varchar", length: 255 })
-  valor_contato!: string; // Tipo explícito: string
+  @Column({ name: "valor_contato", type: "varchar", length: 255 }) // Nome da coluna
+  valor_contato!: string;
 
   @ManyToOne(
     () => ClienteEntity,
     (cliente: Cliente) => cliente.contatos
   )
-  cliente!: Cliente; // Tipo explícito: Cliente
+  @JoinColumn({ name: "cliente_ID" }) // Nome da chave estrangeira
+  cliente!: Cliente;
 }

@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  JoinColumn, // Adicione o JoinColumn
 } from "typeorm";
 
 // Importações de tipo (só para o TypeScript, não vira código JS)
@@ -16,44 +17,45 @@ import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
 import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
 
-@Entity()
+@Entity("Evento_treinamento") // Nome da tabela
 export class EventoTreinamento {
-  @PrimaryGeneratedColumn({ type: "int" })
-  evento_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
+  @PrimaryGeneratedColumn({ name: "evento_ID" })
+  evento_ID!: number;
 
-  @Column({ type: "varchar", length: 100 })
-  titulo!: string; // Tipo explícito: string
+  @Column({ name: "titulo", type: "varchar", length: 100 })
+  titulo!: string;
 
-  @Column({ type: "longtext", nullable: true })
-  descricao?: string; // Tipo explícito: string | undefined (nullable)
+  @Column({ name: "descricao", type: "longtext", nullable: true })
+  descricao?: string;
 
-  @Column({ type: "timestamp" })
-  data_inicio!: Date; // Tipo explícito: Date
+  @Column({ name: "data_inicio", type: "timestamp" })
+  data_inicio!: Date;
 
-  @Column({ type: "float" })
-  duracao_horas!: number; // Tipo explícito: number
+  @Column({ name: "duracao_horas", type: "float" })
+  duracao_horas!: number;
 
-  @Column({ type: "longtext" })
-  evento_link!: string; // Tipo explícito: string
+  @Column({ name: "evento_link", type: "longtext" })
+  evento_link!: string;
 
-  @Column({ type: "varchar", length: 20 })
-  status!: string; // Tipo explícito: string
+  @Column({ name: "status", type: "varchar", length: 20 })
+  status!: string;
 
   @ManyToOne(
     () => FuncionarioEntity,
     (funcionario: Funcionario) => funcionario.eventosOrganizados
   )
-  organizador!: Funcionario; // Tipo explícito: Funcionario
+  @JoinColumn({ name: "organizador_ID" }) // Nome da chave estrangeira
+  organizador_ID!: Funcionario;
 
   @OneToMany(
     () => FuncionariosConvidadosEntity,
     (fc: FuncionariosConvidados) => fc.evento
   )
-  convidados?: FuncionariosConvidados[]; // Tipo explícito: FuncionariosConvidados[] | undefined (nullable)
+  convidados?: FuncionariosConvidados[];
 
   @OneToMany(
     () => NotificacaoEntity,
     (notificacao: Notificacao) => notificacao.evento
   )
-  notificacoes?: Notificacao[]; // Tipo explícito: Notificacao[] | undefined (nullable)
+  notificacoes?: Notificacao[];
 }

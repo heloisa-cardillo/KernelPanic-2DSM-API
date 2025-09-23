@@ -5,6 +5,7 @@ import {
   ManyToOne,
   OneToMany,
   Unique,
+  JoinColumn, // Importe o JoinColumn
 } from "typeorm";
 
 // Importação só para tipagem (TypeScript)
@@ -25,85 +26,86 @@ import { EventoTreinamento as EventoEntity } from "./EventoTreinamento.js";
 import { FuncionariosConvidados as ConvidadosEntity } from "./FuncionariosConvidados.js";
 import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 
-@Entity()
+@Entity("Funcionario") // Nome da tabela
 @Unique(["email"])
 export class Funcionario {
-  @PrimaryGeneratedColumn({ type: "int" })
-  funcionario_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
+  @PrimaryGeneratedColumn({ name: "funcionario_ID" })
+  funcionario_ID!: number;
 
-  @Column({ type: "varchar", length: 100 })
-  nome!: string; // Tipo explícito: string
+  @Column({ name: "nome", type: "varchar", length: 100 })
+  nome!: string;
 
-  @Column({ type: "varchar", length: 10 })
-  genero!: string; // Tipo explícito: string
+  @Column({ name: "genero", type: "varchar", length: 10 })
+  genero!: string;
 
-  @Column({ type: "varchar", length: 255 })
-  endereco!: string; // Tipo explícito: string
+  @Column({ name: "endereco", type: "varchar", length: 255 })
+  endereco!: string;
 
-  @Column({ type: "varchar", length: 20 })
-  numero_telefone!: string; // Tipo explícito: string
+  @Column({ name: "numero_telefone", type: "varchar", length: 20 })
+  numero_telefone!: string;
 
-  @Column({ type: "varchar", length: 50 })
-  cargo!: string; // Tipo explícito: string
+  @Column({ name: "cargo", type: "varchar", length: 50 })
+  cargo!: string;
 
-  @Column({ type: "varchar", length: 50 })
-  email!: string; // Tipo explícito: string
+  @Column({ name: "email", type: "varchar", length: 50 })
+  email!: string;
 
-  @Column({ type: "varchar", length: 255 })
-  senha_hash!: string; // Tipo explícito: string
+  @Column({ name: "senha_hash", type: "varchar", length: 255 })
+  senha_hash!: string;
 
-  @Column({ type: "varchar", length: 255 })
-  nivel_acesso!: string; // Tipo explícito: string
+  @Column({ name: "nivel_acesso", type: "varchar", length: 255 })
+  nivel_acesso!: string;
 
-  @Column({ type: "varchar", length: 100 })
-  localizacao_funcionario!: string; // Tipo explícito: string
+  @Column({ name: "localizacao_funcionario", type: "varchar", length: 100 })
+  localizacao_funcionario!: string;
 
   @ManyToOne(
     () => FuncionarioEntity,
     (gerente: FuncionarioType) => gerente.subordinados,
     { nullable: true }
   )
-  gerente?: FuncionarioType; // Tipo explícito: FuncionarioType | undefined (nullable)
+  @JoinColumn({ name: "gerente_ID" }) // Nome da chave estrangeira recursiva
+  gerente_ID?: FuncionarioType;
 
   @OneToMany(
     () => FuncionarioEntity,
-    (funcionario: FuncionarioType) => funcionario.gerente
+    (funcionario: FuncionarioType) => funcionario.gerente_ID
   )
-  subordinados?: FuncionarioType[]; // Tipo explícito: FuncionarioType[] | undefined (nullable)
+  subordinados?: FuncionarioType[];
 
   @OneToMany(
     () => ClienteEntity,
     (cliente: Cliente) => cliente.funcionario
   )
-  clientes?: Cliente[]; // Tipo explícito: Cliente[] | undefined (nullable)
+  clientes?: Cliente[];
 
   @OneToMany(
     () => AgendamentoEntity,
     (agendamento: AgendamentoInteracao) => agendamento.funcionario
   )
-  agendamentos?: AgendamentoInteracao[]; // Tipo explícito: AgendamentoInteracao[] | undefined (nullable)
+  agendamentos?: AgendamentoInteracao[];
 
   @OneToMany(
     () => InteracaoEntity,
     (interacao: InteracaoCliente) => interacao.funcionario
   )
-  interacoes?: InteracaoCliente[]; // Tipo explícito: InteracaoCliente[] | undefined (nullable)
+  interacoes?: InteracaoCliente[];
 
   @OneToMany(
     () => VendasEntity,
     (venda: Vendas) => venda.funcionario
   )
-  vendas?: Vendas[]; // Tipo explícito: Vendas[] | undefined (nullable)
+  vendas?: Vendas[];
 
   @OneToMany(
     () => EventoEntity,
-    (evento: EventoTreinamento) => evento.organizador
+    (evento: EventoTreinamento) => evento.organizador_ID
   )
-  eventosOrganizados?: EventoTreinamento[]; // Tipo explícito: EventoTreinamento[] | undefined (nullable)
+  eventosOrganizados?: EventoTreinamento[];
 
   @OneToMany(
     () => ConvidadosEntity,
     (convite: FuncionariosConvidados) => convite.funcionario
   )
-  convites?: FuncionariosConvidados[]; // Tipo explícito: FuncionariosConvidados[] | undefined (nullable)
+  convites?: FuncionariosConvidados[];
 }

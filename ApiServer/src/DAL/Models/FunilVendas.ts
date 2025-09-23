@@ -8,25 +8,25 @@ import type { HistoricoFunil } from "./HistoricoFunil.js";
 import { Cliente as ClienteEntity } from "./Cliente.js";
 import { HistoricoFunil as HistoricoFunilEntity } from "./HistoricoFunil.js";
 
-@Entity()
+@Entity("Funil_vendas") // Nome da tabela
 export class FunilVendas {
-  @PrimaryGeneratedColumn({ type: "int" })
-  funil_ID!: number; // Tipo explícito: number (ID gerado automaticamente)
+  @PrimaryGeneratedColumn({ name: "funil_ID" }) // Nome da coluna de ID
+  funil_ID!: number;
 
-  @Column({ type: "varchar", length: 20 })
-  estagio_nome!: string; // Tipo explícito: string
+  @Column({ name: "estagio_nome", type: "varchar", length: 20 }) // Nome da coluna
+  estagio_nome!: string;
 
   // Relacionamento 1:N com Cliente
   @OneToMany(
     () => ClienteEntity,
     (cliente: Cliente) => cliente.funil
   )
-  clientes?: Cliente[]; // Tipo explícito: Cliente[] | undefined (nullable)
+  clientes?: Cliente[];
 
   // Relacionamento 1:N com HistoricoFunil
   @OneToMany(
     () => HistoricoFunilEntity,
     (historico: HistoricoFunil) => historico.funil
   )
-  historico?: HistoricoFunil[]; // Tipo explícito: HistoricoFunil[] | undefined (nullable)
+  historico?: HistoricoFunil[];
 }

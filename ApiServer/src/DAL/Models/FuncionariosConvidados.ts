@@ -18,39 +18,39 @@ import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { NotificacaoConvidados as NotificacaoEntity } from "./NotificacaoConvidados.js";
 import { Presenca as PresencaEntity } from "./Presenca.js";
 
-@Entity()
+@Entity("Funcionarios_convidados") // Nome da tabela
 export class FuncionariosConvidados {
-  @PrimaryColumn({ type: "int" })
-  funcionario_ID!: number; // Tipo explícito: number (ID de tipo numérico)
+  @PrimaryColumn({ name: "funcionario_id", type: "int" })
+  funcionario_ID!: number;
 
-  @PrimaryColumn({ type: "int" })
-  evento_ID!: number; // Tipo explícito: number (ID de tipo numérico)
+  @PrimaryColumn({ name: "evento_id", type: "int" })
+  evento_ID!: number;
 
   @ManyToOne(
     () => EventoEntity,
     (evento: EventoTreinamento) => evento.convidados,
     { onDelete: "CASCADE" }
   )
-  @JoinColumn({ name: "evento_ID" })
-  evento!: EventoTreinamento; // Tipo explícito: EventoTreinamento
+  @JoinColumn({ name: "evento_id" })
+  evento!: EventoTreinamento;
 
   @ManyToOne(
     () => FuncionarioEntity,
     (funcionario: Funcionario) => funcionario.convites,
     { onDelete: "CASCADE" }
   )
-  @JoinColumn({ name: "funcionario_ID" })
-  funcionario!: Funcionario; // Tipo explícito: Funcionario
+  @JoinColumn({ name: "funcionario_id" })
+  funcionario!: Funcionario;
 
   @OneToMany(
     () => NotificacaoEntity,
     (notificacaoConvidados: NotificacaoConvidados) => notificacaoConvidados.funcionarioConvidado
   )
-  notificacoes?: NotificacaoConvidados[]; // Tipo explícito: NotificacaoConvidados[] | undefined (nullable)
+  notificacoes?: NotificacaoConvidados[];
 
   @OneToMany(
     () => PresencaEntity,
     (presenca: Presenca) => presenca.funcionarioConvidado
   )
-  presencas?: Presenca[]; // Tipo explícito: Presenca[] | undefined (nullable)
+  presencas?: Presenca[];
 }
