@@ -50,7 +50,7 @@
             const funilRepo = AppDataSource.getRepository(FunilVendas);
 
             const funcionario = await funcionarioRepo.findOneBy({
-                id_funcionario: data.funcionario_ID,
+                funcionario_id: data.funcionario_ID,
             });
             if (!funcionario) throw new Error("Funcionario não encontrado!");
 
