@@ -1,21 +1,41 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { EventoTreinamento } from "./EventoTreinamento";
-import { NotificacaoConvidados } from "./NotificacaoConvidados";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinColumn, // Importe o JoinColumn
+} from "typeorm";
 
-@Entity()
+// Importação apenas para tipos (não gera código JS)
+import type { EventoTreinamento } from "./EventoTreinamento.js";
+import type { NotificacaoConvidados } from "./NotificacaoConvidados.js";
+
+// Importação real para decorators
+import { EventoTreinamento as EventoTreinamentoEntity } from "./EventoTreinamento.js";
+import { NotificacaoConvidados as NotificacaoConvidadosEntity } from "./NotificacaoConvidados.js";
+
+@Entity("Notificacao") // Nome da tabela
 export class Notificacao {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "notificacao_ID" })
   notificacao_ID!: number;
 
-  @Column({ length: 100 })
+  @Column({ name: "titulo_notificacao", type: "varchar", length: 100 })
   titulo_notificacao!: string;
 
-  @Column({ type: "longtext", nullable: true })
-  corpo_notificacao?: string;
+  @Column({ name: "corpo_notificacao", type: "longtext", nullable: true })
+  corpo_notificacao?: string | null;
 
-  @ManyToOne(() => EventoTreinamento, e => e.notificacoes)
+  @ManyToOne(
+    () => EventoTreinamentoEntity,
+    (evento: EventoTreinamento) => evento.notificacoes
+  )
+  @JoinColumn({ name: "evento_ID" }) // Nome da chave estrangeira
   evento!: EventoTreinamento;
 
-  @OneToMany(() => NotificacaoConvidados, nc => nc.notificacao)
+  @OneToMany(
+    () => NotificacaoConvidadosEntity,
+    (nc: NotificacaoConvidados) => nc.notificacao
+  )
   convidados?: NotificacaoConvidados[];
 }

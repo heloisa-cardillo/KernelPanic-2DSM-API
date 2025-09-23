@@ -1,37 +1,61 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { FuncionariosConvidados } from "./FuncionariosConvidados";
-import { Notificacao } from "./Notificacao";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinColumn, // Adicione o JoinColumn
+} from "typeorm";
 
-@Entity()
+// Importações de tipo (só para o TypeScript, não vira código JS)
+import type { Funcionario } from "./Funcionario.js";
+import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+import type { Notificacao } from "./Notificacao.js";
+
+// Importações reais (usadas nos decorators)
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
+import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
+
+@Entity("Evento_treinamento") // Nome da tabela
 export class EventoTreinamento {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "evento_ID" })
   evento_ID!: number;
 
-  @Column({ length: 100 })
+  @Column({ name: "titulo", type: "varchar", length: 100 })
   titulo!: string;
 
-  @Column({ type: "longtext", nullable: true })
+  @Column({ name: "descricao", type: "longtext", nullable: true })
   descricao?: string;
 
-  @Column()
+  @Column({ name: "data_inicio", type: "timestamp" })
   data_inicio!: Date;
 
-  @Column({ type: "float" })
+  @Column({ name: "duracao_horas", type: "float" })
   duracao_horas!: number;
 
-  @Column({ type: "longtext" })
+  @Column({ name: "evento_link", type: "longtext" })
   evento_link!: string;
 
-  @Column({ length: 20 })
+  @Column({ name: "status", type: "varchar", length: 20 })
   status!: string;
 
-  @ManyToOne(() => Funcionario, f => f.eventosOrganizados)
-  organizador!: Funcionario;
+  @ManyToOne(
+    () => FuncionarioEntity,
+    (funcionario: Funcionario) => funcionario.eventosOrganizados
+  )
+  @JoinColumn({ name: "organizador_ID" }) // Nome da chave estrangeira
+  organizador_ID!: Funcionario;
 
-  @OneToMany(() => FuncionariosConvidados, fc => fc.evento)
+  @OneToMany(
+    () => FuncionariosConvidadosEntity,
+    (fc: FuncionariosConvidados) => fc.evento
+  )
   convidados?: FuncionariosConvidados[];
 
-  @OneToMany(() => Notificacao, n => n.evento)
+  @OneToMany(
+    () => NotificacaoEntity,
+    (notificacao: Notificacao) => notificacao.evento
+  )
   notificacoes?: Notificacao[];
 }
