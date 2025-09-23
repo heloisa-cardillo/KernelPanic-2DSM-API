@@ -4,6 +4,7 @@ import cors from "cors"
 
 const calendarioRoute = require("./API/Routes/calendarioRoutes")
 const funilVendasRoute = require("./API/Routes/funilVendasRoutes")
+const cadastroCliente = require("./API/Routes/clientesRoutes")
 
 const app = express();
 
@@ -23,6 +24,7 @@ AppDataSource.initialize()
 
 app.use("/funilVendas",funilVendasRoute )
 app.use("/calendario", calendarioRoute)
+app.use("/clientes", cadastroCliente)
 
 app.get("/", (req, res) => {
     res.send("API funcionando")
