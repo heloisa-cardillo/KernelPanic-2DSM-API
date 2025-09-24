@@ -4,10 +4,10 @@ import { join } from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
-const host = process.env.DB_HOST;
-const password = process.env.DB_PASSWORD;
-const username = process.env.DB_USERNAME;
-const database = process.env.DB_DB;
+const host = process.env.DB_HOST || "localhost";
+const password = process.env.DB_PASSWORD || "fatec";
+const username = process.env.DB_USERNAME || "root";
+const database = process.env.DB_DB || "newe_database";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -30,7 +30,7 @@ export const AppDataSource = new DataSource({
 
 
 // comando para gerar nova migration (apontando para o arquivo TypeScript)
-//// npx typeorm migration:generate src/DAL/Migrations/PrimeiraMigration -d dist/DAL/ormconfig.js
+//// npx typeorm migration:generate src/DAL/migrations/PrimeiraMigration -d dist/DAL/ormconfig.js
 
 // compilar o TypeScript para JavaScript
 //// npx tsc
