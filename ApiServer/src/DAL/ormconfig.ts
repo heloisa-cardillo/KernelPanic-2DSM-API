@@ -4,10 +4,10 @@ import { join } from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
-const host = process.env.DB_HOST || "localhost";
-const password = process.env.DB_PASSWORD || "fatec";
-const username = process.env.DB_USERNAME || "root";
-const database = process.env.DB_DB || "newe_database";
+const host = process.env.DB_HOST;
+const password = process.env.DB_PASSWORD;
+const username = process.env.DB_USERNAME;
+const database = process.env.DB_DB;
 
 export const AppDataSource = new DataSource({
   type: "mysql",
