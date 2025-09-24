@@ -1,9 +1,9 @@
 'use client';
-
+ 
 import React, { useState } from 'react';
 import Select from 'react-select';
-import styles from './App.module.css'; 
-
+import styles from './App.module.css';
+ 
 const opcoesMes = [
   { value: 'Janeiro', label: 'Janeiro' },
   { value: 'Fevereiro', label: 'Fevereiro' },
@@ -18,7 +18,7 @@ const opcoesMes = [
   { value: 'Novembro', label: 'Novembro' },
   { value: 'Dezembro', label: 'Dezembro' },
 ];
-
+ 
 const opcoesAno = [
   { value: 2020, label: '2020' },
   { value: 2021, label: '2021' },
@@ -27,7 +27,7 @@ const opcoesAno = [
   { value: 2024, label: '2024' },
   { value: 2025, label: '2025' },
 ];
-
+ 
 const Styles = {
   option: (provided, state) => ({
     ...provided,
@@ -47,16 +47,21 @@ const Styles = {
     display: 'none',
   }),
 };
-
+ 
 export default function Page() {
   const vendedores = [
     { nome: 'Paula', visitas: 10, vendas: 5, faturamento: 1000 },
     { nome: 'Carlos', visitas: 8, vendas: 4, faturamento: 800 },
   ];
-
+ 
   const [mesSelecionado, setMesSelecionado] = useState(null);
   const [anoSelecionado, setAnoSelecionado] = useState(null);
-
+  const [vendedorSelecionado, setVendedorSelecionado] = useState('');
+ 
+  const filterVendedor = vendedores.filter(vendedor =>
+    vendedor.nome.toLowerCase().includes(vendedorSelecionado.toLowerCase())
+  );
+ 
   const totalVisitas = vendedores.reduce((total, v) => total + v.visitas, 0);
   const totalVendas = vendedores.reduce((total, v) => total + v.vendas, 0);
   const taxaConversaoGeral =
@@ -65,7 +70,7 @@ export default function Page() {
     (total, v) => total + v.faturamento,
     0
   );
-
+ 
   return (
     <div className={styles.container}>
       <div className={styles.cardsContainer}>
@@ -91,7 +96,7 @@ export default function Page() {
           <p>Faturamento</p>
         </div>
       </div>
-
+ 
       <div className={styles.desempenhoVendedores}>
         <div className={styles.desempenhoHeader}>
           <h1>Desempenho de vendedores</h1>
@@ -112,9 +117,16 @@ export default function Page() {
               value={anoSelecionado}
               onChange={setAnoSelecionado}
             />
+            <input
+              type="text"
+              placeholder="Vendedor..."
+              className={styles.inputVendedor}
+              value={vendedorSelecionado}
+              onChange={(e) => setVendedorSelecionado(e.target.value)}
+            />
           </div>
         </div>
-
+ 
         <table className={styles.tabelaDesempenho}>
           <thead>
             <tr>
@@ -126,7 +138,7 @@ export default function Page() {
             </tr>
           </thead>
           <tbody>
-            {vendedores.map((v, index) => {
+            {filterVendedor.map((v, index) => {
               const taxa =
                 v.visitas > 0
                   ? ((v.vendas / v.visitas) * 100).toFixed(2) + '%'

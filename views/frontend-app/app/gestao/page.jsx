@@ -57,8 +57,8 @@ function App() {
               <table className={styles.tabela}>
                 <thead>
                   <tr>
-                    <th></th>
                     <th>Cliente</th>
+                    <th>Empresa</th>
                     <th>Estado da venda</th>
                     <th>Última Interação</th>
                     <th></th>
