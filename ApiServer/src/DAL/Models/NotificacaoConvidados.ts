@@ -1,30 +1,53 @@
-import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
-import { Notificacao } from "./Notificacao";
-import { FuncionariosConvidados } from "./FuncionariosConvidados";
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
-@Entity()
+// Importações apenas para tipos
+import type { Notificacao } from "./Notificacao.js";
+import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+
+// Importações reais para decorators
+import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
+import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
+
+@Entity("Notificacao_convidados") // Nome da tabela
 export class NotificacaoConvidados {
-  @PrimaryColumn()
+  // Chave primária composta com nomes explícitos
+  @PrimaryColumn({ name: "funcionario_ID", type: "int" })
   funcionario_ID!: number;
 
-  @PrimaryColumn()
+  @PrimaryColumn({ name: "evento_ID", type: "int" })
   evento_ID!: number;
 
-  @PrimaryColumn()
+  @PrimaryColumn({ name: "notificacao_ID", type: "int" })
   notificacao_ID!: number;
 
-  @Column()
+  // Definindo a coluna de status com tipo boolean
+  @Column({ name: "status_leitura", type: "boolean" })
   status_leitura!: boolean;
 
-  @Column({ nullable: true })
-  data_leitura?: Date;
+  // Data de leitura, permitindo null
+  @Column({ name: "data_leitura", type: "timestamp", nullable: true })
+  data_leitura?: Date | null;
 
-  @Column({ length: 20 })
+  // A prioridade é uma string, mas com comprimento limitado
+  @Column({ name: "prioridade", type: "varchar", length: 20 })
   prioridade!: string;
 
-  @ManyToOne(() => Notificacao, n => n.convidados)
+  // Relacionamento com a entidade Notificacao
+  @ManyToOne(
+    () => NotificacaoEntity,
+    (notificacao: Notificacao) => notificacao.convidados
+  )
+  @JoinColumn({ name: "notificacao_ID" })
   notificacao!: Notificacao;
 
-  @ManyToOne(() => FuncionariosConvidados, fc => fc.notificacoes)
+  // Relacionamento com a entidade FuncionariosConvidados
+  @ManyToOne(
+    () => FuncionariosConvidadosEntity,
+    (fc: FuncionariosConvidados) => fc.notificacoes
+  )
+  @JoinColumn([
+    { name: "funcionario_ID", referencedColumnName: "funcionario_ID" },
+    { name: "evento_ID", referencedColumnName: "evento_ID" },
+  ])
   funcionarioConvidado!: FuncionariosConvidados;
 }

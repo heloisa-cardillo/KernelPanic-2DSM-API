@@ -1,20 +1,7 @@
-const { DataSource } = require("typeorm");
-const dotenv = require("dotenv");
+import { DataSource } from "typeorm";
+import { join } from "path";
 
-const { AgendamentoInteracao } = require("./Models/AgendamentoInteracao");
-const { Cliente } = require("./Models/Cliente");
-const { ContatoCliente } = require("./Models/ContatoCliente");
-const { EventoTreinamento } = require("./Models/EventoTreinamento");
-const { Funcionario } = require("./Models/Funcionario");
-const { FuncionariosConvidados } = require("./Models/FuncionariosConvidados");
-const { FunilVendas } = require("./Models/FunilVendas");
-const { HistoricoFunil } = require("./Models/HistoricoFunil");
-const { InteracaoCliente } = require("./Models/InteracaoCliente");
-const { Notificacao } = require("./Models/Notificacao");
-const { NotificacaoConvidados } = require("./Models/NotificacaoConvidados");
-const { Presenca } = require("./Models/Presenca");
-const { Vendas } = require("./Models/Vendas");
-
+import dotenv from "dotenv";
 dotenv.config();
 
 const host = process.env.DB_HOST;
@@ -29,23 +16,27 @@ export const AppDataSource = new DataSource({
   username,
   password,
   database,
+  // Use os arquivos compilados JS para evitar problemas de importação circular
+  // Caminho dinâmico para os arquivos .ts ou .js
   entities: [
-    AgendamentoInteracao,
-    Cliente,
-    ContatoCliente,
-    EventoTreinamento,
-    Funcionario,
-    FuncionariosConvidados,
-    FunilVendas,
-    HistoricoFunil,
-    InteracaoCliente,
-    Notificacao,
-    NotificacaoConvidados,
-    Presenca,
-    Vendas
+    join(__dirname, "./Models/*.{ts,js}")
   ],
-  migrations: ["src/DAL/migrations/*.ts"],
+  migrations: [
+    join(__dirname, "./Migrations/*.{ts,js}")
+  ],
   synchronize: false,
-  logging: true
+  logging: true,
 });
 
+
+// comando para gerar nova migration (apontando para o arquivo TypeScript)
+//// npx typeorm migration:generate src/DAL/Migrations/PrimeiraMigration -d dist/DAL/ormconfig.js
+
+// compilar o TypeScript para JavaScript
+//// npx tsc
+
+// depois, rodar a migration com o arquivo JavaScript compilado
+//// npx typeorm migration:run -d dist/DAL/ormconfig.js
+
+////// orm debug
+/// npx typeorm schema:log -d dist/DAL/ormconfig.js

@@ -1,19 +1,16 @@
-body {
-  margin: 0;
-  font-family: 'Poppins', 'Inter', sans-serif;
+.container {
   background-color: #F0F2F5;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  margin: 0;
 }
 
-.desempenho-header {
+.desempenhoHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 }
 
-.desempenho-header h1 {
-  color: #1f4af4;
-}
 
 .filtro {
   display: flex;
@@ -21,30 +18,26 @@ body {
   align-items: center;
 }
 
-.filtro select:focus {
+.filtroSelect:focus {
   outline: none;
   border-color: #1f4af4;
 }
 
-.filtro label {
+.filtroLabel {
   font-size: 14px;
   color: #333;
 }
 
-.filtro select {
+.filtroSelect {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
   background-color: #fff;
-}
-
-select,
-select option {
-  color: #000;
   font-family: 'Poppins', 'Inter', sans-serif;
+  color: #000;
 }
 
-.desempenho-vendedores {
+.desempenhoVendedores {
   max-width: 1100px;
   margin: 20px auto;
   padding: 24px;
@@ -53,7 +46,7 @@ select option {
   box-sizing: border-box;
 }
 
-.cards-container {
+.cardsContainer {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -82,20 +75,19 @@ select option {
   color: #9794B3;
 }
 
-
-.tabela-desempenho {
+.tabelaDesempenho {
   width: 100%;
   border-collapse: collapse;
   margin-top: 8px;
 }
 
-.tabela-desempenho th,
-.tabela-desempenho td {
+.tabelaDesempenho th,
+.tabelaDesempenho td {
   padding: 16px 12px;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
 
- .nome-vendedor {
+.nomeVendedor {
   color: #1f4af4;
- }
+}

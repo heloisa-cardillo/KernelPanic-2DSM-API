@@ -50,11 +50,11 @@
             const funilRepo = AppDataSource.getRepository(FunilVendas);
 
             const funcionario = await funcionarioRepo.findOneBy({
-                funcionario_id: data.funcionario_ID,
+                funcionario_ID: data.funcionario_ID,
             });
             if (!funcionario) throw new Error("Funcionario não encontrado!");
 
-            const funil = await funilRepo.findOneBy({ id_funil: data.funil_ID });
+            const funil = await funilRepo.findOneBy({ funil_ID: data.funil_ID });
             if (!funil) throw new Error("Funil não encontrado!");
 
             const cliente = this.clienteRepo.create({
@@ -86,9 +86,10 @@
             if (!funil)
                 throw new Error(`Funil com ID ${novo_funil_id} não encontrado`);
 
-            cliente.funil_ID = novo_funil_id;
+            cliente.funil = funil;
 
             await clienteRepo.save(cliente);
             return cliente;
         }
     }
+

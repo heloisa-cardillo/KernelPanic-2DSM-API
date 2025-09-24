@@ -1,20 +1,38 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { Cliente } from "./Cliente";
-import { FunilVendas } from "./FunilVendas";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn, // Importe o JoinColumn
+} from "typeorm";
 
-@Entity("historicofunil")
+// Importações apenas de tipo (não geram código JS)
+import type { Cliente } from "./Cliente.js";
+import type { FunilVendas } from "./FunilVendas.js";
+
+// Importações reais (para uso no decorator)
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { FunilVendas as FunilVendasEntity } from "./FunilVendas.js";
+
+@Entity("Historico_funil") // Nome explícito da tabela
 export class HistoricoFunil {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "historico_ID" })
   historico_ID!: number;
 
-  @Column({ type: "timestamp" })
+  @Column({ name: "data_movimentacao", type: "timestamp" })
   data_movimentacao!: Date;
 
-  @ManyToOne(() => Cliente, c => c.historico)
-  @JoinColumn({ name: "cliente_ID" })
+  @ManyToOne(
+    () => ClienteEntity,
+    cliente => cliente.historico
+  )
+  @JoinColumn({ name: "cliente_ID" }) // Nome explícito da chave estrangeira
   cliente!: Cliente;
 
-  @ManyToOne(() => FunilVendas, f => f.historico)
-  @JoinColumn({ name: "funil_venda_ID" }) 
+  @ManyToOne(
+    () => FunilVendasEntity,
+    funil => funil.historico
+  )
+  @JoinColumn({ name: "funil_ID" }) // Nome explícito da chave estrangeira
   funil!: FunilVendas;
 }

@@ -1,33 +1,56 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
-import { Cliente } from "./Cliente";
-import { Funcionario } from "./Funcionario";
-import { InteracaoCliente } from "./InteracaoCliente";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinColumn, // Importe o JoinColumn para definir o nome das chaves estrangeiras
+} from "typeorm";
 
-@Entity("AgendamentoInteracao")
+// Importações apenas de tipo
+import type { Cliente } from "./Cliente.js";
+import type { Funcionario } from "./Funcionario.js";
+import type { InteracaoCliente } from "./InteracaoCliente.js";
+
+// Importações reais para os decorators
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
+
+@Entity("Agendamento_interacao") // Nome da tabela definido explicitamente
 export class AgendamentoInteracao {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "agendamento_interacao_ID" }) // Nome da coluna de ID
   agendamento_interacao_ID!: number;
 
-  @Column()
+  @Column({ name: "data_marcada", type: "datetime" }) // Nome da coluna
   data_marcada!: Date;
 
-  @Column({ length: 20 })
+  @Column({ name: "tipo_interacao", type: "varchar", length: 20 }) // Nome da coluna
   tipo_interacao!: string;
 
-  @Column({ length: 20 })
+  @Column({ name: "status", type: "varchar", length: 20 }) // Nome da coluna
   status!: string;
 
-  @Column({ length: 255, nullable: true })
+  @Column({ name: "notas", type: "varchar", length: 255, nullable: true }) // Nome da coluna
   notas?: string;
 
-  @ManyToOne(() => Cliente, cliente => cliente.agendamentos)
-  @JoinColumn({ name: "cliente_ID" }) 
+  @ManyToOne(
+    () => ClienteEntity,
+    (cliente: Cliente) => cliente.agendamentos
+  )
+  @JoinColumn({ name: "cliente_ID" }) // Nome da coluna de chave estrangeira
   cliente!: Cliente;
 
-  @ManyToOne(() => Funcionario, funcionario => funcionario.agendamentos)
-  @JoinColumn({ name: "funcionario_ID" }) 
+  @ManyToOne(
+    () => FuncionarioEntity,
+    (funcionario: Funcionario) => funcionario.agendamentos
+  )
+  @JoinColumn({ name: "funcionario_ID" }) // Nome da coluna de chave estrangeira
   funcionario!: Funcionario;
 
-  @OneToMany(() => InteracaoCliente, i => i.agendamento )
+  @OneToMany(
+    () => InteracaoClienteEntity,
+    (interacao: InteracaoCliente) => interacao.agendamento
+  )
   interacoes?: InteracaoCliente[];
 }

@@ -1,43 +1,82 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { FunilVendas } from "./FunilVendas";
-import { ContatoCliente } from "./ContatoCliente";
-import { HistoricoFunil } from "./HistoricoFunil";
-import { AgendamentoInteracao } from "./AgendamentoInteracao";
-import { InteracaoCliente } from "./InteracaoCliente";
-import { Vendas } from "./Vendas";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinColumn, // Importe o JoinColumn
+} from "typeorm";
 
-@Entity()
+// Importações apenas de tipo
+import type { Funcionario } from "./Funcionario.js";
+import type { FunilVendas } from "./FunilVendas.js";
+import type { ContatoCliente } from "./ContatoCliente.js";
+import type { HistoricoFunil } from "./HistoricoFunil.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
+import type { InteracaoCliente } from "./InteracaoCliente.js";
+import type { Vendas } from "./Vendas.js";
+
+// Importações reais
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { FunilVendas as FunilVendasEntity } from "./FunilVendas.js";
+import { ContatoCliente as ContatoClienteEntity } from "./ContatoCliente.js";
+import { HistoricoFunil as HistoricoFunilEntity } from "./HistoricoFunil.js";
+import { AgendamentoInteracao as AgendamentoInteracaoEntity } from "./AgendamentoInteracao.js";
+import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
+import { Vendas as VendasEntity } from "./Vendas.js";
+
+@Entity("Cliente") // Nome da tabela
 export class Cliente {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "cliente_ID" })
   cliente_ID!: number;
 
-  @Column({ length: 100 })
+  @Column({ name: "nome", type: "varchar", length: 100 })
   nome!: string;
 
-  @Column({ length: 255 })
+  @Column({ name: "endereco", type: "varchar", length: 255 })
   endereco!: string;
 
-  @ManyToOne(() => Funcionario, f => f.clientes)
-  @JoinColumn({ name: "funcionario_ID" })
+  @ManyToOne(
+    () => FuncionarioEntity,
+    (funcionario: Funcionario) => funcionario.clientes
+  )
+  @JoinColumn({ name: "funcionario_ID" }) // Nome da chave estrangeira
   funcionario!: Funcionario;
 
-  @ManyToOne(() => FunilVendas, f => f.clientes)
-  @JoinColumn({ name: "funil_ID" })
+  @ManyToOne(
+    () => FunilVendasEntity,
+    (funil: FunilVendas) => funil.clientes
+  )
+  @JoinColumn({ name: "funil_ID" }) // Nome da chave estrangeira
   funil!: FunilVendas;
 
-  @OneToMany(() => ContatoCliente, c => c.cliente)
+  @OneToMany(
+    () => ContatoClienteEntity,
+    (contato: ContatoCliente) => contato.cliente
+  )
   contatos?: ContatoCliente[];
 
-  @OneToMany(() => HistoricoFunil, h => h.cliente)
+  @OneToMany(
+    () => HistoricoFunilEntity,
+    (historico: HistoricoFunil) => historico.cliente
+  )
   historico?: HistoricoFunil[];
 
-  @OneToMany(() => AgendamentoInteracao, a => a.cliente)
+  @OneToMany(
+    () => AgendamentoInteracaoEntity,
+    (agendamento: AgendamentoInteracao) => agendamento.cliente
+  )
   agendamentos?: AgendamentoInteracao[];
 
-  @OneToMany(() => InteracaoCliente, i => i.cliente)
+  @OneToMany(
+    () => InteracaoClienteEntity,
+    (interacao: InteracaoCliente) => interacao.cliente
+  )
   interacoes?: InteracaoCliente[];
 
-  @OneToMany(() => Vendas, v => v.cliente)
+  @OneToMany(
+    () => VendasEntity,
+    (venda: Vendas) => venda.cliente
+  )
   vendas?: Vendas[];
 }
