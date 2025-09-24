@@ -1,7 +1,8 @@
 import "reflect-metadata"; // necessário para TypeORM
 import express from "express"
 import cors from "cors"
-import gestaoRoute from "./API/Routes/gestaoRoutes";
+import gestaoRoute from "./API/Routes/gestaoRoutes"
+import historicoRoute from "./API/Routes/historicoRoutes";
 
 /*const calendarioRoute = require("./API/Routes/calendarioRoutes")*/
 
@@ -22,7 +23,7 @@ AppDataSource.initialize()
   });
 
 /*app.use("/calendario", calendarioRoute)*/
-
+app.use("/historico",historicoRoute)
 app.use("/gestao",gestaoRoute)
 
 app.get("/", (req, res) => {
