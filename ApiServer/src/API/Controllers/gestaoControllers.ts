@@ -34,11 +34,15 @@ export const getVendaById = async (req: Request, res: Response) => {
     }
 };
 
-export const UptadeVenda = async (req:Request, res:Response) =>{
+export const UpdateVenda = async (req:Request, res:Response) =>{
     try{
         const id = Number(req.params.id)
-        const venda = await Service.listarPorID(id)
-        return res.json(venda)
+        const dados = req.body;
+        const vendaAtualizada = await Service.updatePorID(id, dados);
+        if (!vendaAtualizada) {
+            return res.status(404).json({ message: "Venda não encontrada" });
+        }
+        return res.json(vendaAtualizada);
     }catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro ao buscar venda" });
