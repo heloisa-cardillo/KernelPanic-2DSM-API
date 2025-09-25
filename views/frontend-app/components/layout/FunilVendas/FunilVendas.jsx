@@ -1,4 +1,3 @@
- //funil atualiza automaticamente com a mudança dos cards de coluna
 
 export default function FunilVendas({ cards }) {
   const coresFunil = [
@@ -17,7 +16,7 @@ export default function FunilVendas({ cards }) {
   Object.entries(cards).forEach(([coluna, cardsObj]) => {
     Object.entries(cardsObj).forEach(([cardKey, clientes]) => {
       contagens.push({
-        nome: cardKey,
+        nome: cardKey.charAt(0).toUpperCase() + cardKey.slice(1).toLowerCase(),
         qtd: clientes.length
       });
     });
@@ -33,7 +32,7 @@ export default function FunilVendas({ cards }) {
           key={index}
           className="funnel-bar"
           style={{
-            width: `${(c.qtd / maxQtd) * 100}%`,
+            width: `${Math.max((c.qtd / maxQtd) * 100, 10)}%`,
             backgroundColor: coresFunil[index] || "#B6FFFF",
             marginBottom: "8px",
             padding: "6px",

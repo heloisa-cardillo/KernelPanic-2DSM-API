@@ -1,28 +1,52 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Funcionario } from "./Funcionario";
-import { Cliente } from "./Cliente";
-import { AgendamentoInteracao } from "./AgendamentoInteracao";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
 
-@Entity()
+import type { Funcionario } from "./Funcionario.js";
+import type { Cliente } from "./Cliente.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
+
+import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
+import { Cliente as ClienteEntity } from "./Cliente.js";
+import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteracao.js";
+
+@Entity("Interacao_cliente")
 export class InteracaoCliente {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "interacao_ID" })
   interacao_ID!: number;
 
-  @Column({ type: "date" })
+  @Column({ name: "data_interacao", type: "date" })
   data_interacao!: Date;
 
-  @Column({ length: 20 })
+  @Column({ name: "tipo_interacao", type: "varchar", length: 20 })
   tipo_interacao!: string;
 
-  @Column({ length: 255 })
+  @Column({ name: "relatorio_interacao", type: "varchar", length: 255 })
   relatorio_interacao!: string;
 
-  @ManyToOne(() => Funcionario, f => f.interacoes)
+  @ManyToOne(
+    () => FuncionarioEntity,
+    (funcionario: Funcionario) => funcionario.interacoes
+  )
+  @JoinColumn({ name: "funcionario_ID" })
   funcionario!: Funcionario;
 
-  @ManyToOne(() => Cliente, c => c.interacoes)
+  @ManyToOne(
+    () => ClienteEntity,
+    (cliente: Cliente) => cliente.interacoes
+  )
+  @JoinColumn({ name: "cliente_ID" })
   cliente!: Cliente;
 
-  @ManyToOne(() => AgendamentoInteracao, a => a.interacoes, { nullable: true })
+  @ManyToOne(
+    () => AgendamentoEntity,
+    (agendamento: AgendamentoInteracao) => agendamento.interacoes,
+    { nullable: true }
+  )
+  @JoinColumn({ name: "agendamento_interacao_ID" })
   agendamento?: AgendamentoInteracao;
 }
