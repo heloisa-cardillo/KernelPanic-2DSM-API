@@ -32,7 +32,7 @@ export default function FunilVendas({ cards }) {
           key={index}
           className="funnel-bar"
           style={{
-            width: `${Math.max((c.qtd / maxQtd) * 100, 10)}%`,
+            width: `${Math.max((c.qtd / maxQtd) * 60, 15)}%`,
             backgroundColor: coresFunil[index] || "#B6FFFF",
             marginBottom: "8px",
             padding: "6px",

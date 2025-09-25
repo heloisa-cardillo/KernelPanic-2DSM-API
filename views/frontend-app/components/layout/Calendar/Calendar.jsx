@@ -5,6 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import styles from './Calendar.module.css';
+import axios from 'axios';
 
 const CalendarComponent = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,22 +13,18 @@ const CalendarComponent = () => {
   const [dataHora, setDataHora] = useState('');
   const [descricao, setDescricao] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
-  const tags = ['reunião', 'lembrete', 'ligação', 'mensagem', 'outro'];
+  const tags = ['Reunião', 'Lembrete', 'Ligação', 'Mensagem', 'Outro'];
 
   const handleSalvar = async () => {
     try {
-      const response = await fetch('http://localhost:5000/eventos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: 'usuario@exemplo.com',
-          titulo,
-          dataHora,
-          categoria: selectedTag
-        })
+      const response = await axios.post('http://localhost:5000/eventos', {
+        email: 'usuario@exemplo.com',
+        titulo,
+        dataHora,
+        categoria: selectedTag
       });
+
+      console.log(response.data)
 
       const result = await response.json();
       console.log('Salvo com sucesso:', result);
