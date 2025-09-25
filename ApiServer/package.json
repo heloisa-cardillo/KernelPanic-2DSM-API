@@ -2,10 +2,11 @@
   "name": "meu-projeto-backend",
   "version": "1.0.0",
   "scripts": {
-  "build:db": "npm run build && node dist/DAL/Scripts/build-database.js && npx typeorm migration:run -d dist/DAL/ormconfig.js",
-  "dev": "nodemon -r tsconfig-paths/register --watch src/**/*.ts --exec tsx src/main.ts",
-  "build": "tsc",
-  "start": "node dist/main.js"
+    "build:db": "npm run build && node dist/DAL/Scripts/build-database.js",
+    "build:db-dev": "npm run build && node dist/DAL/Scripts/build-database-dev.js",
+    "dev": "nodemon -r tsconfig-paths/register --watch src/**/*.ts --exec tsx src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -14,7 +15,8 @@
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
-    "typeorm": "^0.3.26"
+    "typeorm": "^0.3.26",
+    "typeorm-extension": "^3.7.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
