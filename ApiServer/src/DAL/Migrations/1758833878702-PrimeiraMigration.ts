@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class PrimeiraMigration1758797691232 implements MigrationInterface {
-    name = 'PrimeiraMigration1758797691232'
+export class PrimeiraMigration1758833878702 implements MigrationInterface {
+    name = 'PrimeiraMigration1758833878702'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE \`Interacao_cliente\` (\`interacao_ID\` int NOT NULL AUTO_INCREMENT, \`data_interacao\` date NOT NULL, \`tipo_interacao\` varchar(20) NOT NULL, \`relatorio_interacao\` varchar(255) NOT NULL, \`funcionario_ID\` int NULL, \`cliente_ID\` int NULL, \`agendamento_interacao_ID\` int NULL, PRIMARY KEY (\`interacao_ID\`)) ENGINE=InnoDB`);
@@ -15,7 +15,7 @@ export class PrimeiraMigration1758797691232 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE \`Historico_funil\` (\`historico_ID\` int NOT NULL AUTO_INCREMENT, \`data_movimentacao\` timestamp NOT NULL, \`cliente_ID\` int NULL, \`funil_ID\` int NULL, PRIMARY KEY (\`historico_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Funil_vendas\` (\`funil_ID\` int NOT NULL AUTO_INCREMENT, \`estagio_nome\` varchar(20) NOT NULL, PRIMARY KEY (\`funil_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Contato_cliente\` (\`contato_cliente_ID\` int NOT NULL AUTO_INCREMENT, \`tipo_contato\` varchar(20) NOT NULL, \`valor_contato\` varchar(255) NOT NULL, \`cliente_ID\` int NULL, PRIMARY KEY (\`contato_cliente_ID\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`Cliente\` (\`cliente_ID\` int NOT NULL AUTO_INCREMENT, \`nome\` varchar(100) NOT NULL, \`endereco\` varchar(255) NOT NULL, \`funcionario_ID\` int NULL, \`funil_ID\` int NULL, PRIMARY KEY (\`cliente_ID\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`Cliente\` (\`cliente_ID\` int NOT NULL AUTO_INCREMENT, \`nome\` varchar(100) NOT NULL, \`endereco\` varchar(255) NOT NULL, \`segmento_atuacao\` varchar(40) NOT NULL, \`funcionario_ID\` int NULL, \`funil_ID\` int NULL, PRIMARY KEY (\`cliente_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Vendas\` (\`venda_ID\` int NOT NULL AUTO_INCREMENT, \`data_venda\` timestamp NOT NULL, \`valor_total\` decimal(10,2) NOT NULL, \`status\` varchar(20) NOT NULL, \`cliente_ID\` int NULL, \`funcionario_ID\` int NULL, PRIMARY KEY (\`venda_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` ADD CONSTRAINT \`FK_cb34e5d245ba3c99e3a541d7ef9\` FOREIGN KEY (\`funcionario_ID\`) REFERENCES \`Funcionario\`(\`funcionario_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` ADD CONSTRAINT \`FK_67a8108793b88002a2bd16ac853\` FOREIGN KEY (\`cliente_ID\`) REFERENCES \`Cliente\`(\`cliente_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);

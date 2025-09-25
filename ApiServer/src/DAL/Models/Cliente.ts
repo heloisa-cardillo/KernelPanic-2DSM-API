@@ -4,7 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-  JoinColumn, // Importe o JoinColumn
+  JoinColumn,
 } from "typeorm";
 
 // Importações apenas de tipo
@@ -36,18 +36,22 @@ export class Cliente {
   @Column({ name: "endereco", type: "varchar", length: 255 })
   endereco!: string;
 
+  // Novo atributo SegmentoAtuacao
+  @Column({ name: "segmento_atuacao", type: "varchar", length: 40 })
+  segmentoAtuacao!: string;
+
   @ManyToOne(
     () => FuncionarioEntity,
     (funcionario: Funcionario) => funcionario.clientes
   )
-  @JoinColumn({ name: "funcionario_ID" }) // Nome da chave estrangeira
+  @JoinColumn({ name: "funcionario_ID" })
   funcionario!: Funcionario;
 
   @ManyToOne(
     () => FunilVendasEntity,
     (funil: FunilVendas) => funil.clientes
   )
-  @JoinColumn({ name: "funil_ID" }) // Nome da chave estrangeira
+  @JoinColumn({ name: "funil_ID" })
   funil!: FunilVendas;
 
   @OneToMany(

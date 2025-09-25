@@ -22,9 +22,9 @@ INSERT INTO funcionario (nome, genero, endereco, numero_telefone, cargo, email, 
 ('João Souza', 'Masculino', 'Rua C, 789', '11777777777', 'Consultor', 'joao@empresa.com', 'hashsenha3', 'consultor', 'Rio de Janeiro', 1);
 
 -- Tabela: cliente
-INSERT INTO cliente (nome, endereco, funcionario_id, funil_id) VALUES
-('Empresa Alpha', 'Av. Paulista, 1000', 2, 1),
-('Empresa Beta', 'Av. Rio Branco, 200', 3, 2);
+INSERT INTO cliente (nome, endereco, segmento_atuacao , funcionario_id, funil_id) VALUES
+('Empresa Alpha', 'Av. Paulista, 1000', 'Congelados', 2, 1),
+('Empresa Beta', 'Av. Rio Branco, 200', 'Metalúrgia', 3, 2);
 
 -- Tabela: contato_cliente
 INSERT INTO contato_cliente (tipo_contato, valor_contato, cliente_id) VALUES
