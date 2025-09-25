@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Comercial</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9fafb;
+            color: #374151;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        .header {
+            margin-bottom: 32px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: #6b7280;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .filters label {
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .filters select, 
+        .filters button {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .kpis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 24px;
+        }
+        
+        .kpi-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 24px;
+        }
+        
+        .kpi-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+        
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .report-btn {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .report-btn:hover {
+            background: #f9fafb;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        
+        .table th, 
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .table th {
+            background: #f9fafb;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .table td {
+            color: #374151;
+        }
+        
+        .vendor-name {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+        
+        .chart-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 24px;
+        }
+        
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dashboard Comercial</h1>
+            <p>Relatórios e gráficos quantitativos para gestão de vendas</p>
+        </div>
+
+        <div class="card">
+            <div class="filters">
+                <label>Filtros:</label>
+                <select>
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    <option>15</option>
+                    <option>30</option>
+                </select>
+                <select>
+                    <option>Dia</option>
+                    <option selected>Mês</option>
+                    <option>Ano</option>
+                </select>
+                <select>
+                    <option selected>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                </select>
+                <button class="btn-primary">Todos Vendedores</button>
+                <select>
+                    <option>Escolher vendedor</option>
+                    <option>Paula</option>
+                    <option>Carlos</option>
+                </select>
+                <button class="btn-primary">Atualizar</button>
+            </div>
+        </div>
+
+        <div class="kpis">
+            <div class="kpi-card">
+                <div class="kpi-title">Visitas comerciais</div>
+                <div class="kpi-value">18</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Vendas fechadas</div>
+                <div class="kpi-value">9</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Taxa de conversão Geral</div>
+                <div class="kpi-value">50,00%</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Faturamento</div>
+                <div class="kpi-value">R$ 1.800,00</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="chart-title">Relatórios Disponíveis</h3>
+            <div class="reports-grid">
+                <button class="report-btn">Interações</button>
+                <button class="report-btn">Vendas Efetivadas</button>
+                <button class="report-btn">Clientes Cadastrados</button>
+                <button class="report-btn">Clientes por Cidade</button>
+                <button class="report-btn">Clientes por Segmento</button>
+                <button class="report-btn">Relatório Completo</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="chart-title">Desempenho de Vendedores</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Vendedor</th>
+                        <th style="text-align: center;">Visitas</th>
+                        <th style="text-align: center;">Vendas</th>
+                        <th style="text-align: center;">Taxa de conversão</th>
+                        <th style="text-align: center;">Faturamento (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="vendor-name">xxx</td>
+                        <td style="text-align: center;">10</td>
+                        <td style="text-align: center;">5</td>
+                        <td style="text-align: center;">50,00%</td>
+                        <td style="text-align: center;">R$ 1.000,00</td>
+                    </tr>
+                    <tr>
+                        <td class="vendor-name">yyy</td>
+                        <td style="text-align: center;">8</td>
+                        <td style="text-align: center;">4</td>
+                        <td style="text-align: center;">50,00%</td>
+                        <td style="text-align: center;">R$ 800,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-card">
+                <h3 class="chart-title">Performance Mensal</h3>
+                <div style="height: 150px;">
+                    <canvas id="graficoPerformance"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Faturamento Mensal</h3>
+                <div style="height: 150px;">
+                    <canvas id="graficoFaturamento"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-card">
+                <h3 class="chart-title">Clientes por Cidade</h3>
+                <div style="max-width: 200px; height: 200px; margin: 0 auto;">
+                    <canvas id="graficoCidades"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Clientes por Segmento</h3>
+                <div style="max-width: 200px; height: 200px; margin: 0 auto;">
+                    <canvas id="graficoSegmentos"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+        });
+
+        function initializeDashboard() {
+            const dados = getDadosFicticios();
+            
+            createPerformanceChart(dados.performance);
+            createRevenueChart(dados.faturamento);
+            createCityChart(dados.cidades);
+            createSegmentChart(dados.segmentos);
+        }
+
+        function createPerformanceChart(dados) {
+            const ctxPerformance = document.getElementById('graficoPerformance').getContext('2d');
+            const chartPerformance = new Chart(ctxPerformance, {
+                type: 'line',
+                data: {
+                    labels: dados.meses,
+                    datasets: [
+                        {
+                            label: 'Visitas',
+                            data: dados.visitas,
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'transparent',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#3B82F6',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        },
+                        {
+                            label: 'Vendas',
+                            data: dados.vendas,
+                            borderColor: '#1E40AF',
+                            backgroundColor: 'transparent',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#1E40AF',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e5e7eb'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: '#e5e7eb'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createRevenueChart(dados) {
+            const ctxFaturamento = document.getElementById('graficoFaturamento').getContext('2d');
+            const chartFaturamento = new Chart(ctxFaturamento, {
+                type: 'bar',
+                data: {
+                    labels: dados.meses,
+                    datasets: [{
+                        label: 'Faturamento (R$)',
+                        data: dados.valores,
+                        backgroundColor: '#3B82F6',
+                        borderColor: '#2563EB',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e5e7eb'
+                            },
+                            ticks: {
+                                callback: function(valor) {
+                                    return 'R$ ' + valor.toLocaleString('pt-BR');
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: '#e5e7eb'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createCityChart(dados) {
+            const ctxCidades = document.getElementById('graficoCidades').getContext('2d');
+            const chartCidades = new Chart(ctxCidades, {
+                type: 'doughnut',
+                data: {
+                    labels: dados.nomes,
+                    datasets: [{
+                        data: dados.valores,
+                        backgroundColor: ['#3B82F6', '#1E40AF', '#60A5FA', '#93C5FD'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createSegmentChart(dados) {
+            const ctxSegmentos = document.getElementById('graficoSegmentos').getContext('2d');
+            const chartSegmentos = new Chart(ctxSegmentos, {
+                type: 'doughnut',
+                data: {
+                    labels: dados.nomes,
+                    datasets: [{
+                        data: dados.valores,
+                        backgroundColor: ['#2563EB', '#1D4ED8', '#3730A3'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        //dados teste
+        function getDadosFicticios() {
+            return {
+                performance: {
+                    meses: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    visitas: [45, 52, 48, 38, 55, 42],
+                    vendas: [23, 28, 25, 19, 31, 22]
+                },
+                faturamento: {
+                    meses: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    valores: [4600, 5200, 4800, 3800, 5500, 4200]
+                },
+                cidades: {
+                    nomes: ['São Paulo', 'Rio de Janeiro', 'Belo Horizonte', 'Outras'],
+                    valores: [45, 30, 15, 10]
+                },
+                segmentos: {
+                    nomes: ['Varejo', 'Atacado', 'Online'],
+                    valores: [40, 35, 25]
+                }
+            };
+        }
+    </script>
+</body>
+</html>
