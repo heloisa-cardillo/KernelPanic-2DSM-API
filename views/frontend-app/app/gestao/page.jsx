@@ -19,6 +19,8 @@ function App() {
       const mapaClientes = vendas.map((venda) => {
         const contatos = venda.cliente.contatos?.map((c) => `${c.tipo_contato}: ${c.valor_contato}`).join(" | ") || "";
 
+        const primeiroContato = venda.cliente.contatos?.[0] || {};
+
         return {
           id: venda.cliente.cliente_ID,
           cliente: venda.cliente.nome || "",
@@ -26,6 +28,8 @@ function App() {
           segmento: venda.cliente.segmento || "",
           status: venda.status || "",
           contatos: contatos,
+          tipoContato: primeiroContato.tipo_contato || "telefone",
+          contatoValor: primeiroContato.valor_contato || "",
           departamento: venda.funcionario?.nome || "",
           ultimaInteracao: venda.data_venda,
         };
@@ -80,8 +84,9 @@ function App() {
         }
       ];
     }
-    
+
     try {
+      console.log("Enviando para backend:", dadosEnvio);
       await axios.put(`http://localhost:5000/gestao/${selectedClient.id}`, dadosEnvio);
       const updatedClients = clientes.map(c =>
         c.id === selectedClient.id ? { ...c, ...selectedClient } : c

@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../DAL/ormconfig";
 import { Vendas } from "../../DAL/Models/Vendas"
 import { Cliente } from "../../DAL/Models/Cliente";
+import { ContatoCliente } from "../../DAL/Models/ContatoCliente";
 
 
 export class GestaoService{
@@ -49,9 +50,9 @@ export class GestaoService{
 
         if (dados.cliente.contatos && Array.isArray(dados.cliente.contatos)) {
 
-        await AppDataSource.getRepository("ContatoCliente").delete({ cliente: { cliente_ID: venda.cliente.cliente_ID } });
+        await AppDataSource.getRepository(ContatoCliente).delete({ cliente: { cliente_ID: venda.cliente.cliente_ID } });
         for (const contato of dados.cliente.contatos) {
-            await AppDataSource.getRepository("ContatoCliente").save({
+            await AppDataSource.getRepository(ContatoCliente).save({
             ...contato,
             cliente: venda.cliente,
             });
