@@ -1,12 +1,11 @@
 import { DataSource } from "typeorm";
 import { join } from "path";
 
-import *  as dotenv from "dotenv";
-import * as path from 'path';
-dotenv.config({ path: path.resolve(__dirname, '..', '..', '.env') });
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const host = process.env.DB_HOST || "localhost";
-const password = process.env.DB_PASSWORD || "@Grongos115935";
+const password = process.env.DB_PASSWORD || "fatec";
 const username = process.env.DB_USERNAME || "root";
 const database = process.env.DB_DB || "newe_database";
 
