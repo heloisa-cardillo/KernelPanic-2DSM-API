@@ -1,14 +1,17 @@
-    import { Repository } from "typeorm";
-    import { AppDataSource } from "../../DAL/ormconfig";
-    import { Cliente } from "../../DAL/Models/Cliente";
-    import { Funcionario } from "../../DAL/Models/Funcionario";
-    import { FunilVendas } from "../../DAL/Models/FunilVendas";
+import { Repository } from "typeorm";
+import { AppDataSource } from "../../DAL/ormconfig";
+import { Cliente } from "../../DAL/Models/Cliente";
+import { ContatoCliente } from "../../DAL/Models/ContatoCliente";
+import { Funcionario } from "../../DAL/Models/Funcionario";
+import { FunilVendas } from "../../DAL/Models/FunilVendas";
 
     export class ClienteService {
         private clienteRepo: Repository<Cliente>;
+        private clienteContatoRepo: Repository<ContatoCliente>;
 
         constructor() {
             this.clienteRepo = AppDataSource.getRepository(Cliente);
+            this.clienteContatoRepo = AppDataSource.getRepository(ContatoCliente)
         }
 
         async listarTodos(): Promise<Cliente[]> {
@@ -45,10 +48,13 @@
             endereco: string;
             funcionario_ID: number;
             funil_ID: number;
+            tipo_contato: string;//contato_clinte
+            valor_contato: string;//tb 
+
         }): Promise<Cliente> {
             const funcionarioRepo = AppDataSource.getRepository(Funcionario);
             const funilRepo = AppDataSource.getRepository(FunilVendas);
-
+            
             const funcionario = await funcionarioRepo.findOneBy({
                 funcionario_ID: data.funcionario_ID,
             });
@@ -64,6 +70,18 @@
                 funil,
             });
 
+            const clienteSalvo = await this.clienteRepo.save(cliente);
+            const novoClienteId = clienteSalvo.cliente_ID;
+            // console.log("Cliente salvo com o ID:",novoClienteId)
+            const clienteConect = await this.clienteRepo.findOneBy({
+                cliente_ID: novoClienteId,
+            });
+            const cliente_contato = this.clienteContatoRepo.create({
+                tipo_contato: data.tipo_contato,
+                valor_contato: data.valor_contato,
+                cliente:clienteConect!
+            });
+            this.clienteContatoRepo.save(cliente_contato)
             return this.clienteRepo.save(cliente);
         }
 
