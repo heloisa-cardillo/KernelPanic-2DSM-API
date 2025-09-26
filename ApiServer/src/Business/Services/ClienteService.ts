@@ -1,34 +1,37 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../DAL/ormconfig";
 import { Cliente } from "../../DAL/Models/Cliente";
+import { ContatoCliente } from "../../DAL/Models/ContatoCliente";
 import { Funcionario } from "../../DAL/Models/Funcionario";
 import { FunilVendas } from "../../DAL/Models/FunilVendas";
 
 export class ClienteService {
-  private clienteRepo: Repository<Cliente>;
+      private clienteRepo: Repository<Cliente>;
+      private clienteContatoRepo: Repository<ContatoCliente>;
 
-  constructor() {
-    // ===== Inicializa repositório de Cliente =====
-    this.clienteRepo = AppDataSource.getRepository(Cliente);
-  }
+      constructor() {
+          this.clienteRepo = AppDataSource.getRepository(Cliente);
+          this.clienteContatoRepo = AppDataSource.getRepository(ContatoCliente)
+      }
 
-  // ===== Lista todos os clientes com suas relações =====
-  async listarTodos(): Promise<Cliente[]> {
-    return this.clienteRepo.find({
-      relations: [
-        "funcionario",
-        "funil",
-        "contatos",
-        "historico",
-        "agendamentos",
-        "interacoes",
-        "vendas",
-      ],
-    });
-  }
+
+
+async listarTodos(): Promise<Cliente[]> {
+  return this.clienteRepo.find({
+    relations: [
+      "funcionario",
+      "funil",
+      "contatos",
+      "historico",
+      "agendamentos",
+      "interacoes",
+      "vendas",
+    ],
+  });
+}
 
   // ===== Busca cliente por ID com suas relações =====
-  async buscarPorID(id: number): Promise<Cliente | null> {
+async buscarPorID(id: number): Promise<Cliente | null> {
     return this.clienteRepo.findOne({
       where: { cliente_ID: id },
       relations: [
@@ -42,38 +45,40 @@ export class ClienteService {
       ],
     });
   }
+async criarCliente(data: {
+            nome: string;
+            endereco: string;
+            funcionario_ID: number;
+            funil_ID: number;
+            tipo_contato: string;//contato_clinte
+            valor_contato: string;//tb 
 
-  // ===== Cria novo cliente após validar funcionário e funil =====
-  async criarCliente(data: {
-    nome: string;
-    endereco: string;
-    funcionario_ID: number;
-    funil_ID: number;
-  }): Promise<Cliente> {
-    const funcionarioRepo = AppDataSource.getRepository(Funcionario);
-    const funilRepo = AppDataSource.getRepository(FunilVendas);
+        }): Promise<Cliente> {
+            const funcionarioRepo = AppDataSource.getRepository(Funcionario);
+            const funilRepo = AppDataSource.getRepository(FunilVendas);
+            
+            const funcionario = await funcionarioRepo.findOneBy({
+                funcionario_ID: data.funcionario_ID,
+            });
+            if (!funcionario) throw new Error("Funcionario não encontrado!");
+            const clienteSalvo = await this.clienteRepo.save(cliente);
+            const novoClienteId = clienteSalvo.cliente_ID;
+            // console.log("Cliente salvo com o ID:",novoClienteId)
+            const clienteConect = await this.clienteRepo.findOneBy({
+                cliente_ID: novoClienteId,
+            });
+            const cliente_contato = this.clienteContatoRepo.create({
+                tipo_contato: data.tipo_contato,
+                valor_contato: data.valor_contato,
+                cliente:clienteConect!
+            });
+            this.clienteContatoRepo.save(cliente_contato)
+            return this.clienteRepo.save(cliente);
+        }
 
-    // ===== Busca funcionário pelo ID =====
-    const funcionario = await funcionarioRepo.findOneBy({
-      funcionario_ID: data.funcionario_ID,
-    });
-    if (!funcionario) throw new Error("Funcionario não encontrado!");
-
-    // ===== Busca funil pelo ID =====
-    const funil = await funilRepo.findOneBy({ funil_ID: data.funil_ID });
-    if (!funil) throw new Error("Funil não encontrado!");
-
-    // ===== Cria instância de cliente =====
-    const cliente = this.clienteRepo.create({
-      nome: data.nome,
-      endereco: data.endereco,
-      funcionario,
-      funil,
-    });
-
-    // ===== Salva cliente no banco =====
     return this.clienteRepo.save(cliente);
   }
+
 
   // ===== Atualiza o funil do cliente =====
   async editarFunilCliente(
