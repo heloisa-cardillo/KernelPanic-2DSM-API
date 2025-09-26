@@ -14,13 +14,18 @@ export class ClienteSubscriber implements EntitySubscriberInterface<Cliente> {
   }
 
   async afterUpdate(event: UpdateEvent<Cliente>) {
-    // Verifica se a coluna funil_ID foi alterada
-    if (event.updatedColumns.some(col => col.propertyName === "funil")) {
+    if (!event.entity || !event.databaseEntity) return;
+
+    const antigoFunilId = event.databaseEntity.funil?.funil_ID;
+    const novoFunilId = event.entity.funil?.funil_ID;
+
+    // Verifica se o funil_ID mudou
+    if (antigoFunilId !== novoFunilId) {
       const repo = event.manager.getRepository(HistoricoFunil);
 
       const historico = repo.create({
-        cliente: { cliente_ID: event.entity!.cliente_ID }, // novo estado do cliente
-        funil: { funil_ID: event.entity!.funil.funil_ID }, // novo funil onde ele entrou
+        cliente: { cliente_ID: event.entity.cliente_ID },
+        funil: { funil_ID: novoFunilId },
         data_movimentacao: new Date(),
       });
 

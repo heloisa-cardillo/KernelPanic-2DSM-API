@@ -48,7 +48,7 @@ INSERT INTO historico_funil (data_movimentacao, cliente_id, funil_id) VALUES
 (CURRENT_TIMESTAMP, 2, 2);
 
 -- Tabela: evento_treinamento
-INSERT INTO evento_treinamento (titulo, descricao, data_inicio, duracao_horas, evento_link, status, organizador_id) VALUES
+INSERT INTO evento_treinamento (titulo, descricao, dataHora, duracao_horas, evento_link, status, organizador_id) VALUES
 ('Treinamento de Vendas Consultivas', 'Curso avançado de técnicas de vendas.', '2025-09-25 09:00:00', 4, 'https://evento.com/vendas', 'Ativo', 1);
 
 -- Tabela: funcionarios_convidados

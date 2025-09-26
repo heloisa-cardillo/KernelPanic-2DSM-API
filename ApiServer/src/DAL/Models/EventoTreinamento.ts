@@ -29,7 +29,7 @@ export class EventoTreinamento {
   descricao?: string;
 
   @Column({ name: "dataHora", type: "datetime" })
-  data_inicio!: Date;
+  dataHora!: Date;
 
   @Column({ name: "duracao_horas", type: "float" })
   duracao_horas!: number;
