@@ -29,7 +29,7 @@ function App() {
           contatos,
           tipoContato: primeiroContato.tipo_contato || 'telefone',
           contatoValor: primeiroContato.valor_contato || '',
-          departamento: venda.funcionario?.nome || '',
+          departamento: venda.funcionario.cargo || '',
           departamentoId: venda.funcionario?.funcionario_ID || null,
           ultimaInteracao: venda.data_venda,
         };
@@ -77,7 +77,7 @@ function App() {
       },
       status: selectedClient.status || '',
       funcionario: {
-        nome: selectedClient.departamento || '',
+        cargo: selectedClient.departamento || '',
         funcionario_ID: selectedClient.departamentoId || null
       }
     };
@@ -97,7 +97,7 @@ function App() {
               tipoContato: updated.cliente.contatos?.[0]?.tipo_contato || 'telefone',
               contatoValor: updated.cliente.contatos?.[0]?.valor_contato || '',
               status: updated.status,
-              departamento: updated.funcionario?.nome || '',
+              departamento: updated.funcionario.cargo || '',
               departamentoId: updated.funcionario?.funcionario_ID || null,
             }
           : c

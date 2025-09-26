@@ -25,7 +25,7 @@ function App() {
           id: venda.funcionario?.funcionario_ID || null,
           cliente: venda.cliente.nome || '',
           funcionario: venda.funcionario?.nome || '',
-          segmento: venda.cliente.segmentoAtuacao || '',
+          segmento: venda.funcionario.cargo || '',
           status: venda.status || '',
           ultimaInteracao: venda.data_venda,
           report: venda.report || ''

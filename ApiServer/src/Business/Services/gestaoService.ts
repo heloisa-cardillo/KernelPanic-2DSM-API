@@ -64,9 +64,9 @@ export class GestaoService{
             }
         }
 
-        if (dados.funcionario?.nome) {
+        if (dados.funcionario?.cargo) {
             await this.funcionarioRepo.update(venda.funcionario.funcionario_ID, {
-            nome: dados.funcionario.nome ?? venda.funcionario?.nome,
+            cargo: dados.funcionario.cargo ?? venda.funcionario?.cargo,
             });
         }
 
