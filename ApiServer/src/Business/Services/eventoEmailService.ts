@@ -36,3 +36,7 @@ export async function enviarEmail(email: string, titulo: string) {
     console.error("Falha ao enviar e-mail:", err);
   }
 }
+
+export async function listarEventos(): Promise<Evento[]>{
+  return eventoRepo.find()
+}
