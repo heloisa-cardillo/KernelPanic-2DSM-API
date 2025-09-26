@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { criarEvento } from "../../Business/Services/eventoEmailService";
+import { criarEvento, listarEventos } from "../../Business/Services/eventoEmailService";
 
 export async function postEvento(req: Request, res: Response) {
   // ===== Extrai dados do corpo da requisição =====
@@ -18,6 +18,17 @@ export async function postEvento(req: Request, res: Response) {
     return res.json({ sucesso: true, id: evento.id });
   } catch (err) {
     // ===== Log do erro e retorno de erro interno =====
+    console.error(err);
+    return res.status(500).json({ erro: "Erro ao salvar evento!" });
+  }
+}
+
+export async function getEventos(req: Request, res: Response){
+  try{
+    const evento = await listarEventos()
+    return res.json({ sucesso: true, evento: evento})
+  }
+  catch (err) {
     console.error(err);
     return res.status(500).json({ erro: "Erro ao salvar evento!" });
   }

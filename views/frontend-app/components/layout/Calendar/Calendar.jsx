@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import styles from './Calendar.module.css';
 import axios from 'axios';
+
+
 
 const CalendarComponent = () => {
   const [showModal, setShowModal] = useState(false);
@@ -15,9 +17,38 @@ const CalendarComponent = () => {
   const [selectedTag, setSelectedTag] = useState('');
   const tags = ['Reunião', 'Lembrete', 'Ligação', 'Mensagem', 'Outro'];
 
+  const [arrayLembretes, setArrayLembretes] = useState([])
+
+  const getLembretes = async() =>{
+    try{
+      const response = await axios.get("http://localhost:5000/eventos")
+      
+      const eventosConvertidos = response.data.evento.map((item) => {
+        const startDate = new Date(item.dataHora);
+        const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); 
+      
+        return {
+          id: item.id,
+          title: item.titulo,
+          start: startDate.toISOString(),
+          end: endDate.toISOString(),
+          extendedProps: {
+            email: item.email,
+            categoria: item.categoria
+          }
+        };
+      });
+      
+      setArrayLembretes((prevArray) => [...prevArray, ...eventosConvertidos]);
+
+    }catch(err){
+
+    }
+  }
+
   const handleSalvar = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/eventos', {
+      const response = await axios.post('http://localhost:5000/eventos/lembrete', {
         email: 'usuario@exemplo.com',
         titulo,
         dataHora,
@@ -25,9 +56,8 @@ const CalendarComponent = () => {
       });
 
       console.log(response.data)
-
-      const result = await response.json();
-      console.log('Salvo com sucesso:', result);
+      console.log('Salvo com sucesso:');
+      getLembretes()
 
       setTitulo('');
       setDataHora('');
@@ -38,6 +68,10 @@ const CalendarComponent = () => {
       console.error('Erro ao salvar:', error);
     }
   };
+
+  useEffect(() => {
+    getLembretes()
+  },[])
 
   return (
     <div className={styles.container}>
@@ -53,7 +87,7 @@ const CalendarComponent = () => {
           right: 'prev,next today timeGridWeek,timeGridDay'
         }}
         locale='pt-br'
-        events={[]}
+        events={arrayLembretes}
         selectable={false}
         selectMirror={false}
         allDaySlot={false}
@@ -138,7 +172,11 @@ const CalendarComponent = () => {
         </div>
       )}
     </div>
+
+    
   );
+
+  
 };
 
 export default CalendarComponent;
