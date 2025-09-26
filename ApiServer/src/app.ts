@@ -4,6 +4,8 @@ import cors from "cors"
 
 const calendarioRoute = require("./API/Routes/calendarioRoutes")
 const funilVendasRoute = require("./API/Routes/funilVendasRoutes")
+import gestaoRoute from "./API/Routes/gestaoRoutes"
+import historicoRoute from "./API/Routes/historicoRoutes";
 
 const app = express();
 
@@ -20,7 +22,9 @@ AppDataSource.initialize()
   .catch((err:Error) => {
     console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
   });
-
+  
+app.use("/historico",historicoRoute)
+app.use("/gestao",gestaoRoute)
 app.use("/funilVendas",funilVendasRoute )
 app.use("/calendario", calendarioRoute)
 
