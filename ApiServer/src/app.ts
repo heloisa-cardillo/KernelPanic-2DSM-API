@@ -1,42 +1,44 @@
-import "reflect-metadata"; 
-import express from "express"
-import cors from "cors"
-import dotenv from "dotenv";
+import "reflect-metadata"; // Necessário para decorators funcionarem no TypeORM e outras libs
+import express from "express"; // Framework web para Node.js
+import cors from "cors"; // Middleware para habilitar CORS (compartilhamento de recursos entre origens)
+import dotenv from "dotenv"; // Carrega variáveis de ambiente do arquivo .env
 
+import { iniciarCron } from "./API/Jobs/emailCron"; // Importa função para iniciar tarefas agendadas
+const eventoRoute = require("./API/Routes/eventoEmailRoutes"); // Importa rotas para eventos de email
 
-import { iniciarCron } from "./API/Jobs/emailCron";
-const eventoRoute = require("./API/Routes/eventoEmailRoutes")
+dotenv.config(); // Carrega configurações do .env para process.env
 
-dotenv.config()
+const calendarioRoute = require("./API/Routes/calendarioRoutes"); // Rotas do calendário
+const funilVendasRoute = require("./API/Routes/funilVendasRoutes"); // Rotas do funil de vendas
+const cadastroCliente = require("./API/Routes/clientesRoutes"); // Rotas do cadastro de clientes
 
-const calendarioRoute = require("./API/Routes/calendarioRoutes")
-const funilVendasRoute = require("./API/Routes/funilVendasRoutes")
-const cadastroCliente = require("./API/Routes/clientesRoutes")
+const app = express(); // Cria instância do Express
 
-const app = express();
+app.use(cors()); // Ativa CORS para todas as rotas
+app.use(express.json()); // Middleware para interpretar JSON nas requisições
 
-app.use(cors())
-app.use(express.json())
+import { AppDataSource } from "./DAL/ormconfig"; // Configuração do TypeORM / banco
 
-import { AppDataSource } from "./DAL/ormconfig";
-
+// Inicializa conexão com banco de dados
 AppDataSource.initialize()
   .then(() => {
     console.log("✅ Conectado ao MySQL com sucesso!");
-
   })
-  .catch((err:Error) => {
+  .catch((err: Error) => {
+    // Caso falhe conexão, mostra erro e alerta sobre .env
     console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
   });
 
-app.use("/eventos", eventoRoute);
-iniciarCron();
-app.use("/funilVendas",funilVendasRoute )
-app.use("/calendario", calendarioRoute)
-app.use("/clientes", cadastroCliente)
+// Define as rotas da aplicação
+app.use("/eventos", eventoRoute); // Rota para eventos relacionados a email
+iniciarCron(); // Inicia tarefas agendadas (jobs)
+app.use("/funilVendas", funilVendasRoute); // Rotas para funil de vendas
+app.use("/calendario", calendarioRoute); // Rotas do calendário
+app.use("/clientes", cadastroCliente); // Rotas para clientes
 
+// Rota raiz para teste rápido da API
 app.get("/", (req, res) => {
-    res.send("API funcionando")
-})
+  res.send("API funcionando");
+});
 
-export default app
+export default app; // Exporta o app para ser usado em outro lugar (ex: server.ts)

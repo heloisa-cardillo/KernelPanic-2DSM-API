@@ -2,44 +2,48 @@ import { DataSource } from "typeorm";
 import { join } from "path";
 
 // import dotenv from "dotenv";
-// dotenv.config();
+// dotenv.config(); 
+// (Descomente para carregar variáveis de ambiente do arquivo .env)
 
-const host = process.env.DB_HOST || "localhost";
-const password = process.env.DB_PASSWORD || "fatec";
-const username = process.env.DB_USERNAME || "root";
-const database = process.env.DB_DB || "newe_database";
+const host = process.env.DB_HOST || "localhost"; // Host do banco (default localhost)
+const password = process.env.DB_PASSWORD || "fatec"; // Senha do banco (default 'fatec')
+const username = process.env.DB_USERNAME || "root"; // Usuário do banco (default 'root')
+const database = process.env.DB_DB || "newe_database"; // Nome do banco (default 'newe_database')
 
 export const AppDataSource = new DataSource({
-  type: "mysql",
+  type: "mysql", // Tipo do banco de dados
   host,
-  port: 3306,
+  port: 3306, // Porta padrão MySQL
   username,
   password,
   database,
-  // Use os arquivos compilados JS para evitar problemas de importação circular
-  // Caminho dinâmico para os arquivos .ts ou .js
+  // Aqui definimos onde ficam os arquivos das entidades (models) compilados ou em TS
+  // Isso ajuda evitar problemas de importação circular em runtime
   entities: [
     join(__dirname, "./Models/*.{ts,js}")
   ],
+  // Arquivos de migrations para controlar versões do schema
   migrations: [
     join(__dirname, "./Migrations/*.{ts,js}")
   ],
-  synchronize: false,
+  synchronize: false, // Nunca use true em produção! Só sincroniza schema automaticamente
+  // Arquivos de subscribers para eventos do TypeORM
   subscribers: [
     join(__dirname, "./Subscribers/*.{ts,js}")
   ],
-  logging: true,
+  logging: true, // Ativa logs detalhados de queries e operações
 });
 
+// Comandos úteis:
 
-// comando para gerar nova migration (apontando para o arquivo TypeScript)
+// Gerar nova migration com base nas entidades atuais (apontando para arquivo JS compilado):
 //// npx typeorm migration:generate src/DAL/migrations/PrimeiraMigration -d dist/DAL/ormconfig.js
 
-// compilar o TypeScript para JavaScript
+// Compilar o TypeScript para JavaScript (gera a pasta dist):
 //// npx tsc
 
-// depois, rodar a migration com o arquivo JavaScript compilado
+// Rodar as migrations no banco usando o arquivo JS compilado:
 //// npx typeorm migration:run -d dist/DAL/ormconfig.js
 
-////// orm debug
-/// npx typeorm schema:log -d dist/DAL/ormconfig.js
+// Mostrar o log das alterações que o TypeORM faria no schema:
+//// npx typeorm schema:log -d dist/DAL/ormconfig.js

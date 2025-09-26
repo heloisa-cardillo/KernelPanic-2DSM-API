@@ -1,12 +1,15 @@
-import express from "express"
-import { putFunilCliente, getClientes, postMoverCliente } from "../Controllers/funilVendasControllers"
+import express from "express";
+import { putFunilCliente, getClientes, postMoverCliente } from "../Controllers/funilVendasControllers";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/moverCliente", postMoverCliente)
+// ===== Rota POST para mover cliente entre estágios do funil =====
+router.post("/moverCliente", postMoverCliente);
 
-router.put("/", putFunilCliente)
+// ===== Rota PUT para atualizar funil do cliente =====
+router.put("/", putFunilCliente);
 
-router.get("/" , getClientes)
+// ===== Rota GET para listar clientes =====
+router.get("/", getClientes);
 
-module.exports = router
+module.exports = router;

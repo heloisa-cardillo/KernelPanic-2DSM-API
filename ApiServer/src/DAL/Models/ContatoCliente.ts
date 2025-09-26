@@ -3,30 +3,28 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  JoinColumn, // Importe o JoinColumn
+  JoinColumn, // Importa para definir o nome da FK
 } from "typeorm";
 
-// Importação de tipo (não gera código JS)
+// ===== Importação de tipo (não gera JS) =====
 import type { Cliente } from "./Cliente.js";
 
-// Importação real (para uso no decorator)
+// ===== Importação real para decorator =====
 import { Cliente as ClienteEntity } from "./Cliente.js";
 
-@Entity("Contato_cliente") // Nome da tabela
+@Entity("Contato_cliente") // ===== Nome da tabela =====
 export class ContatoCliente {
-  @PrimaryGeneratedColumn({ name: "contato_cliente_ID" }) // Nome da coluna de ID
+  @PrimaryGeneratedColumn({ name: "contato_cliente_ID" }) // ===== PK =====
   contato_cliente_ID!: number;
 
-  @Column({ name: "tipo_contato", type: "varchar", length: 20 }) // Nome da coluna
+  @Column({ name: "tipo_contato", type: "varchar", length: 20 }) // ===== Tipo do contato =====
   tipo_contato!: string;
 
-  @Column({ name: "valor_contato", type: "varchar", length: 255 }) // Nome da coluna
+  @Column({ name: "valor_contato", type: "varchar", length: 255 }) // ===== Valor do contato (ex: email, telefone) =====
   valor_contato!: string;
 
-  @ManyToOne(
-    () => ClienteEntity,
-    (cliente: Cliente) => cliente.contatos
-  )
-  @JoinColumn({ name: "cliente_ID" }) // Nome da chave estrangeira
+  // ===== Relação ManyToOne com Cliente =====
+  @ManyToOne(() => ClienteEntity, (cliente: Cliente) => cliente.contatos)
+  @JoinColumn({ name: "cliente_ID" }) // ===== FK para cliente =====
   cliente!: Cliente;
 }
