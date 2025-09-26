@@ -34,8 +34,8 @@ export class EventoTreinamento {
   @Column({ name: "duracao_horas", type: "float" })
   duracao_horas!: number;
 
-  @Column({ name: "evento_link", type: "longtext" })
-  evento_link!: string;
+  @Column({ name: "evento_link", type: "longtext", nullable: true })
+  evento_link?: string;
 
   @Column({ name: "status", type: "varchar", length: 20 })
   status!: string;

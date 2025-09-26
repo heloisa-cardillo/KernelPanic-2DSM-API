@@ -25,6 +25,9 @@ export const AppDataSource = new DataSource({
     join(__dirname, "./Migrations/*.{ts,js}")
   ],
   synchronize: false,
+  subscribers: [
+    join(__dirname, "./Subscribers/*.{ts,js}")
+  ],
   logging: true,
 });
 
