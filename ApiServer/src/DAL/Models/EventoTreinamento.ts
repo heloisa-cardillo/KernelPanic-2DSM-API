@@ -28,7 +28,7 @@ export class EventoTreinamento {
   @Column({ name: "descricao", type: "longtext", nullable: true })
   descricao?: string;
 
-  @Column({ name: "data_inicio", type: "timestamp" })
+  @Column({ name: "dataHora", type: "datetime" })
   data_inicio!: Date;
 
   @Column({ name: "duracao_horas", type: "float" })
