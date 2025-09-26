@@ -3,8 +3,9 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv";
 
-import eventoRoutes from "./API/Routes/eventoEmailRoutes";
+
 import { iniciarCron } from "./API/Jobs/emailCron";
+const eventoRoute = require("./API/Routes/eventoEmailRoutes")
 
 dotenv.config()
 
@@ -29,7 +30,7 @@ AppDataSource.initialize()
     console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
   });
 
-app.use("/eventos", eventoRoutes);
+app.use("/eventos", eventoRoute);
 iniciarCron();
 app.use("/funilVendas",funilVendasRoute )
 app.use("/calendario", calendarioRoute)

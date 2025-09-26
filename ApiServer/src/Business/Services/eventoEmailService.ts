@@ -2,13 +2,15 @@ import { AppDataSource } from "../../DAL/ormconfig";
 import { Evento } from "../../DAL/Models/EventoEmail";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+// Caminho absoluto até a raiz do projeto onde o .env está
+dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
 
 const eventoRepo = AppDataSource.getRepository(Evento);
 
-export async function criarEvento(email: string, titulo: string, dataHora: Date) {
-  const evento = eventoRepo.create({ email, titulo, dataHora });
+export async function criarEvento(email: string, titulo: string, dataHora: Date, categoria: string) {
+  const evento = eventoRepo.create({ email, titulo, dataHora, categoria });
   return await eventoRepo.save(evento);
 }
 

@@ -8,6 +8,8 @@ app.listen(PORT, ()=>{
   console.log("Servidor rodando em http://localhost:5000")
 })
 
+
+
 // src/main.ts (ou app.ts)
 
 // import { AppDataSource } from "./DAL/ormconfig";

@@ -5,4 +5,4 @@ const router = Router();
 
 router.post("/", postEvento);
 
-export default router;
+module.exports = router

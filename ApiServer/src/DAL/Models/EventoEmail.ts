@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Check } from "typeorm";
 
 @Entity("eventos") // Nome da tabela no banco
+@Check(`"categoria" IN ('categoria1', 'categoria2', 'categoria3', 'categoria4')`)
+
 export class Evento {
   @PrimaryGeneratedColumn({ name: "id" })
   id!: number;
@@ -13,4 +15,11 @@ export class Evento {
 
   @Column({ name: "dataHora", type: "datetime" })
   dataHora!: Date;
+
+
+  @Column({name: "categoria", type: "varchar", length: 30})
+  categoria!: string;
+
+
+
 }
