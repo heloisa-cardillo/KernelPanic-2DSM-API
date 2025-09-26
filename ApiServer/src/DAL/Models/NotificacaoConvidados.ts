@@ -8,31 +8,34 @@ import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
 import { Notificacao as NotificacaoEntity } from "./Notificacao.js";
 import { FuncionariosConvidados as FuncionariosConvidadosEntity } from "./FuncionariosConvidados.js";
 
-@Entity("Notificacao_convidados") // Nome da tabela
+@Entity("Notificacao_convidados") // Define o nome da tabela no banco de dados
 export class NotificacaoConvidados {
-  // Chave primária composta com nomes explícitos
+  // Parte da chave primária composta: ID do funcionário convidado
   @PrimaryColumn({ name: "funcionario_ID", type: "int" })
   funcionario_ID!: number;
 
+  // Parte da chave primária composta: ID do evento relacionado
   @PrimaryColumn({ name: "evento_ID", type: "int" })
   evento_ID!: number;
 
+  // Parte da chave primária composta: ID da notificação associada
   @PrimaryColumn({ name: "notificacao_ID", type: "int" })
   notificacao_ID!: number;
 
-  // Definindo a coluna de status com tipo boolean
+  // Indica se a notificação foi lida (true/false)
   @Column({ name: "status_leitura", type: "boolean" })
   status_leitura!: boolean;
 
-  // Data de leitura, permitindo null
+  // Data e hora em que a notificação foi lida, pode ser nula se não lida ainda
   @Column({ name: "data_leitura", type: "timestamp", nullable: true })
   data_leitura?: Date | null;
 
-  // A prioridade é uma string, mas com comprimento limitado
+  // Prioridade da notificação (ex: "alta", "media", "baixa")
   @Column({ name: "prioridade", type: "varchar", length: 20 })
   prioridade!: string;
 
-  // Relacionamento com a entidade Notificacao
+  // Relacionamento muitos-para-um com a entidade Notificacao
+  // Cada registro pertence a uma notificação específica
   @ManyToOne(
     () => NotificacaoEntity,
     (notificacao: Notificacao) => notificacao.convidados
@@ -40,7 +43,8 @@ export class NotificacaoConvidados {
   @JoinColumn({ name: "notificacao_ID" })
   notificacao!: Notificacao;
 
-  // Relacionamento com a entidade FuncionariosConvidados
+  // Relacionamento muitos-para-um com a entidade FuncionariosConvidados
+  // Associa o convidado funcionário a este registro, chave composta usada para o join
   @ManyToOne(
     () => FuncionariosConvidadosEntity,
     (fc: FuncionariosConvidados) => fc.notificacoes
