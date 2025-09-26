@@ -37,12 +37,13 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | 10 | 🟠 Média | 1 | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis | ❌ |
 | 11 | 🟠 Média | 3 | Eu como gestor, quero eleger as permissões que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | ? | Controle de permissões customizáveis por usuário | ❌ |
 | 12 | 🟠 Média | 2 | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro | ? | Cadastro de agregados com feedback automático | ❌ |
-| 13 | 🟡 Baixa | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | ? | Cadastro de funcionários, agregados e veículos com perfis atualizados | ❌ |
-| 14 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | ? | Responsividade da plataforma para dispositivos móveis | ❌ |
-| 15 | 🟡 Baixa | 2 | Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH | ? | Integração de dados de fretes concluídos com o setor de RH | ❌ |
-| 16 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes | ❌ |
-| 17 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento | ❌ |
-| 18 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente | ❌ |
+| 13 | 🟠 Média | 2 | Eu como cliente, quero poder calcular a cotação de um frete de forma automática | ? | Cotação com cálculo automático de custos, valores e adicionais | ❌ |
+| 14 | 🟡 Baixa | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | ? | Cadastro de funcionários, agregados e veículos com perfis atualizados | ❌ |
+| 15 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | ? | Responsividade da plataforma para dispositivos móveis | ❌ |
+| 16 | 🟡 Baixa | 2 | Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH | ? | Integração de dados de fretes concluídos com o setor de RH | ❌ |
+| 17 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes | ❌ |
+| 18 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento | ❌ |
+| 19 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente | ❌ |
 
 
 ## ⏳ Status do projeto: 0/3 Sprint
@@ -64,15 +65,15 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 <details>
   <summary><b>Clique aqui</b></summary>
 
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisitos do Parceiro |
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
 | :--: | :--------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1 | 🔴 Alta | Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para inclui-los no sistema | 4 | 1 | Sistema de cadastro de clientes com campos completos |
-| 2 | 🔴 Alta | Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes | 6 | 1 | Registro e consulta de histórico detalhado de interações com clientes |
-| 3 | 🟠 Média | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e não vendas para visualizar insights sobre o ciclo de vendas do cliente | 8 | 1 | Funil de vendas com etapas definidas e classificações de clientes |
-| 4 | 🟠 Média | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores | 7 | 1 | Relatórios e dashboards com filtros e agrupamentos customizáveis |
-| 5 | 🟡 Baixa | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | 1 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes |
-| 6 | 🟡 Baixa | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | 1 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento |
-| 7 | 🟡 Baixa | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | 1 | Visualização do histórico completo de interações com o cliente |
+| 1 | 🔴 Alta | 1 | Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para inclui-los no sistema | 4 | Sistema de cadastro de clientes com campos completos | ❌ |
+| 2 | 🔴 Alta | 1 | Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes | 6 | Sistema de cadastro de clientes com campos completos | ❌ |
+| 3 | 🟠 Média | 1 | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e não vendas para visualizar insights sobre o ciclo de vendas do cliente | 8 | Funil de vendas com etapas definidas e classificações de clientes | ❌ |
+| 4 | 🟠 Média | 1 | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis | ❌ |
+| 5 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes | ❌ |
+| 6 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento | ❌ |
+| 7 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente | ❌ |
 </details>
 
 ---
@@ -81,13 +82,14 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 <details>
   <summary><b>Clique aqui</b></summary>
 
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisitos do Parceiro |
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
 | :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
 | 1 | 🔴 Alta | Eu como cliente, quero unificar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | ? | 2 | Centralização e unificação de checklists e cadastros |
 | 2 | 🔴 Alta | Eu como cliente, quero uma plataforma centralizada para visualização, padronização e simplificação do acesso para todos os envolvidos | ? | 2 | Plataforma única de acesso, visualização e padronização que abranja o setor comercial, operacional e administrativo |
 | 3 | 🔴 Alta | Eu como cliente, quero gerenciar checklists padronizados, para maior controle e organização das operações | ? | 2 | Checklists padronizados para empresa, agregados, frota e manutenção predial |
 | 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro | ? | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟡 Baixa | Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH | ? | 2 | Integração de dados de fretes concluídos com o setor de RH |
+| 5 | 🟠 Média | 2 | Eu como cliente, quero poder calcular a cotação de um frete de forma automática | ? | Cotação com cálculo automático de custos, valores e adicionais | ❌ |
+| 6 | 🟡 Baixa | Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH | ? | 2 | Integração de dados de fretes concluídos com o setor de RH |
 </details>
 
 ---
@@ -96,7 +98,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 <details>
   <summary><b>Clique aqui</b></summary>
 
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisitos do Parceiro |
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
 | :--: | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :---------------------------------------------------------------------------------: |
 | 1 | 🔴 Alta | Eu como cliente, quero notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro | ? | 3 | Sistema de eventos com notificações, formulários e geração automática de relatórios |
 | 2 | 🔴 Alta | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa), para acompanhar o desempenho e facilitar a tomada de decisão | ? | 3 | Integração de dados comerciais e operacionais na mesma plataforma |
