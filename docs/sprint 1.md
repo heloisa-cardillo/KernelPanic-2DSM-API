@@ -1,32 +1,30 @@
 # Backlog da Primeira Sprint 
 
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisitos do Parceiro |
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
 | :--: | :--------: | :--- | :---: | :----: | :--- |
-| 1 | 🔴 Alta | Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para incluí-los no sistema | 4 | 1 | Sistema de cadastro de clientes com campos completos |
-| 2 | 🔴 Alta | Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes | 6 | 1 | Registro e consulta de histórico detalhado de interações com clientes |
-| 3 | 🟠 Média | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação e Follow Up, para visualizar insights sobre o ciclo de vendas do cliente | 8 | 1 | Funil de vendas com etapas definidas e classificações de clientes --> *Aqui que acho que ficaria bom colocar também um quadro parecido com o do Jira, para mostrar onde cada cliente está* |
-| 4 | 🟠 Média | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores | 7 | 1 | Relatórios e dashboards com filtros e agrupamentos customizáveis |
-| 5 | 🟡 Baixa | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | 1 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes |
-| 6 | 🟡 Baixa | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | 1 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento |
-| 7 | 🟡 Baixa | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | 1 | Visualização do histórico completo de interações com o cliente |
+| 1 | 🔴 Alta | 1 | Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para inclui-los no sistema | 4 | Sistema de cadastro de clientes com campos completos |
+| 2 | 🔴 Alta | 1 | Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes | 6 | Sistema de cadastro de clientes com campos completos 
+| 3 | 🟠 Média | 1 | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e não vendas para visualizar insights sobre o ciclo de vendas do cliente | 8 | Funil de vendas com etapas definidas e classificações de clientes |
+| 4 | 🟠 Média | 1 | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis |
+| 5 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes 
+| 6 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento |
+| 7 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente |
 
 ---
 
 # Mockup
 
 <details>
-<summary><b>Versão Mobile</b></summary>
-
-![Mockup Mobile](docs/Mockup/mobile%20API.png)
-
+  <summary><b>Versão Mobile</b></summary>
+  <img src="docs/Mockup/mobile_API.png" alt="Mockup Mobile" style="width:100vw; height:100px; object-fit: contain;">
 </details>
 
 <details>
-<summary><b>Versão Desktop</b></summary>
-
-![Mockup Desktop](docs/Mockup/desktop%20API.png)
-
+  <summary><b>Versão Desktop</b></summary>
+  <img src="docs/Mockup/desktop_API.jpg" alt="Mockup Desktop" style="width:100vw; height:100px; object-fit: contain;">
 </details>
+
+<br>
 
 # Cenários de Teste
 
@@ -171,3 +169,4 @@
 
 **Quando será testado?**
 - Após o desenvolvimento da User Story, serão realizados os testes necessários.
+
