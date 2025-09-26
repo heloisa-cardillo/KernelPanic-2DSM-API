@@ -5,19 +5,19 @@ import {
   ManyToOne,
   OneToMany,
   Unique,
-  JoinColumn, // Importe o JoinColumn
+  JoinColumn, // Para definir nomes das FKs
 } from "typeorm";
 
-// Importação só para tipagem (TypeScript)
+// ===== Importações de tipos (TS only) =====
 import type { Cliente } from "./Cliente.js";
 import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
 import type { InteracaoCliente } from "./InteracaoCliente.js";
 import type { Vendas } from "./Vendas.js";
 import type { EventoTreinamento } from "./EventoTreinamento.js";
 import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
-import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // para recursivo
+import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // Recursivo
 
-// Importação real usada nos decorators (TypeORM)
+// ===== Importações reais para decorators =====
 import { Cliente as ClienteEntity } from "./Cliente.js";
 import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteracao.js";
 import { InteracaoCliente as InteracaoEntity } from "./InteracaoCliente.js";
@@ -26,86 +26,69 @@ import { EventoTreinamento as EventoEntity } from "./EventoTreinamento.js";
 import { FuncionariosConvidados as ConvidadosEntity } from "./FuncionariosConvidados.js";
 import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 
-@Entity("Funcionario") // Nome da tabela
-@Unique(["email"])
+@Entity("Funcionario") // ===== Nome da tabela =====
+@Unique(["email"]) // ===== Email único =====
 export class Funcionario {
-  @PrimaryGeneratedColumn({ name: "funcionario_ID" })
+  @PrimaryGeneratedColumn({ name: "funcionario_ID" }) // ===== PK =====
   funcionario_ID!: number;
 
-  @Column({ name: "nome", type: "varchar", length: 100 })
+  @Column({ name: "nome", type: "varchar", length: 100 }) // ===== Nome completo =====
   nome!: string;
 
-  @Column({ name: "genero", type: "varchar", length: 10 })
+  @Column({ name: "genero", type: "varchar", length: 10 }) // ===== Gênero =====
   genero!: string;
 
-  @Column({ name: "endereco", type: "varchar", length: 255 })
+  @Column({ name: "endereco", type: "varchar", length: 255 }) // ===== Endereço =====
   endereco!: string;
 
-  @Column({ name: "numero_telefone", type: "varchar", length: 20 })
+  @Column({ name: "numero_telefone", type: "varchar", length: 20 }) // ===== Telefone =====
   numero_telefone!: string;
 
-  @Column({ name: "cargo", type: "varchar", length: 50 })
+  @Column({ name: "cargo", type: "varchar", length: 50 }) // ===== Cargo =====
   cargo!: string;
 
-  @Column({ name: "email", type: "varchar", length: 50 })
+  @Column({ name: "email", type: "varchar", length: 50 }) // ===== Email =====
   email!: string;
 
-  @Column({ name: "senha_hash", type: "varchar", length: 255 })
+  @Column({ name: "senha_hash", type: "varchar", length: 255 }) // ===== Hash da senha =====
   senha_hash!: string;
 
-  @Column({ name: "nivel_acesso", type: "varchar", length: 255 })
+  @Column({ name: "nivel_acesso", type: "varchar", length: 255 }) // ===== Nível de acesso =====
   nivel_acesso!: string;
 
-  @Column({ name: "localizacao_funcionario", type: "varchar", length: 100 })
+  @Column({ name: "localizacao_funcionario", type: "varchar", length: 100 }) // ===== Localização =====
   localizacao_funcionario!: string;
 
-  @ManyToOne(
-    () => FuncionarioEntity,
-    (gerente: FuncionarioType) => gerente.subordinados,
-    { nullable: true }
-  )
-  @JoinColumn({ name: "gerente_ID" }) // Nome da chave estrangeira recursiva
+  // ===== Relação recursiva ManyToOne: gerente =====
+  @ManyToOne(() => FuncionarioEntity, (gerente: FuncionarioType) => gerente.subordinados, { nullable: true })
+  @JoinColumn({ name: "gerente_ID" }) // ===== FK para gerente =====
   gerente_ID?: FuncionarioType;
 
-  @OneToMany(
-    () => FuncionarioEntity,
-    (funcionario: FuncionarioType) => funcionario.gerente_ID
-  )
+  // ===== Relação OneToMany: subordinados =====
+  @OneToMany(() => FuncionarioEntity, (funcionario: FuncionarioType) => funcionario.gerente_ID)
   subordinados?: FuncionarioType[];
 
-  @OneToMany(
-    () => ClienteEntity,
-    (cliente: Cliente) => cliente.funcionario
-  )
+  // ===== Relação OneToMany: clientes atendidos =====
+  @OneToMany(() => ClienteEntity, (cliente: Cliente) => cliente.funcionario)
   clientes?: Cliente[];
 
-  @OneToMany(
-    () => AgendamentoEntity,
-    (agendamento: AgendamentoInteracao) => agendamento.funcionario
-  )
+  // ===== Relação OneToMany: agendamentos =====
+  @OneToMany(() => AgendamentoEntity, (agendamento: AgendamentoInteracao) => agendamento.funcionario)
   agendamentos?: AgendamentoInteracao[];
 
-  @OneToMany(
-    () => InteracaoEntity,
-    (interacao: InteracaoCliente) => interacao.funcionario
-  )
+  // ===== Relação OneToMany: interações =====
+  @OneToMany(() => InteracaoEntity, (interacao: InteracaoCliente) => interacao.funcionario)
   interacoes?: InteracaoCliente[];
 
-  @OneToMany(
-    () => VendasEntity,
-    (venda: Vendas) => venda.funcionario
-  )
+  // ===== Relação OneToMany: vendas =====
+  @OneToMany(() => VendasEntity, (venda: Vendas) => venda.funcionario)
   vendas?: Vendas[];
 
-  @OneToMany(
-    () => EventoEntity,
-    (evento: EventoTreinamento) => evento.organizador_ID
-  )
+  // ===== Relação OneToMany: eventos organizados =====
+  @OneToMany(() => EventoEntity, (evento: EventoTreinamento) => evento.organizador_ID)
   eventosOrganizados?: EventoTreinamento[];
 
-  @OneToMany(
-    () => ConvidadosEntity,
-    (convite: FuncionariosConvidados) => convite.funcionario
-  )
+  // ===== Relação OneToMany: convites para eventos =====
+  @OneToMany(() => ConvidadosEntity, (convite: FuncionariosConvidados) => convite.funcionario)
   convites?: FuncionariosConvidados[];
 }

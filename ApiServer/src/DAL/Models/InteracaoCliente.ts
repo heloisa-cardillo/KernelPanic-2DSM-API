@@ -28,6 +28,7 @@ export class InteracaoCliente {
   @Column({ name: "relatorio_interacao", type: "varchar", length: 255 })
   relatorio_interacao!: string;
 
+  // Relação com Funcionario
   @ManyToOne(
     () => FuncionarioEntity,
     (funcionario: Funcionario) => funcionario.interacoes
@@ -35,6 +36,7 @@ export class InteracaoCliente {
   @JoinColumn({ name: "funcionario_ID" })
   funcionario!: Funcionario;
 
+  // Relação com Cliente
   @ManyToOne(
     () => ClienteEntity,
     (cliente: Cliente) => cliente.interacoes
@@ -42,6 +44,7 @@ export class InteracaoCliente {
   @JoinColumn({ name: "cliente_ID" })
   cliente!: Cliente;
 
+  // Relação opcional com AgendamentoInteracao (pode ser null)
   @ManyToOne(
     () => AgendamentoEntity,
     (agendamento: AgendamentoInteracao) => agendamento.interacoes,
