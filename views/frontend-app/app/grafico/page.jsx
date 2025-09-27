@@ -1,9 +1,10 @@
 import React from 'react'
+import GraficoComponent from "../../components/layout/Grafico/Grafico"
 
 export default function page() {
   return (
     <div>
-        <h1>Gráfico page</h1>
+        <GraficoComponent></GraficoComponent>
     </div>
   )
 }

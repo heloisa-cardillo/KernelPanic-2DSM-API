@@ -14,6 +14,9 @@ export default function Page() {
   const [tipoContato, setTipoContato] = useState('email'); // 'email' como padrão
   const [valorContato, setValorContato] = useState('');
 
+  const [tipoContatoAdd, setTipoContatoAdd] = useState('email');
+  const [valorContatoAdd, setValorContatoAdd] = useState('');
+
   // Estados de feedback da requisição
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -59,6 +62,7 @@ export default function Page() {
       setFunilId(5);
       setTipoContato('email');
       setValorContato('');
+      setValorContatoAdd('');
 
     } catch (error) {
       console.error('Falha ao enviar dados:', error);
@@ -72,6 +76,11 @@ export default function Page() {
   const handleTipoContatoChange = (event) => {
     setTipoContato(event.target.value);
     setValorContato(''); // Limpa o campo de valor ao trocar o tipo
+  };
+
+  const handleTipoContatoAddChange = (event) => {
+    setTipoContatoAdd(event.target.value);
+    setValorContatoAdd(''); // Limpa o campo de valor ao trocar o tipo adicional
   };
 
   return (
@@ -150,6 +159,58 @@ export default function Page() {
           {message && <p>{message}</p>}
         </form>
       </div>
+      <div className={styles.container}>
+        <h1> Teste </h1>
+        <form onSubmit={handleSubmit} className={styles.formulario}>
+          <label htmlFor="funil" className={styles.textLabel}>Cliente:</label>
+          <select className={styles.input1} id="funil" name="funil" value={funilId} onChange={(e) => setFunilId(Number(e.target.value))}>
+            <option value={1}>ABC da Embraer</option>
+            <option value={2}>Carlinhos Fotoshop</option>
+            <option value={3}>Mercearia do Seu Dimas</option>
+            <option value={4}>Cleitin do Pneu</option>
+          </select>
+          <label className={styles.textLabel}>Tipo de Contato:</label>
+        <div className={styles.radioGroup}>
+          <label>
+            <input type="radio" value="email" checked={tipoContatoAdd === 'email'} onChange={handleTipoContatoAddChange} />
+            E-mail
+          </label>
+          <label>
+            <input type="radio" value="telefone" checked={tipoContatoAdd === 'telefone'} onChange={handleTipoContatoAddChange} />
+            Telefone
+          </label>
+          <label>
+            <input type="radio" value="whatsapp" checked={tipoContatoAdd === 'whatsapp'} onChange={handleTipoContatoAddChange} />
+            WhatsApp
+          </label>
+        </div>
+        {tipoContatoAdd && (
+            <div>
+              <label htmlFor="valor_contato" className={styles.textLabel}>
+                {tipoContatoAdd.charAt(0).toUpperCase() + tipoContatoAdd.slice(1)}:
+              </label>
+              <input
+                className={styles.input1}
+                type={tipoContatoAdd === 'email' ? 'email' : 'tel'}
+                id="valor_contato"
+                name="valor_contato"
+                value={valorContatoAdd}
+                onChange={(e) => setValorContatoAdd(e.target.value)}
+                placeholder={
+                  tipoContatoAdd === 'email' ? 'exemplo@dominio.com' : '(99) 99999-9999'
+                }
+                required
+              />
+            </div>
+        )} 
+                  <button type="submit" className={styles.botao} disabled={isLoading}>
+            {isLoading ? 'Enviando...' : 'Enviar Formulário'}
+          </button>
+
+          {message && <p>{message}</p>}
+        </form>
+        
+      </div>          
     </div>
   );
 }
