@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { GestaoService } from "../../Business/Services/gestaoService";
-import { FuncionarioService } from "../../Business/Services/FuncionarioService";
 
 const Service = new GestaoService()
 
