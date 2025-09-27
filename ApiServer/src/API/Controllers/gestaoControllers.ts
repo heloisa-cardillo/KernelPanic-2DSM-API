@@ -1,11 +1,9 @@
 import { Request, Response } from "express"
 import { GestaoService } from "../../Business/Services/gestaoService";
+import { FuncionarioService } from "../../Business/Services/FuncionarioService";
 
 const Service = new GestaoService()
 
-export const teste = (req: Request, res: Response) => {
-    res.send("funciona")
-}
 
 
 export const getVendas = async (req: Request, res: Response) => {

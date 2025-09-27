@@ -7,4 +7,4 @@ router.get("/teste", teste);
 router.get("/", getInteracoes);
 router.get("/:id", getInteracoesID);
 
-export default router;
+module.exports = router;

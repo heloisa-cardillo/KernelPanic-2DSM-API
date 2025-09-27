@@ -11,6 +11,10 @@ dotenv.config(); // Carrega configurações do .env para process.env
 const calendarioRoute = require("./API/Routes/calendarioRoutes"); // Rotas do calendário
 const funilVendasRoute = require("./API/Routes/funilVendasRoutes"); // Rotas do funil de vendas
 const cadastroCliente = require("./API/Routes/clientesRoutes"); // Rotas do cadastro de clientes
+const gestaoRoute = require("./API/Routes/gestaoRoutes")
+const historicoRoute = require("./API/Routes/historicoRoutes")
+const pegarVendedor = require("./API/Routes/VendedorRoutes")
+
 
 const app = express(); // Cria instância do Express
 
@@ -35,6 +39,10 @@ iniciarCron(); // Inicia tarefas agendadas (jobs)
 app.use("/funilVendas", funilVendasRoute); // Rotas para funil de vendas
 app.use("/calendario", calendarioRoute); // Rotas do calendário
 app.use("/clientes", cadastroCliente); // Rotas para clientes
+
+app.use("/vendedor",pegarVendedor)
+app.use("/historico",historicoRoute)
+app.use("/gestao",gestaoRoute)
 
 // Rota raiz para teste rápido da API
 app.get("/", (req, res) => {
