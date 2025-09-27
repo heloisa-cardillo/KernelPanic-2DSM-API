@@ -1,6 +1,6 @@
 'use client';
- 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Select from 'react-select';
 import styles from './App.module.css';
  
@@ -49,28 +49,57 @@ const Styles = {
 };
  
 export default function Page() {
-  const vendedores = [
-    { nome: 'Paula', visitas: 10, vendas: 5, faturamento: 1000 },
-    { nome: 'Carlos', visitas: 8, vendas: 4, faturamento: 800 },
-  ];
- 
+
+  const [vendedores, setVendedores] = useState([]);
   const [mesSelecionado, setMesSelecionado] = useState(null);
   const [anoSelecionado, setAnoSelecionado] = useState(null);
   const [vendedorSelecionado, setVendedorSelecionado] = useState('');
- 
-  const filterVendedor = vendedores.filter(vendedor =>
-    vendedor.nome.toLowerCase().includes(vendedorSelecionado.toLowerCase())
-  );
- 
+
+  const fetchVendedores = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/vendedor');
+      let vendedoresBackend = response.data;
+
+      if (!Array.isArray(vendedoresBackend)) {
+        vendedoresBackend = [vendedoresBackend];
+      }
+
+      const mapa = vendedoresBackend.map((vendedor) => {
+        const visitas = vendedor.interacoes ? vendedor.interacoes.length : 0;
+        const vendasFechadas = vendedor.vendas
+          ? vendedor.vendas.filter((venda) => venda.status === 'Fechada')
+          : [];
+
+        const faturamento = vendasFechadas.reduce(
+          (total, v) => total + Number(v.valor_total || 0),
+          0
+        );
+
+        return {
+          nome: vendedor.nome,
+          visitas,
+          vendas: vendasFechadas.length,
+          faturamento,
+        };
+      });
+
+      setVendedores(mapa);
+    } catch (err) {
+      console.error('Erro ao carregar vendedores:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchVendedores();
+  }, []);
+
+  const filterVendedor = vendedores.filter((vendedor) => vendedor.nome.toLowerCase().includes(vendedorSelecionado.toLowerCase()));
+
   const totalVisitas = vendedores.reduce((total, v) => total + v.visitas, 0);
   const totalVendas = vendedores.reduce((total, v) => total + v.vendas, 0);
-  const taxaConversaoGeral =
-    totalVisitas > 0 ? ((totalVendas / totalVisitas) * 100).toFixed(2) : 0;
-  const totalFaturamento = vendedores.reduce(
-    (total, v) => total + v.faturamento,
-    0
-  );
- 
+  const taxaConversaoGeral = totalVisitas > 0 ? ((totalVendas / totalVisitas) * 100).toFixed(2) : '0';
+  const totalFaturamento = vendedores.reduce((total, v) => total + v.faturamento, 0);
+  
   return (
     <div className={styles.container}>
       <div className={styles.cardsContainer}>
