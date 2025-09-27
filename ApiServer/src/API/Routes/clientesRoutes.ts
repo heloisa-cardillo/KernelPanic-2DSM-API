@@ -1,9 +1,7 @@
 import express from "express";
 import { criarCliente } from "../Controllers/cadastrarClientesControlers";
+const router = express.Router()
 
-const router = express.Router();
+router.post("/",criarCliente)
 
-// ===== Rota POST para criar novo cliente =====
-router.post("/", criarCliente);
-
-module.exports = router;
+module.exports = router
