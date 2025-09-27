@@ -2,21 +2,11 @@ import "reflect-metadata"; // Necessário para decorators funcionarem no TypeORM
 import express from "express"; // Framework web para Node.js
 import cors from "cors"; // Middleware para habilitar CORS (compartilhamento de recursos entre origens)
 import dotenv from "dotenv"; // Carrega variáveis de ambiente do arquivo .env
-
-<<<<<<< HEAD
-const app = express();
-=======
 import { iniciarCron } from "./API/Jobs/emailCron"; // Importa função para iniciar tarefas agendadas
 const eventoRoute = require("./API/Routes/eventoEmailRoutes"); // Importa rotas para eventos de email
 
 dotenv.config(); // Carrega configurações do .env para process.env
->>>>>>> parent of 936c2c9 (Revert "Merge branch 'desenvolvimento' into feat/addContatoAoCriarCliente")
 
-const calendarioRoute = require("./API/Routes/calendarioRoutes"); // Rotas do calendário
-const funilVendasRoute = require("./API/Routes/funilVendasRoutes"); // Rotas do funil de vendas
-const cadastroCliente = require("./API/Routes/clientesRoutes"); // Rotas do cadastro de clientes
-
-<<<<<<< HEAD
 const calendarioRoute = require("./API/Routes/calendarioRoutes"); // Rotas do calendário
 const funilVendasRoute = require("./API/Routes/funilVendasRoutes"); // Rotas do funil de vendas
 const cadastroCliente = require("./API/Routes/clientesRoutes"); // Rotas do cadastro de clientes
@@ -25,11 +15,7 @@ const historicoRoute = require("./API/Routes/historicoRoutes")
 const pegarVendedor = require("./API/Routes/VendedorRoutes")
 
 
-//Conexão com o banco de dados
-import { AppDataSource } from "./DAL/ormconfig";
-=======
 const app = express(); // Cria instância do Express
->>>>>>> parent of 936c2c9 (Revert "Merge branch 'desenvolvimento' into feat/addContatoAoCriarCliente")
 
 app.use(cors()); // Ativa CORS para todas as rotas
 app.use(express.json()); // Middleware para interpretar JSON nas requisições
@@ -46,7 +32,6 @@ AppDataSource.initialize()
     console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
   });
 
-<<<<<<< HEAD
 app.use("/funilVendas",funilVendasRoute )
 app.use("/calendario", calendarioRoute)
 app.use("/clientes", cadastroCliente)
@@ -54,14 +39,12 @@ app.use("/vendedor",pegarVendedor)
 app.use("/historico",historicoRoute)
 app.use("/gestao",gestaoRoute)
 
-=======
 // Define as rotas da aplicação
 app.use("/eventos", eventoRoute); // Rota para eventos relacionados a email
 iniciarCron(); // Inicia tarefas agendadas (jobs)
 app.use("/funilVendas", funilVendasRoute); // Rotas para funil de vendas
 app.use("/calendario", calendarioRoute); // Rotas do calendário
 app.use("/clientes", cadastroCliente); // Rotas para clientes
->>>>>>> parent of 936c2c9 (Revert "Merge branch 'desenvolvimento' into feat/addContatoAoCriarCliente")
 
 // Rota raiz para teste rápido da API
 app.get("/", (req, res) => {
