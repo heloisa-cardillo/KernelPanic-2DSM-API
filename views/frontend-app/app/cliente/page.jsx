@@ -13,7 +13,7 @@ export default function Page() {
   // 1. Novos estados para os novos campos
   const [tipoContato, setTipoContato] = useState('email'); // 'email' como padrão
   const [valorContato, setValorContato] = useState('');
-  const [clienteID, setClienteID] = useState(1);
+  const [ClienteId, setClienteId] = useState(1);
 
   const [tipoContatoAdd, setTipoContatoAdd] = useState('email');
   const [valorContatoAdd, setValorContatoAdd] = useState('');
@@ -80,8 +80,9 @@ export default function Page() {
       setMessage('');
 
       const formDataAdd = {
-        tipo_contatoAdd: tipoContatoAdd,
-        valor_contatoAdd: valorContatoAdd
+        tipo_contato: tipoContatoAdd,
+        valor_contato: valorContatoAdd,
+        client_id: ClienteId
       }
 
       console.log('Enviando os seeguintes dados:', formDataAdd)
@@ -130,7 +131,7 @@ export default function Page() {
   return (
     <div className={styles.conteudo}>
       <div className={styles.container}>
-        <h1>Cadastro de Oportunidade</h1>
+        <h1>Cadastro de Clientes</h1>
         <form onSubmit={handleSubmit} className={styles.formulario}>
           {/* Campos existentes */}
           <label htmlFor="nome" className={styles.textLabel}>Nome:</label>
@@ -204,10 +205,10 @@ export default function Page() {
         </form>
       </div>
       <div className={styles.container}>
-        <h1> Teste </h1>
+        <h1> Adicionar Contato </h1>
         <form onSubmit={handleSubmitAdd} className={styles.formulario}>
           <label htmlFor="cliente" className={styles.textLabel}>Cliente:</label>
-          <select className={styles.input1} id="cliente" name="cliente" value={funilId} onChange={(e) => setClienteId(Number(e.target.value))}>
+          <select className={styles.input1} id="cliente" name="cliente" value={ClienteId} onChange={(e) => setClienteId(Number(e.target.value))}>
             <option value={1}>ABC da Embraer</option>
             <option value={2}>Carlinhos Fotoshop</option>
             <option value={3}>Mercearia do Seu Dimas</option>
