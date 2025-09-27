@@ -3,7 +3,6 @@
   grid-area: aside;
   background-color: #ffffff;
   color: #9197B3;
-  font-family: "Poppins", sans-serif;
   font-size: 14px;
   display: flex;
   flex-direction: column;
@@ -35,11 +34,9 @@
   border-color: transparent;
   color: #9197B3;
   margin-left: 10px;
-  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 500;
   text-align: left;
-  transition: background-color 0.2s, color 0.2s;
 }
 
 
@@ -51,16 +48,6 @@
   width: calc(100% - 20px);
 }
 
-
-.menuItemAtivo h3 {
-  color: #fff;
-}
-
-
-
-.menuItem:hover h3  {
-  color: #1f4af4;
-}
 
 .menuItem:hover {
   background-color: #e6f0ff;
@@ -87,4 +74,9 @@
   min-height: 50px;       
   font-size: 14px;         
   box-sizing: border-box;
+}
+
+.menuItemAtivo:hover{
+  background-color: #1f4af4;
+  color: #fff;
 }
