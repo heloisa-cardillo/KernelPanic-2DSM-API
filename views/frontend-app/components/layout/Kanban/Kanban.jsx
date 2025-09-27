@@ -13,8 +13,6 @@ export default function CicloDeVendas() {
         colunaQuatro: { manutencao: [], naoVendas: [] },
     });
 
-    const [mostrarHistorico, setMostrarHistorico] = useState(false);
-
     const cardToFaseID = {
         prospeccao: 1,
         inicial: 2,
@@ -180,9 +178,7 @@ export default function CicloDeVendas() {
 
     return (
         <div className={styles.container}>
-            <div>
-                <h1 className={styles.tittle}>Funil de Vendas</h1>
-            </div>
+            <h1 className={styles.tittle}>Funil de Vendas</h1>
 
             <div className={styles.kanban}>
                 <div className={styles.column}>
@@ -202,60 +198,9 @@ export default function CicloDeVendas() {
                     {renderCard("Não Vendas", "colunaQuatro", "naoVendas")}
                 </div>
             </div>
-            <button
-                className={styles.buttonHistorico}
-                onClick={() => setMostrarHistorico(true)}
-            >
-                Ver histórico de Movimentações
-            </button>
             <div>
                 <Funil cards={cards} />
             </div>
-
-            {mostrarHistorico && (
-                <div
-                    className={styles.modalOverlay}
-                    onClick={() => setMostrarHistorico(false)}
-                >
-                    <div
-                        className={styles.modalContent}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <h2>📜 Histórico de Movimentações</h2>
-                        <table className={styles.tableHistorico} border="1" >
-                            <thead>
-                                <tr>
-                                    <th>Nome Cliente</th>
-                                    <th>Data movimentação</th>
-                                    <th>Estágio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>João Silva</td>
-                                    <td>(11) 91234-5678</td>
-                                    <td>joao@email.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Maria Oliveira</td>
-                                    <td>(21) 99876-5432</td>
-                                    <td>maria@email.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Carlos Souza</td>
-                                    <td>(31) 91111-2222</td>
-                                    <td>carlos@email.com</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div>
-                            <button className={styles.buttonHistoricoOver} onClick={() => setMostrarHistorico(false)}>
-                                Fechar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

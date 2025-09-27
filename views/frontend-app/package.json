@@ -8,9 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@fullcalendar/interaction": "^6.1.19",
-    "@fullcalendar/react": "^6.1.19",
-    "@fullcalendar/timegrid": "^6.1.19",
     "axios": "^1.12.2",
     "chart.js": "^4.5.0",
     "fullcalendar": "^6.1.19",
