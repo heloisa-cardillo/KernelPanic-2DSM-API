@@ -13,6 +13,7 @@ export default function Page() {
   // 1. Novos estados para os novos campos
   const [tipoContato, setTipoContato] = useState('email'); // 'email' como padrão
   const [valorContato, setValorContato] = useState('');
+  const [clienteID, setClienteID] = useState(1);
 
   const [tipoContatoAdd, setTipoContatoAdd] = useState('email');
   const [valorContatoAdd, setValorContatoAdd] = useState('');
@@ -37,6 +38,7 @@ export default function Page() {
     };
 
     console.log('Enviando os seguintes dados:', formData);
+
 
     try {
       const response = await fetch('http://localhost:5000/clientes', {
@@ -71,6 +73,48 @@ export default function Page() {
       setIsLoading(false);
     }
   };
+
+      const handleSubmitAdd = async (event) => {
+      event.preventDefault();
+      setIsLoading(true);
+      setMessage('');
+
+      const formDataAdd = {
+        tipo_contatoAdd: tipoContatoAdd,
+        valor_contatoAdd: valorContatoAdd
+      }
+
+      console.log('Enviando os seeguintes dados:', formDataAdd)
+
+      try {
+      const response = await fetch('http://localhost:5000/clientes/contato', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataAdd),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      console.log('Resposta do servidor:', result);
+      setMessage('Adição realizado com sucesso!');
+
+      setTipoContato('email');
+      setValorContato('');
+      setValorContatoAdd('');
+
+    } catch (error) {
+      console.error('Falha ao enviar dados:', error);
+      setMessage(`Erro ao cadastrar: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+    }
+
   
   // 3. Função para lidar com a mudança do tipo de contato e limpar o valor
   const handleTipoContatoChange = (event) => {
@@ -161,9 +205,9 @@ export default function Page() {
       </div>
       <div className={styles.container}>
         <h1> Teste </h1>
-        <form onSubmit={handleSubmit} className={styles.formulario}>
-          <label htmlFor="funil" className={styles.textLabel}>Cliente:</label>
-          <select className={styles.input1} id="funil" name="funil" value={funilId} onChange={(e) => setFunilId(Number(e.target.value))}>
+        <form onSubmit={handleSubmitAdd} className={styles.formulario}>
+          <label htmlFor="cliente" className={styles.textLabel}>Cliente:</label>
+          <select className={styles.input1} id="cliente" name="cliente" value={funilId} onChange={(e) => setClienteId(Number(e.target.value))}>
             <option value={1}>ABC da Embraer</option>
             <option value={2}>Carlinhos Fotoshop</option>
             <option value={3}>Mercearia do Seu Dimas</option>
@@ -203,7 +247,7 @@ export default function Page() {
               />
             </div>
         )} 
-                  <button type="submit" className={styles.botao} disabled={isLoading}>
+            <button type="submit" className={styles.botao} disabled={isLoading}>
             {isLoading ? 'Enviando...' : 'Enviar Formulário'}
           </button>
 
