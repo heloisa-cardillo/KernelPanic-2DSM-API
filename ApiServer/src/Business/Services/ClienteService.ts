@@ -84,6 +84,22 @@ import { FunilVendas } from "../../DAL/Models/FunilVendas";
             this.clienteContatoRepo.save(cliente_contato)
             return this.clienteRepo.save(cliente);
         }
+        async atribuirContato(data:{
+            tipo_contato: string;//contato_clinte
+            valor_contato: string;//tb 
+            client_id: number;}): Promise<ContatoCliente> {
+            
+            // console.log("Cliente salvo com o ID:",novoClienteId)
+            const clienteConect = await this.clienteRepo.findOneBy({
+                cliente_ID: data.client_id,
+            });
+            const cliente_contato = this.clienteContatoRepo.create({
+                tipo_contato: data.tipo_contato,
+                valor_contato: data.valor_contato,
+                cliente:clienteConect!
+            });
+            return this.clienteContatoRepo.save(cliente_contato);
+        }
 
         async editarFunilCliente(
             id_cliente: number,
