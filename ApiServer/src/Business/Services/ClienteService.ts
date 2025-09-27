@@ -73,6 +73,7 @@ export class ClienteService {
       endereco: data.endereco,
       funcionario,
       funil,
+      segmentoAtuacao: ""
     });
 
     // Salva cliente

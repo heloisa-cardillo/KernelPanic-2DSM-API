@@ -35,6 +35,7 @@ export default function Page() {
       funil_id: funilId,
       tipo_contato: tipoContato,
       valor_contato: valorContato
+      
     };
 
     console.log('Enviando os seguintes dados:', formData);
