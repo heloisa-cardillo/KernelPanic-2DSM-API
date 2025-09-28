@@ -1,8 +1,8 @@
 import { DataSource } from "typeorm";
 import { join } from "path";
 
-// import dotenv from "dotenv";
-// dotenv.config(); 
+import dotenv from "dotenv";
+dotenv.config(); 
 // (Descomente para carregar variáveis de ambiente do arquivo .env)
 
 const host = process.env.DB_HOST || "localhost"; // Host do banco (default localhost)
@@ -11,27 +11,24 @@ const username = process.env.DB_USERNAME || "root"; // Usuário do banco (defaul
 const database = process.env.DB_DB || "api2dsm"; // Nome do banco (default 'newe_database')
 
 export const AppDataSource = new DataSource({
-  type: "mysql", // Tipo do banco de dados
+  type: "mysql",
   host,
-  port: 3306, // Porta padrão MySQL
+  port: 3306,
   username,
   password,
   database,
-  // Aqui definimos onde ficam os arquivos das entidades (models) compilados ou em TS
-  // Isso ajuda evitar problemas de importação circular em runtime
+
   entities: [
     join(__dirname, "./Models/*.{ts,js}")
   ],
-  // Arquivos de migrations para controlar versões do schema
   migrations: [
     join(__dirname, "./Migrations/*.{ts,js}")
   ],
-  synchronize: false, // Nunca use true em produção! Só sincroniza schema automaticamente
-  // Arquivos de subscribers para eventos do TypeORM
+  synchronize: false,
   subscribers: [
     join(__dirname, "./Subscribers/*.{ts,js}")
   ],
-  logging: true, // Ativa logs detalhados de queries e operações
+  logging: true,
 });
 
 // Comandos úteis:

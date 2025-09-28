@@ -12,6 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  title: "NEWE Logística",
+  description: "Painel de logística da NEWE",
+  icons: {
+    icon: "/favicon.ico", 
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
