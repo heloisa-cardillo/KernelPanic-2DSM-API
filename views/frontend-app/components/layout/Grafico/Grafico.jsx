@@ -31,6 +31,18 @@ ChartJS.register(
 );
 
 export default function GraficoPage() {
+  // Paleta de cores do funil
+  const coresFunil = [
+    "#2A49EB",
+    "#3366F0", 
+    "#4686F5",
+    "#5AA6FA",
+    "#6DC6FF",
+    "#87DBFF",
+    "#9EEFFF",
+    "#B6FFFF"
+  ];
+
   // Variáveis de estado para o filtro e para todos os gráficos
   const [filtroTempo, setFiltroTempo] = useState('mes');
   const [vendasDados, setVendasDados] = useState({ labels: [], datasets: [] });
@@ -56,7 +68,7 @@ export default function GraficoPage() {
         default: break;
       }
       setVendasDados({
-        labels: vendasLabels, datasets: [{ label: vendasTitulo, data: vendasData, backgroundColor: 'rgba(75, 192, 192, 0.6)' }]
+        labels: vendasLabels, datasets: [{ label: vendasTitulo, data: vendasData, backgroundColor: coresFunil[0] + '99' }]
       });
 
       // Lógica para Interações
@@ -73,7 +85,7 @@ export default function GraficoPage() {
         default: break;
       }
       setInteracoesDados({
-        labels: interacoesLabels, datasets: [{ label: interacoesTitulo, data: interacoesData, borderColor: '#36A2EB', backgroundColor: '#9BD0F5' }]
+        labels: interacoesLabels, datasets: [{ label: interacoesTitulo, data: interacoesData, borderColor: coresFunil[1], backgroundColor: coresFunil[6] }]
       });
 
       // Lógica para Clientes por Cidade
@@ -82,8 +94,8 @@ export default function GraficoPage() {
         datasets: [{
           label: 'Clientes por Cidade',
           data: [300, 150, 100, 80],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+          backgroundColor: [coresFunil[0], coresFunil[2], coresFunil[4], coresFunil[6]],
+          hoverBackgroundColor: [coresFunil[0], coresFunil[2], coresFunil[4], coresFunil[6]]
         }]
       });
 
@@ -93,8 +105,8 @@ export default function GraficoPage() {
         datasets: [{
           label: 'Clientes Cadastrados',
           data: [10, 25, 40, 55, 70, 85, 45, 65, 34 ,65, 65, 34],
-          borderColor: '#4BC0C0',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: coresFunil[2],
+          backgroundColor: coresFunil[2] + '33',
           fill: true
         }]
       });
@@ -156,6 +168,18 @@ export default function GraficoPage() {
         <div className='grafico-card'>
           <h2>Clientes Cadastrados</h2>
           <Line data={clientesCadastradosDados} options={{...opcoesGrafico, plugins: { title: { display: true, text: 'Clientes Cadastrados'}}}} />
+        </div>
+      </div>
+
+      <div className='relatorios-section'>
+        <h2>Relatórios Disponíveis</h2>
+        <div className='relatorios-grid'>
+          <button className='relatorio-btn'>Interações</button>
+          <button className='relatorio-btn'>Vendas Efetivadas</button>
+          <button className='relatorio-btn'>Clientes Cadastrados</button>
+          <button className='relatorio-btn'>Clientes por Cidade</button>
+          <button className='relatorio-btn'>Clientes por Segmento</button>
+          <button className='relatorio-btn'>Relatório Completo</button>
         </div>
       </div>
     </div>
