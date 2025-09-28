@@ -4,21 +4,19 @@ import React, { useState } from 'react'
 import styles from './App.module.css'
 
 export default function Page() {
-  // Estados do formulário
+
   const [nome, setNome] = useState('');
   const [endereco, setEndereco] = useState('');
   const [funcionarioId, setFuncionarioId] = useState(1);
-  const [funilId, setFunilId] = useState(5); // Valor inicial atualizado
+  const [funilId, setFunilId] = useState(5); 
   
-  // 1. Novos estados para os novos campos
-  const [tipoContato, setTipoContato] = useState('email'); // 'email' como padrão
+  const [tipoContato, setTipoContato] = useState('email'); 
   const [valorContato, setValorContato] = useState('');
   const [ClienteId, setClienteId] = useState(1);
 
   const [tipoContatoAdd, setTipoContatoAdd] = useState('email');
   const [valorContatoAdd, setValorContatoAdd] = useState('');
 
-  // Estados de feedback da requisição
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -27,11 +25,10 @@ export default function Page() {
     setIsLoading(true);
     setMessage('');
 
-    // 2. O objeto formData agora inclui os novos campos
     const formData = {
       nome,
       endereco,
-      "funcionario_id:": funcionarioId, // Mantendo a chave com ':' conforme o exemplo
+      "funcionario_id:": funcionarioId, 
       funil_id: funilId,
       tipo_contato: tipoContato,
       valor_contato: valorContato
@@ -58,7 +55,7 @@ export default function Page() {
       console.log('Resposta do servidor:', result);
       setMessage('Cadastro realizado com sucesso!');
 
-      // Limpar todos os campos
+
       setNome('');
       setEndereco('');
       setFuncionarioId(1);
@@ -117,16 +114,14 @@ export default function Page() {
     }
     }
 
-  
-  // 3. Função para lidar com a mudança do tipo de contato e limpar o valor
   const handleTipoContatoChange = (event) => {
     setTipoContato(event.target.value);
-    setValorContato(''); // Limpa o campo de valor ao trocar o tipo
+    setValorContato(''); 
   };
 
   const handleTipoContatoAddChange = (event) => {
     setTipoContatoAdd(event.target.value);
-    setValorContatoAdd(''); // Limpa o campo de valor ao trocar o tipo adicional
+    setValorContatoAdd(''); 
   };
 
   return (
@@ -160,24 +155,39 @@ export default function Page() {
             <option value={8}>Venda</option>
           </select>
           
-          {/* 4. Novos campos para tipo e valor de contato */}
           <label className={styles.textLabel}>Tipo de Contato:</label>
           <div className={styles.radioGroup}>
-            <label>
-              <input type="radio" value="email" checked={tipoContato === 'email'} onChange={handleTipoContatoChange} />
-              E-mail
-            </label>
-            <label>
-              <input type="radio" value="telefone" checked={tipoContato === 'telefone'} onChange={handleTipoContatoChange} />
-              Telefone
-            </label>
-            <label>
-              <input type="radio" value="whatsapp" checked={tipoContato === 'whatsapp'} onChange={handleTipoContatoChange} />
-              WhatsApp
-            </label>
+            <input
+              type="radio"
+              id="email1"
+              name="tipoContato"   
+              value="email"
+              checked={tipoContato === 'email'}
+              onChange={handleTipoContatoChange}
+            />
+            <label htmlFor="email1">E-mail</label>
+
+            <input
+              type="radio"
+              id="telefone1"
+              name="tipoContato"
+              value="telefone"
+              checked={tipoContato === 'telefone'}
+              onChange={handleTipoContatoChange}
+            />
+            <label htmlFor="telefone1">Telefone</label>
+
+            <input
+              type="radio"
+              id="whatsapp1"
+              name="tipoContato"
+              value="whatsapp"
+              checked={tipoContato === 'whatsapp'}
+              onChange={handleTipoContatoChange}
+            />
+            <label htmlFor="whatsapp1">WhatsApp</label>
           </div>
 
-          {/* 5. Renderização condicional do campo de valor */}
           {tipoContato && (
             <div>
               <label htmlFor="valor_contato" className={styles.textLabel}>
@@ -217,19 +227,35 @@ export default function Page() {
           </select>
           <label className={styles.textLabel}>Tipo de Contato:</label>
         <div className={styles.radioGroup}>
-          <label>
-            <input type="radio" value="email" checked={tipoContatoAdd === 'email'} onChange={handleTipoContatoAddChange} />
-            E-mail
-          </label>
-          <label>
-            <input type="radio" value="telefone" checked={tipoContatoAdd === 'telefone'} onChange={handleTipoContatoAddChange} />
-            Telefone
-          </label>
-          <label>
-            <input type="radio" value="whatsapp" checked={tipoContatoAdd === 'whatsapp'} onChange={handleTipoContatoAddChange} />
-            WhatsApp
-          </label>
-        </div>
+         <input
+          type="radio"
+          id="email"
+          name="tipoContatoAdd"   
+          value="email"
+          checked={tipoContatoAdd === 'email'}
+          onChange={handleTipoContatoAddChange}
+        />
+        <label htmlFor="email">E-mail</label>
+
+        <input
+          type="radio"
+          id="telefone"
+          name="tipoContatoAdd"   
+          value="telefone"
+          checked={tipoContatoAdd === 'telefone'}
+          onChange={handleTipoContatoAddChange}
+        />
+        <label htmlFor="telefone">Telefone</label>
+
+        <input
+          type="radio"
+          id="whatsapp"
+          value="whatsapp"
+          checked={tipoContatoAdd === 'whatsapp'}
+          onChange={handleTipoContatoAddChange}
+        />
+        <label htmlFor="whatsapp">WhatsApp</label>
+       </div>
         {tipoContatoAdd && (
             <div>
               <label htmlFor="valor_contato" className={styles.textLabel}>
