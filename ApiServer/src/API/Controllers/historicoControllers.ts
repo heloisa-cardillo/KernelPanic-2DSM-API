@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { HistoricoService } from "../../Business/Services/historicoService";
+import { HistoricoFunilService } from "../../Business/Services/HistoricoFunilService";
 
 const Service = new HistoricoService();
 
@@ -39,3 +40,20 @@ export const getInteracoesID = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Erro ao buscar interação" });
     }
 };
+
+export const getMovimentacoes = async(req: Request, res: Response) => {
+    try{
+        const historicoFunilRepo = new HistoricoFunilService()
+        const historico = await historicoFunilRepo.listarHistorico();
+
+        if (!historico) {
+            return res.status(404).json({ message: "Interação não encontrada" });
+        }
+
+        return res.json(historico);
+        
+    }catch(err){
+        console.error
+        return res.status(500).json({ message: "Erro ao buscar interação" });
+    }
+}

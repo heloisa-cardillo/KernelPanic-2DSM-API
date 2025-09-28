@@ -13,6 +13,7 @@ export default function CicloDeVendas() {
         colunaQuatro: { manutencao: [], naoVendas: [] },
     });
 
+    const [historicoFunil, setHistoricoFunil] = useState([]);
     const [mostrarHistorico, setMostrarHistorico] = useState(false);
 
     const cardToFaseID = {
@@ -25,6 +26,26 @@ export default function CicloDeVendas() {
         vendas: 7,
         naoVendas: 8,
     };
+
+    const fetchHistorico = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:5000/historico/movimentacoes"
+            );
+            setHistoricoFunil(response.data.message || response.data);
+        } catch (error) {
+            console.error("Erro ao buscar histórico", error);
+        }
+    };
+
+    useEffect(() => {
+    if (mostrarHistorico) {
+        const fetchData = async () => {
+            await fetchHistorico();
+        };
+        fetchData();
+    }
+}, [mostrarHistorico]);
 
     const fetchGetClientes = async () => {
         try {
@@ -222,7 +243,7 @@ export default function CicloDeVendas() {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h2>📜 Histórico de Movimentações</h2>
-                        <table className={styles.tableHistorico} border="1" >
+                        <table className={styles.tableHistorico} border="1">
                             <thead>
                                 <tr>
                                     <th>Nome Cliente</th>
@@ -231,25 +252,44 @@ export default function CicloDeVendas() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>João Silva</td>
-                                    <td>(11) 91234-5678</td>
-                                    <td>joao@email.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Maria Oliveira</td>
-                                    <td>(21) 99876-5432</td>
-                                    <td>maria@email.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Carlos Souza</td>
-                                    <td>(31) 91111-2222</td>
-                                    <td>carlos@email.com</td>
-                                </tr>
+                                {historicoFunil.length === 0 && (
+                                    <tr>
+                                        <td
+                                            colSpan="3"
+                                            style={{ textAlign: "center" }}
+                                        >
+                                            Nenhum histórico encontrado.
+                                        </td>
+                                    </tr>
+                                )}
+
+                                {historicoFunil
+                                    .slice()
+                                    .reverse()
+                                    .map((item) => (
+                                        <tr key={item.historico_ID}>
+                                            <td>{item.cliente?.nome || "—"}</td>
+                                            <td>
+                                                {new Date(
+                                                    item.data_movimentacao
+                                                ).toLocaleDateString()}
+                                            </td>
+                                            <td>
+                                                {item.funil?.estagio_nome ||
+                                                    "—"}
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
+
                         <div>
-                            <button className={styles.buttonHistoricoOver} onClick={() => setMostrarHistorico(false)}>
+                            <button
+                                className={styles.buttonHistoricoOver}
+                                onClick={() => {
+                                    setMostrarHistorico(false);
+                                }}
+                            >
                                 Fechar
                             </button>
                         </div>
