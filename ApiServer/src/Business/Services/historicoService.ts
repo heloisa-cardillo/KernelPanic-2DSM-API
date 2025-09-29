@@ -14,7 +14,11 @@ export class HistoricoService {
         direcao: 'ASC' | 'DESC' = 'DESC'
     ): Promise<Vendas[]> {
         const opcoesDeBusca: any = {
-            relations: ['cliente', 'funcionario'], 
+            relations: [
+    'cliente',
+    'cliente.interacoes',  
+    'funcionario'
+  ],
             order: {
                 [ordenarPor]: direcao
             }

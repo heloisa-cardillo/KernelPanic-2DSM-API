@@ -5,6 +5,7 @@ import { ILike } from "typeorm";
 
 export class FuncionarioService {
     private vendedorRepo: Repository<Funcionario>;
+    
 
     constructor() {
         this.vendedorRepo = AppDataSource.getRepository(Funcionario);

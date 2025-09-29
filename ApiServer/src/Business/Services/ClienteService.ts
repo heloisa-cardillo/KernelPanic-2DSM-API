@@ -14,7 +14,7 @@ export class ClienteService {
     this.clienteContatoRepo = AppDataSource.getRepository(ContatoCliente);
   }
 
-  // ===== Lista todos os clientes com suas relações =====
+  
   async listarTodos(): Promise<Cliente[]> {
     return this.clienteRepo.find({
       relations: [
@@ -29,7 +29,7 @@ export class ClienteService {
     });
   }
 
-  // ===== Busca cliente por ID com suas relações =====
+  
   async buscarPorID(id: number): Promise<Cliente | null> {
     return this.clienteRepo.findOne({
       where: { cliente_ID: id },
@@ -45,53 +45,49 @@ export class ClienteService {
     });
   }
 
-  // ===== Cria cliente com contato inicial =====
   async criarCliente(data: {
-    nome: string;
-    endereco: string;
-    funcionario_ID: number;
-    funil_ID: number;
-    tipo_contato: string;
-    valor_contato: string;
-  }): Promise<Cliente> {
-    const funcionarioRepo = AppDataSource.getRepository(Funcionario);
-    const funilRepo = AppDataSource.getRepository(FunilVendas);
+  nome: string;
+  endereco: string;
+  segmento: string; // <- trocado de "area" para "segmento"
+  funcionario_ID: number;
+  funil_ID: number;
+  tipo_contato: string;
+  valor_contato: string;
+}): Promise<Cliente> {
+  const funcionarioRepo = AppDataSource.getRepository(Funcionario);
+  const funilRepo = AppDataSource.getRepository(FunilVendas);
 
-    const funcionario = await funcionarioRepo.findOneBy({
-      funcionario_ID: data.funcionario_ID,
-    });
-    if (!funcionario) throw new Error("Funcionario não encontrado!");
+  const funcionario = await funcionarioRepo.findOneBy({
+    funcionario_ID: data.funcionario_ID,
+  });
+  if (!funcionario) throw new Error("Funcionário não encontrado!");
 
-    const funil = await funilRepo.findOneBy({
-      funil_ID: data.funil_ID,
-    });
-    if (!funil) throw new Error("Funil não encontrado!");
+  const funil = await funilRepo.findOneBy({
+    funil_ID: data.funil_ID,
+  });
+  if (!funil) throw new Error("Funil não encontrado!");
 
-    // Cria cliente
-    const novoCliente = this.clienteRepo.create({
-      nome: data.nome,
-      endereco: data.endereco,
-      funcionario,
-      funil,
-      segmentoAtuacao: ""
-    });
+  const novoCliente = this.clienteRepo.create({
+    nome: data.nome,
+    endereco: data.endereco,
+    funcionario,
+    funil,
+    segmentoAtuacao: data.segmento || "Não informado", 
+  });
 
-    // Salva cliente
-    const clienteSalvo = await this.clienteRepo.save(novoCliente);
+  const clienteSalvo = await this.clienteRepo.save(novoCliente);
 
-    // Cria contato associado
-    const clienteContato = this.clienteContatoRepo.create({
-      tipo_contato: data.tipo_contato,
-      valor_contato: data.valor_contato,
-      cliente: clienteSalvo,
-    });
+  const clienteContato = this.clienteContatoRepo.create({
+    tipo_contato: data.tipo_contato,
+    valor_contato: data.valor_contato,
+    cliente: clienteSalvo,
+  });
 
-    await this.clienteContatoRepo.save(clienteContato);
+  await this.clienteContatoRepo.save(clienteContato);
 
-    return clienteSalvo;
-  }
+  return clienteSalvo;
+}
 
-  // ===== Atribui um contato a um cliente existente =====
   async atribuirContato(data: {
     tipo_contato: string;
     valor_contato: string;
@@ -111,7 +107,6 @@ export class ClienteService {
     return await this.clienteContatoRepo.save(clienteContato);
   }
 
-  // ===== Atualiza o funil do cliente =====
   async editarFunilCliente(
     id_cliente: number,
     novo_funil_id: number

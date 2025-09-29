@@ -23,6 +23,8 @@ function App() {
             const vendas = response.data;
 
             const mapaClientes = vendas.map((venda) => {
+                const interacoes = venda.cliente?.interacoes || [];
+                const ultimaInteracaoObj = interacoes[interacoes.length - 1];
                 return {
                     id: venda.funcionario?.funcionario_ID || null,
                     cliente: venda.cliente.nome || "",
@@ -30,7 +32,9 @@ function App() {
                     segmento: venda.funcionario.cargo || "",
                     status: venda.status || "",
                     ultimaInteracao: venda.data_venda,
-                    report: venda.report || "",
+                    relatorio_interacao:
+                        ultimaInteracaoObj?.relatorio_interacao ||
+                        "Sem relatório",
                 };
             });
             setClients(mapaClientes);
@@ -152,7 +156,7 @@ function App() {
                                     </p>
                                     <p>
                                         <strong>Relatório:</strong>{" "}
-                                        {clienteSelecionado.report}
+                                        {clienteSelecionado.relatorio_interacao}
                                     </p>
                                 </div>
                             ) : (

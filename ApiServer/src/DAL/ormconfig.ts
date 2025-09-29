@@ -3,12 +3,11 @@ import { join } from "path";
 
 import dotenv from "dotenv";
 dotenv.config(); 
-// (Descomente para carregar variáveis de ambiente do arquivo .env)
 
-const host = process.env.DB_HOST || "localhost"; // Host do banco (default localhost)
-const password = process.env.DB_PASSWORD || "Tomilho@0"; // Senha do banco (default 'fatec')
-const username = process.env.DB_USERNAME || "root"; // Usuário do banco (default 'root')
-const database = process.env.DB_DB || "api2dsm"; // Nome do banco (default 'newe_database')
+const host = process.env.DB_HOST || "localhost"; 
+const password = process.env.DB_PASSWORD || "fatec"; 
+const username = process.env.DB_USERNAME || "root"; 
+const database = process.env.DB_DB || "newe_database"; 
 
 export const AppDataSource = new DataSource({
   type: "mysql",

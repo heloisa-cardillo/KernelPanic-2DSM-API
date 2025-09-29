@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getVendas, getVendaById, UpdateVenda } from "../Controllers/gestaoControllers";
+import {  getVendaById, UpdateVenda } from "../Controllers/gestaoControllers";
+import { getClientes } from "../Controllers/funilVendasControllers";
 
 const router = Router();
 
-router.get("/",getVendas)
+router.get("/",getClientes)
 
 router.get("/:id",getVendaById)
 

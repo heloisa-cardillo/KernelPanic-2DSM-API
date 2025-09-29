@@ -4,18 +4,15 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import path from "path";
 
-// ===== Configura dotenv para carregar variáveis do .env na raiz do projeto =====
 dotenv.config({ path: path.resolve(__dirname, "../../../../.env") });
 
 const eventoRepo = AppDataSource.getRepository(Evento);
 
-// ===== Cria e salva um novo evento no banco =====
 export async function criarEvento(email: string, titulo: string, dataHora: Date, categoria: string) {
   const evento = eventoRepo.create({ email, titulo, dataHora, categoria });
   return await eventoRepo.save(evento);
 }
 
-// ===== Envia email de lembrete do evento =====
 export async function enviarEmail(email: string, titulo: string) {
   try {
     const transporter = nodemailer.createTransport({

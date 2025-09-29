@@ -1,12 +1,8 @@
 import { Request, Response } from "express";
 import { ClienteService } from "../../Business/Services/ClienteService";
+import { GestaoService } from "../../Business/Services/gestaoService";
 
-// ===== Retorna status simples para checar funcionamento =====
-export const getHistoricoFunil = (req: Request, res: Response) => {
-  res.send("Ta funcionando");
-};
 
-// ===== Atualiza funil do cliente =====
 export const putFunilCliente = (req: Request, res: Response) => {
   const { id_cliente, novo_funil_id } = req.body;
   const clienteService = new ClienteService();
@@ -20,7 +16,6 @@ export const putFunilCliente = (req: Request, res: Response) => {
   }
 };
 
-// ===== Lista todos os clientes =====
 export const getClientes = async (req: Request, res: Response) => {
   const clienteRepo = new ClienteService();
 
@@ -33,14 +28,13 @@ export const getClientes = async (req: Request, res: Response) => {
   }
 };
 
-// ===== Move cliente para novo estágio no funil =====
 export const postMoverCliente = async (req: Request, res: Response) => {
-  const clienteRepo = new ClienteService();
+  const gestaoService = new GestaoService();
   const body = req.body;
   console.log(body);
 
   try {
-    const cliente = await clienteRepo.editarFunilCliente(body.cliente_id, body.novo_estagio);
+    const cliente = await gestaoService.moverClienteParaNovoFunil(body.cliente_id, body.novo_estagio);
 
     if (!cliente) {
       return res.status(404).send({ message: "Cliente não encontrado ou não atualizado." });
@@ -55,3 +49,4 @@ export const postMoverCliente = async (req: Request, res: Response) => {
     });
   }
 };
+

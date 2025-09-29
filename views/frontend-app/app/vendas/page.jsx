@@ -56,38 +56,41 @@ export default function Page() {
   const [vendedorSelecionado, setVendedorSelecionado] = useState('');
 
   const fetchVendedores = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/vendedor');
-      let vendedoresBackend = response.data;
+  try {
+    const response = await axios.get('http://localhost:5000/vendedor');
+    const vendas = response.data;
 
-      if (!Array.isArray(vendedoresBackend)) {
-        vendedoresBackend = [vendedoresBackend];
+    const mapa = new Map();
+
+    vendas.forEach((venda) => {
+      const id = venda.funcionario.funcionario_ID;
+      const nome = venda.funcionario.nome;
+      const valorVenda = parseFloat(venda.valor_total || '0');
+      const status = venda.status;
+
+      if (!mapa.has(id)) {
+        mapa.set(id, {
+          nome,
+          visitas: 0,
+          vendas: 0,
+          faturamento: 0,
+        });
       }
 
-      const mapa = vendedoresBackend.map((vendedor) => {
-        const visitas = vendedor.interacoes ? vendedor.interacoes.length : 0;
-        const vendasFechadas = vendedor.vendas
-          ? vendedor.vendas.filter((venda) => venda.status === 'Fechada')
-          : [];
+      const vendedor = mapa.get(id);
+      vendedor.visitas += 1;
 
-        const faturamento = vendasFechadas.reduce(
-          (total, v) => total + Number(v.valor_total || 0),
-          0
-        );
+      if (status === 'Fechada') {
+        vendedor.vendas += 1;
+        vendedor.faturamento += valorVenda;
+      }
+    });
 
-        return {
-          nome: vendedor.nome,
-          visitas,
-          vendas: vendasFechadas.length,
-          faturamento,
-        };
-      });
-
-      setVendedores(mapa);
-    } catch (err) {
-      console.error('Erro ao carregar vendedores:', err);
-    }
-  };
+    setVendedores(Array.from(mapa.values()));
+  } catch (err) {
+    console.error('Erro ao carregar vendedores:', err);
+  }
+};
 
   useEffect(() => {
     fetchVendedores();

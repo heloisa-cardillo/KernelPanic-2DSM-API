@@ -67,7 +67,7 @@
 }
 
 .tabela-container {
-  max-height: 400px; 
+  max-height: 80%; 
   overflow-y: auto; 
   margin-top: 20px;
 }

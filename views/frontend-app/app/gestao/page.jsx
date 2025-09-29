@@ -12,34 +12,37 @@ function App() {
   const [selectedClient, setSelectedClient] = useState(null);
 
   const fetchClientes = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/gestao');
-      const vendas = response.data;
+  try {
+    const response = await axios.get('http://localhost:5000/gestao');
+    const clientes = response.data.message; 
 
-      const mapaClientes = vendas.map((venda) => {
-        const contatos = venda.cliente.contatos?.map(c => `${c.tipo_contato}: ${c.valor_contato}`).join(' | ') || '';
-        const primeiroContato = venda.cliente.contatos?.[0] || {};
+    const mapaClientes = clientes.map((cliente) => {
+      const contatos = cliente.contatos?.map(c => `${c.tipo_contato}: ${c.valor_contato}`).join(' | ') || '';
+      const primeiroContato = cliente.contatos?.[0] || {};
 
-        return {
-          id: venda.cliente.cliente_ID,
-          cliente: venda.cliente.nome || '',
-          endereco: venda.cliente.endereco || '',
-          segmento: venda.cliente.segmentoAtuacao || '',
-          status: venda.status || '',
-          contatos,
-          tipoContato: primeiroContato.tipo_contato || 'telefone',
-          contatoValor: primeiroContato.valor_contato || '',
-          departamento: venda.funcionario.cargo || '',
-          departamentoId: venda.funcionario?.funcionario_ID || null,
-          ultimaInteracao: venda.data_venda,
-        };
-      });
+      const ultimaVenda = cliente.vendas?.[cliente.vendas.length - 1];
+      const ultimaInteracao = cliente.interacoes?.[cliente.interacoes.length - 1];
 
-      setClients(mapaClientes);
-    } catch (error) {
-      console.error('Erro ao buscar vendas:', error);
-    }
-  };
+      return {
+        id: cliente.cliente_ID,
+        cliente: cliente.nome || '',
+        endereco: cliente.endereco || '',
+        segmento: cliente.segmentoAtuacao || '',
+        status: ultimaVenda?.status || 'Sem venda',
+        contatos,
+        tipoContato: primeiroContato.tipo_contato || 'telefone',
+        contatoValor: primeiroContato.valor_contato || '',
+        departamento: cliente.funcionario?.cargo || '',
+        departamentoId: cliente.funcionario?.funcionario_ID || null,
+        ultimaInteracao: ultimaInteracao?.data_interacao || ultimaVenda?.data_venda || 'Sem interação',
+      };
+    });
+
+    setClients(mapaClientes);
+  } catch (error) {
+    console.error('Erro ao buscar clientes:', error);
+  }
+};
 
   useEffect(() => {
     fetchClientes();

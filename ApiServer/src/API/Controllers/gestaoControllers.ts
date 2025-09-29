@@ -1,15 +1,16 @@
 import { Request, Response } from "express"
 import { GestaoService } from "../../Business/Services/gestaoService";
+import { ClienteService } from "../../Business/Services/ClienteService";
 
 const Service = new GestaoService()
+const Clientes = new ClienteService()
 
 
-
-export const getVendas = async (req: Request, res: Response) => {
+export const getClientes = async (req: Request, res: Response) => {
     try {
-        const vendas = await Service.listarInformacoes()
+        const clientes = await Clientes.listarTodos()
 
-        return res.json(vendas)
+        return res.json(clientes)
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro ao buscar vendas" });

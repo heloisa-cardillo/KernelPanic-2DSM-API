@@ -9,7 +9,7 @@ dotenv.config();
 
 const calendarioRoute = require("./API/Routes/calendarioRoutes"); 
 const funilVendasRoute = require("./API/Routes/funilVendasRoutes");
-const cadastroCliente = require("./API/Routes/clientesRoutes");
+const clientesRoute = require("./API/Routes/clientesRoutes");
 const gestaoRoute = require("./API/Routes/gestaoRoutes")
 const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
@@ -33,7 +33,7 @@ AppDataSource.initialize()
 
 app.use("/funilVendas",funilVendasRoute )
 app.use("/calendario", calendarioRoute)
-app.use("/clientes", cadastroCliente)
+app.use("/clientes", clientesRoute)
 app.use("/vendedor", vendedorRoute)
 app.use("/historico",historicoRoute)
 app.use("/gestao",gestaoRoute)
@@ -42,7 +42,6 @@ app.use("/eventos", eventoRoute);
 iniciarCron();
 app.use("/funilVendas", funilVendasRoute); 
 app.use("/calendario", calendarioRoute); 
-app.use("/clientes", cadastroCliente);
 
 app.get("/", (req, res) => {
   res.send("API funcionando");
