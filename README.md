@@ -66,7 +66,9 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
   <summary><b>Clique aqui</b></summary>
 
 **Video Demostrativo:**
+<br>
 [Assistir no YouTube](https://youtu.be/yuDfMSC-joM)
+<br>
 [Assistir no YouTube](https://youtu.be/ywFObLK5jC4)
 
 | Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
