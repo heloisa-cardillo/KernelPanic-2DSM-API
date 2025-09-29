@@ -1,0 +1,30 @@
+  {
+    "compilerOptions": {
+      "rootDir": "./src",
+      "outDir": "./dist",
+
+      "lib": ["es5", "es6", "dom"],  
+      "moduleResolution": "node",
+      "target": "es5", 
+      "types": ["node"],
+
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "noImplicitAny": false,
+      "strict": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": false,
+      "noFallthroughCasesInSwitch": true,
+      "noUncheckedIndexedAccess": true,
+      "exactOptionalPropertyTypes": true,
+
+      "forceConsistentCasingInFileNames": true,
+      "skipLibCheck": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+  }

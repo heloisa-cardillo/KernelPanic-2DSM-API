@@ -1,0 +1,82 @@
+
+.barralateral {
+  grid-area: aside;
+  background-color: #ffffff;
+  color: #9197B3;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 300px;        
+  height: 100vh;  
+  box-sizing: border-box;
+}
+
+.tabButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: auto; 
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: calc(100% - 20px);
+  background-color: transparent;
+  border-radius: 6px;
+  border-color: transparent;
+  color: #9197B3;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+
+.menuItemAtivo {
+  background-color: #1f4af4;
+  color: #fff;
+  border-radius: 6px;
+  margin-left: 10px;
+  width: calc(100% - 20px);
+}
+
+
+.menuItem:hover {
+  background-color: #e6f0ff;
+  color: #1f4af4;
+}
+
+.boxglobal {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "aside content";
+  height: 100vh;
+}
+
+.conteudo {
+  grid-area: content;
+  background-color: #f4f4f4;
+}
+
+.menuItem, .menuItemAtivo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px;
+  min-height: 50px;       
+  font-size: 14px;         
+  box-sizing: border-box;
+}
+
+.menuItemAtivo:hover{
+  background-color: #1f4af4;
+  color: #fff;
+}
