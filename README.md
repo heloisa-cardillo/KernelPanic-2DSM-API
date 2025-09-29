@@ -54,7 +54,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 
 | Sprint          |    Período    | Documentação                                     |
 | --------------- | :-----------: | ------------------------------------------------ |
-| **SPRINT 1** | 10/03 - 30/03 | [Sprint 1 Docs](docs/sprintUm.md) |
+| **SPRINT 1** | 08/09 - 28/09 | [Sprint 1 Docs](docs/sprintUm.md) |
 | **SPRINT 2** | 06/10 - 26/10 | [Sprint 2 Docs](./docs/sprint-2.md) |
 | **SPRINT 3** | 03/11 - 23/11 | [Sprint 3 Docs](./docs/sprint-3.md) |
 
