@@ -84,6 +84,9 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 </details>
 
 ---
+## 🟡 Sprint 2 - Setor Comercial
+<details>
+  <summary><b>Clique aqui</b></summary>
 
 | Rank | Prioridade |  User Story | Estimativa | Sprint |  Requisitos do Parceiro |
 | :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
@@ -94,9 +97,9 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | 5 | 🟠 Média | Eu como gestor, quero eleger as permissões que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | ? | 2 | Controle de permissões customizáveis por usuário |
 | 6 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática | ? | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
 
----
+</details>
 
-## 🟡 Sprint 3 - Setor Administrativo
+## 🔴 Sprint 3 - Setor Administrativo
 <details>
   <summary><b>Clique aqui</b></summary>
 
@@ -108,6 +111,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | 4 | 🟠 Média | Eu como gestor, quero eleger as permissões que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | ? | 3 | Controle de permissões customizáveis por usuário |
 | 5 | 🟡 Baixa | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | ? | 3 | Cadastro de funcionários, agregados e veículos com perfis atualizados |
 | 6 | 🟡 Baixa | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | ? | 3 | Responsividade da plataforma para dispositivos móveis |
+
 </details>
 
 ---
