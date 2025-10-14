@@ -96,7 +96,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | 2 | 🔴 Alta | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | 2 | Controle de permissões customizáveis por usuário |
 | 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
 | 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros| 6 | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟠 Média | 6 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
+| 5 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
 
 </details>
 
