@@ -1,121 +1,87 @@
-# Video Demostrativo:
-[Assistir no YouTube](https://youtu.be/yuDfMSC-joM)
-<br>
-[Assistir no YouTube](https://youtu.be/ywFObLK5jC4)
-
 # Backlog da Segunda Sprint 
 
 | Rank | Prioridade |  User Story | Estimativa | Sprint |  Requisitos do Parceiro |
 | :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
-| 1 | 🔴 Alta | Eu como cliente, quero unificar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | ? | 2 | Centralização e unificação de checklists e cadastros |
-| 2 | 🔴 Alta | Eu como cliente, quero gerenciar checklists padronizados, para maior controle e organização das operações | ? | 2 | Checklists padronizados para empresa, agregados, frota e manutenção predial |
-| 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente | ? | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
-| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro | ? | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟠 Média | Eu como gestor, quero eleger as permissões que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | ? | 2 | Controle de permissões customizáveis por usuário |
-| 6 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática | ? | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
+| 1 | 🔴 Alta | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | 5 | 2 | Centralização, padronização e unificação de checklists e cadastros |
+| 2 | 🔴 Alta | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | 2 | Controle de permissões customizáveis por usuário |
+| 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros| 6 | 2 | Cadastro de agregados com feedback automático |
+| 5 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
 
 ---
 
 # Cenários de Teste
 
-### User Story: US01 – Eu como cliente, quero unificar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma.
+### User Story: US01 – Unificar e padronizar checklists e cadastros
 
 <details>
 <summary><b>Clique aqui para ver os cenários</b></summary>
 
 | Título do Cenário | Dado que | Quando | Então |
 | :--- | :--- | :--- | :--- |
-| **Cadastro com dados obrigatórios** | O comercial está na tela de cadastro de cliente | Ele preenche todos os campos obrigatórios | O sistema cadastra o cliente com sucesso e exibe mensagem de confirmação |
-| **Tentativa de cadastro sem todos os dados obrigatórios** | O comercial está na tela de cadastro de cliente | Ele não preenche todos os campos obrigatórios | O sistema exibe uma mensagem de alerta dizendo que todos os campos obrigatórios precisam estar preenchidos |
-| **Cadastro com e-mail já existente** | O comercial está na tela de cadastro de cliente | Ele preenche os dados com um e-mail que já existe no sistema e tenta salvar | O sistema impede o cadastro e exibe uma mensagem de erro informando que o e-mail já está em uso |
+| **Centralizar checklists e cadastros** | O gestor acessa a plataforma | Ele importa ou visualiza os checklists e cadastros de diferentes ferramentas | O sistema unifica e exibe todos os cadastros em uma única plataforma |
+| **Verificação de padronização** | Os checklists e cadastros foram centralizados | O gestor acessa cada checklist | O sistema garante que todos sigam um padrão único definido |
+| **Falha na importação de dados** | O gestor tenta centralizar dados | O sistema encontra inconsistências nos cadastros | O sistema exibe uma mensagem de erro informando quais dados precisam de ajuste |
 
 </details>
 
-<hr>
+---
 
-### User Story: US02 – Eu como cliente, quero gerenciar checklists padronizados, para maior controle e organização das operações.
+### User Story: US02 – Permissões customizáveis por usuário
 
 <details>
 <summary><b>Clique aqui para ver os cenários</b></summary>
 
 | Título do Cenário | Dado que | Quando | Então |
 | :--- | :--- | :--- | :--- |
-| **Visualização de clientes cadastrados** | Um ou mais clientes estão cadastrados | O comercial abre a tela de gerenciamento dos clientes | O sistema exibe os clientes cadastrados |
-| **Visualização sem clientes cadastrados** | Nenhum cliente está cadastrado | O comercial abre a tela de gerenciamento dos clientes | O sistema emite um aviso dizendo que não há nenhum cliente cadastrado |
-| **Tentativa de excluir cliente de outro comercial** | O comercial está na tela de gerenciamento e tenta excluir um cliente que pertence a outro vendedor | O sistema identifica que o cliente pertence a outro usuário | O sistema impede a exclusão e exibe uma mensagem de erro de acesso negado |
+| **Atribuir permissões a liderados** | O gestor está na tela de permissões | Ele seleciona um colaborador e define permissões específicas | O sistema aplica as permissões escolhidas e impede ações não autorizadas |
+| **Alterar permissões existentes** | Um colaborador já possui permissões | O gestor modifica as permissões | O sistema atualiza o acesso do usuário conforme as alterações |
+| **Tentativa de acesso não autorizado** | Um colaborador tenta acessar área sem permissão | Ele executa a ação | O sistema bloqueia o acesso e exibe uma mensagem de erro de permissão |
 
 </details>
 
-<hr>
+---
 
-### User Story: US03 – Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente.
+### User Story: US03 – Acesso integrado a informações comerciais e operacionais
+
 <details>
 <summary><b>Clique aqui para ver os cenários</b></summary>
 
 | Título do Cenário | Dado que | Quando | Então |
 | :--- | :--- | :--- | :--- |
-| **Avanço de cliente no funil** | O comercial está na visualização do funil de vendas | Ele arrasta um cliente da etapa "Inicial" para a etapa "Em Negociação" | O cliente é movido para a nova coluna, e o funil reflete a mudança de status |
-| **Tentativa de mover cliente para etapa inválida** | O comercial está na visualização do funil de vendas | Ele tenta arrastar um cliente para uma etapa que não é a próxima no ciclo de vendas | O sistema impede a ação e exibe uma mensagem de erro indicando que a transição não é permitida |
+| **Visualizar informações integradas** | O cliente acessa o sistema | Ele abre a tela de informações comerciais e operacionais | O sistema exibe dados integrados de ambos os setores |
+| **Gerar insights a partir dos dados** | Há dados comerciais e operacionais registrados | O cliente aplica filtros e gera relatórios | O sistema apresenta insights e métricas relevantes |
+| **Falha na integração** | O cliente tenta acessar os dados integrados | O sistema não consegue buscar os dados de algum setor | O sistema exibe mensagem de erro indicando falha na integração |
 
 </details>
 
-<hr>
+---
 
-### User Story: US04 – Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro.
+### User Story: US04 – Cadastro de agregados com devolutiva automática
 
 <details>
 <summary><b>Clique aqui para ver os cenários</b></summary>
 
 | Título do Cenário | Dado que | Quando | Então |
 | :--- | :--- | :--- | :--- |
-| **Gerar relatório de vendas do mês** | O gestor está na tela de relatórios | Ele seleciona o relatório de "Vendas Efetuadas" e aplica o filtro "Mês" | O sistema gera e exibe um gráfico de barras com as vendas por vendedor para o mês selecionado |
-| **Nenhum dado para o período** | O gestor está na tela de relatórios e aplica um filtro de data | O período selecionado não possui dados de interações ou vendas | O sistema exibe um gráfico vazio com a mensagem "Não há dados para o período selecionado" |
-| **Erro de carregamento do relatório** | O gestor está na tela de relatórios | Ele tenta gerar um relatório e ocorre uma falha na comunicação com o servidor | O sistema exibe uma mensagem de erro informando que não foi possível carregar o relatório |
+| **Cadastrar agregados com feedback** | O cliente está na tela de cadastro | Ele preenche todos os dados do agregado | O sistema cadastra e envia devolutiva automática confirmando o cadastro |
+| **Falha ao cadastrar sem dados obrigatórios** | O cliente tenta cadastrar um agregado | Ele deixa campos obrigatórios vazios | O sistema impede o cadastro e exibe mensagem informando os campos faltantes |
+| **Erro de comunicação durante cadastro** | O cliente envia os dados para cadastro | O sistema não consegue processar devido a falha de servidor | O sistema exibe mensagem de erro de cadastro não concluído |
 
 </details>
 
-<hr>
+---
 
-### User Story: US05 – Eu como comercial, quero agendar tarefas e configurar lembretes, a fim de acompanhar próximos contatos com clientes.
-
-<details>
-<summary><b>Clique aqui para ver os cenários</b></summary>
-
-| Título do Cenário | Dado que | Quando | Então |
-| :--- | :--- | :--- | :--- |
-| **Agendar uma ligação para cliente** | O comercial está na tela de um cliente e clica para agendar uma tarefa | Ele define o tipo de tarefa como "ligação" e configura um lembrete para o próximo dia | A tarefa é criada e o sistema envia uma notificação push no dia e hora agendados |
-| **Falha ao agendar tarefa sem data** | O comercial está na tela de agendamento de tarefas | Ele tenta agendar a tarefa sem uma data | O sistema impede o agendamento e exibe uma mensagem de erro indicando que o campo de data está ausente |
-| **Falha ao agendar tarefa com data retroativa** | O comercial está na tela de agendamento de tarefas | Ele tenta salvar uma tarefa com uma data e hora no passado | O sistema impede o agendamento e exibe uma mensagem de erro informando que a data é inválida |
-
-</details>
-
-<hr>
-
-### User Story: US06 – Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores.
+### User Story: US05 – Cotação de frete automática
 
 <details>
 <summary><b>Clique aqui para ver os cenários</b></summary>
 
 | Título do Cenário | Dado que | Quando | Então |
 | :--- | :--- | :--- | :--- |
-| **Visualização da taxa de conversão** | O comercial está na tela de cadastro de cliente | Ele preenche todos os campos obrigatórios e salva | O sistema cadastra a venda com sucesso |
-| **Falha na exibição dos dados de rendimento** | O comercial acessa a tela de métricas de desempenho | Ele filtra o dashboard por período | O sistema exibe a taxa de conversão de clientes por vendedor em um gráfico |
-| **Tentativa de visualização de rendimento de outro comercial** | O comercial acessa a tela de rendimento | Ele tenta ver o desempenho de um colega de equipe | O sistema impede a visualização e exibe uma mensagem de erro de acesso negado |
-
-</details>
-
-<hr>
-
-### User Story: US07 – Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria.
-
-<details>
-<summary><b>Clique aqui para ver os cenários</b></summary>
-
-| Título do Cenário | Dado que | Quando | Então |
-| :--- | :--- | :--- | :--- |
-| **Visualização do histórico completo** | Um ou mais itens estão registrados no histórico | O comercial seleciona para ver o histórico de interações com ou sem filtro | O sistema exibe todo o histórico de interações com ou sem filtro aplicado |
-| **Nenhum item no histórico** | Não há nenhum item no histórico, ou o filtro não se aplica a nenhum item | O comercial seleciona para ver o histórico de interações com ou sem filtro | O sistema emite um aviso que não há nenhum item no histórico de interações |
-| **Tentativa de edição de histórico** | O comercial está na tela de histórico | Ele tenta editar ou excluir uma interação já registrada | O sistema impede a alteração e exibe uma mensagem de erro de acesso negado, pois o histórico é imutável |
+| **Calcular cotação de frete** | O cliente está na tela de cotação | Ele insere origem, destino e peso | O sistema calcula automaticamente o valor do frete e exibe o resultado |
+| **Alterar parâmetros e recalcular** | O cliente alterou algum dado da cotação | Ele confirma a alteração | O sistema recalcula e exibe nova cotação atualizada |
+| **Erro no cálculo automático** | O cliente insere dados para cotação | O sistema encontra inconsistência nos dados | O sistema exibe mensagem de erro informando a necessidade de revisão |
 
 </details>
 
